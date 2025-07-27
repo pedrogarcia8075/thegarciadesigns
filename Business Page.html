@@ -148,53 +148,46 @@
 <body>
 
   <header>
-    <h1>The Garcia Designs</h1>
-    <p>Personalized, Custom Design for every occasion.</p>
-  </header>
-
-  <nav>
-    <div class="dropdown">
-      <a href="#products">Products ▾</a>
-      <div class="dropdown-content">
-        <a href="#">Tumblers</a>
-        <a href="#">Mugs</a>
-        <a href="#">Water Bottles</a>
-        <a href="#">Photo Prints</a>
-        <a href="#">LED Frames</a>
-      </div>
-    </div>
-    <a href="#contact">Contact</a>
-    <a href="https://thegarciasdesigns.etsy.com" target="_blank">Etsy Shop</a>
-  </nav>
-
-  <section class="hero">
-    <h2>Welcome to TheGarciasDesigns!</h2>
-    <p>
-      We specialize in personalized tumblers, mugs, and unique gifts made just for you!
+    <h1>Welcome to The Garcias Designs!</h1>
+    <p>We specialize in personalized tumblers, mugs, and unique gifts made just for you!
       Whether you're celebrating a special occasion or just want something with your name on it, we've got you covered.
       Every item is made with care, creativity, and a splash of personality.
-      Custom orders are always welcome—because you deserve something one-of-a-kind! Thank you for supporting our small business!
-    </p>
-  </section>
+      Custom orders are always welcome—because you deserve something one-of-a-kind! Thank you for supporting our small business!</p>
+  </header>
 
-  <section id="products" class="products">
-    <div class="product">
-      <img src="images/tumbler.jpg" alt="20oz Custom Tumbler">
-      <h3>20oz Custom Tumbler</h3>
-      <p>Durable, insulated, and tailored to your custom design ideas.</p>
-      <input type="file" name="upload" accept="image/*">
-      <input type="number" name="quantity" placeholder="Quantity" min="1">
-    </div>
-    <div class="product">
-      <img src="https://www.etsy.com/listing/4342198447/personalized-goku-super-saiyan-blue-22oz?ls=a&ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=goku+water+bottle&ref=sc_gallery-1-4&sr_prefetch=1&nob=1&plkey=5be76b8b32ca0ae7f5e5915deb3fc6cc97f69418%3A4342198447" alt="24oz Water Bottle">
-      <h3>24oz Insulated Water Bottle</h3>
-      <p>Perfect for sports and travel. Personalized to your style and needs.</p>
-      <input type="file" name="upload" accept="image/*">
-      <input type="number" name="quantity" placeholder="Quantity" min="1">
-    </div>
-    <!-- Add more product cards similarly -->
-  </section>
+   <nav>
+    <a href="#tumblers">Tumblers</a>
+    <a href="#mugs">Mugs</a>
+    <a href="#leds">LED Signs</a>
+    <a href="#bottles">Water Bottles</a>
+    <a href="#prints">Photo Prints</a>
+  </nav>
 
+  <section class="product-section">
+    <div class="product-grid">
+      <a href="tumblers.html" class="product-card" id="tumblers">
+        <img src="images/tumblers.jpg" alt="Tumblers">
+        <h3>Custom Tumblers</h3>
+      </a>
+      <a href="mugs.html" class="product-card" id="mugs">
+        <img src="images/mugs.jpg" alt="Mugs">
+        <h3>Personalized Mugs</h3>
+      </a>
+      <a href="leds.html" class="product-card" id="leds">
+        <img src="images/leds.jpg" alt="LED Signs">
+        <h3>LED Name Signs</h3>
+      </a>
+      <a href="bottles.html" class="product-card" id="bottles">
+        <img src="images/bottles.jpg" alt="Water Bottles">
+        <h3>Water Bottles</h3>
+      </a>
+      <a href="prints.html" class="product-card" id="prints">
+        <img src="images/prints.jpg" alt="Photo Prints">
+        <h3>Photo Prints</h3>
+      </a>
+    </div>
+  </section>
+  
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
@@ -219,3 +212,4 @@
 
 </body>
 </html>
+
