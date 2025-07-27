@@ -1,12 +1,11 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Garcia Designs</title>
-  
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -24,89 +23,53 @@
       margin: 0;
     }
     nav {
-      background: #1a1a1a;
+      background-color: #1a1a1a;
+      padding: 1rem;
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
     nav a {
-      color: #fff;
+      color: white;
       text-decoration: none;
-      position: relative;
-      padding: 0.5rem;
+      font-weight: bold;
     }
     nav a:hover {
-      background: #cc0000;
-      border-radius: 4px;
+      text-decoration: underline;
     }
-    .dropdown {
-      position: relative;
+    .product-section {
+      padding: 2rem;
     }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 2.5rem;
-      background-color: #fff;
-      color: #000;
-      min-width: 200px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-      z-index: 1;
-    }
-    .dropdown-content a {
-      color: #000;
-      padding: 0.75rem 1rem;
-      display: block;
-      text-decoration: none;
-    }
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    .hero {
-      text-align: center;
-      padding: 3rem 2rem;
-      max-width: 800px;
-      margin: auto;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      color: #ffe6e6;
-    }
-    .products {
+    .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      padding: 3rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      justify-items: center;
     }
-    .product {
-      background: #fff;
-      color: #000;
-      padding: 1rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    .product-card {
       text-align: center;
-    }
-    .product img {
+      text-decoration: none;
+      color: #fff;
+      border-radius: 10px;
+      padding: 1rem;
+      background-color: rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s ease;
       width: 100%;
-      border-radius: 6px;
+      max-width: 300px;
     }
-    .product input, .product button, .product select {
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+    .product-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .product-card h3 {
       margin-top: 1rem;
-      width: 100%;
-      padding: 0.5rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      font-size: 1.1rem;
     }
     .contact {
       background: rgba(0, 0, 0, 0.4);
@@ -149,7 +112,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <h1>Welcome to The Garcia's Designs!</h1>
     <p>We specialize in personalized tumblers, mugs, and unique gifts made just for you!
@@ -158,127 +120,62 @@
       Custom orders are always welcome—because you deserve something one-of-a-kind! Thank you for supporting our small business!</p>
   </header>
 
-   <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom, #3b0000, #f9f7f7, #ff1b1b);
-    color: #fff;
-  }
-
-  nav {
-    background-color: #1a1a1a;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  nav a:hover {
-    text-decoration: underline;
-  }
-
-  .product-section {
-    padding: 2rem;
-  }
-
-  .product-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    justify-items: center;
-  }
-
-  .product-card {
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    border-radius: 10px;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .product-card:hover {
-    transform: scale(1.05);
-  }
-
-  .product-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-
-  .product-card h3 {
-    margin-top: 1rem;
-    font-size: 1.1rem;
-  }
-</style>
-
   <nav>
-  <a href="#tumblers">Tumblers</a>
-  <a href="#mugs">Mugs</a>
-  <a href="#leds">LED Signs</a>
-  <a href="#bottles">Water Bottles</a>
-  <a href="#prints">Photo Prints</a>
-  <a href="https://thegarciasdesigns.etsy.com" target="_blank">Etsy Shop</a> 
-</nav>
+    <a href="tumblers.html">Tumblers</a>
+    <a href="mugs.html">Mugs</a>
+    <a href="leds.html">LED Glass Photos</a>
+    <a href="bottles.html">Water Bottles</a>
+    <a href="prints.html">Aluminum Photo Prints</a>
+    <a href="https://thegarciasdesigns.etsy.com" target="_blank">Etsy Shop</a>
+  </nav>
 
-<section class="product-section">
-  <div class="product-grid">
-    <a href="tumblers.html" class="product-card" id="tumblers">
-      <img src="images/tumblers.jpg" alt="Tumblers">
-      <h3>Custom Tumblers</h3>
-    </a>
-
-    <a href="Alumunim Photo.html" class="product-card" id="Alumunim Photo">
-      <img src="images/Alumunim Photo.jpg" alt="Alumunim Photo">
-      <h3>Personalized Alumunim Photo</h3>
-    </a>
-
-    <a href="leds.html" class="product-card" id="leds">
-      <img src="images/leds.jpg" alt="LED Signs">
-      <h3>Personalized LED Glass Photo</h3>
-    </a>
-
-    <a href="bottles.html" class="product-card" id="bottles">
-      <img src="images/bottles.jpg" alt="Water Bottles">
-      <h3>20-24oz Customized Water Bottles</h3>
-    </a>
-
-    <a href="prints.html" class="product-card" id="Photo Frames">
-      <img src="images/Photo Frames.jpg" alt="Photo Frames">
-      <h3>Photo Frames</h3>
-    </a>
-  </div>
-</section>
+  <section class="product-section">
+    <div class="product-grid">
+      <a href="tumblers.html" class="product-card">
+        <img src="images/tumblers.jpg" alt="Tumblers">
+        <h3>Custom Tumblers</h3>
+      </a>
+      <a href="mugs.html" class="product-card">
+        <img src="images/mugs.jpg" alt="Mugs">
+        <h3>Custom Mugs</h3>
+      </a>
+      <a href="leds.html" class="product-card">
+        <img src="images/leds.jpg" alt="LED Signs">
+        <h3>Personalized LED Glass Photo</h3>
+      </a>
+      <a href="bottles.html" class="product-card">
+        <img src="images/bottles.jpg" alt="Water Bottles">
+        <h3>20-24oz Customized Water Bottles</h3>
+      </a>
+      <a href="prints.html" class="product-card">
+        <img src="images/photo-prints.jpg" alt="Aluminum Photo Prints">
+        <h3>Aluminum Photo Prints</h3>
+      </a>
+    </div>
+  </section>
 
   <section id="contact" class="contact">
-  <h2>Contact Us</h2>
-  <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <h2>Contact Us</h2>
+    <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
+      <input type="hidden" name="_subject" value="New message from your website!">
+      <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
+      <input type="submit" value="Send Message" />
+    </form>
+  </section>
 
-    <input type="text" name="_honey" style="display:none">
-    <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
-    <input type="hidden" name="_subject" value="New message from your website!">
+  <footer>
+    <p>© 2025 The Garcia Designs | Follow us on
+      <a href="https://facebook.com/" target="_blank">Facebook</a> &
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
+    </p>
+  </footer>
+</body>
+</html>
 
-    <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
-
-    <input type="submit" value="Send Message" />
-  </form>
-</section>
 
 
