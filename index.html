@@ -155,39 +155,111 @@
       Custom orders are always welcome—because you deserve something one-of-a-kind! Thank you for supporting our small business!</p>
   </header>
 
-   <nav>
-    <a href="#tumblers">Tumblers</a>
-    <a href="#mugs">Mugs</a>
-    <a href="#leds">LED Signs</a>
-    <a href="#bottles">Water Bottles</a>
-    <a href="#prints">Photo Prints</a>
-  </nav>
+   <style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #3b0000, #f9f7f7, #ff1b1b);
+    color: #fff;
+  }
 
-  <section class="product-section">
-    <div class="product-grid">
-      <a href="tumblers.html" class="product-card" id="tumblers">
-        <img src="images/tumblers.jpg" alt="Tumblers">
-        <h3>Custom Tumblers</h3>
-      </a>
-      <a href="Alumunim Photo.html" class="product-card" id="Alumunim Photo">
-        <img src="images/Alumunim Photo.jpg" alt="Alumunim Photo">
-        <h3>Personalized Alumunim Photo</h3>
-      </a>
-      <a href="leds.html" class="product-card" id="leds">
-        <img src="images/leds.jpg" alt="LED Signs">
-        <h3>Personalized LED Glass Photo</h3>
-      </a>
-      <a href="bottles.html" class="product-card" id="bottles">
-        <img src="images/bottles.jpg" alt="Water Bottles">
-        <h3>20-24oz Customized Water Bottles</h3>
-      </a>
-      <a href="prints.html" class="product-card" id="Photo Frames">
-        <img src="images/Photo Frames.jpg" alt="Photo Frames">
-        <h3>Photo Frames</h3
-      </a>
-    </div>
-  </section>
-  
+  nav {
+    background-color: #1a1a1a;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  .product-section {
+    padding: 2rem;
+  }
+
+  .product-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
+  }
+
+  .product-card {
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .product-card h3 {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+  }
+</style>
+
+  <nav>
+  <a href="#tumblers">Tumblers</a>
+  <a href="#mugs">Mugs</a>
+  <a href="#leds">LED Signs</a>
+  <a href="#bottles">Water Bottles</a>
+  <a href="#prints">Photo Prints</a>
+</nav>
+
+<section class="product-section">
+  <div class="product-grid">
+    <a href="tumblers.html" class="product-card" id="tumblers">
+      <img src="images/tumblers.jpg" alt="Tumblers">
+      <h3>Custom Tumblers</h3>
+    </a>
+
+    <a href="Alumunim Photo.html" class="product-card" id="Alumunim Photo">
+      <img src="images/Alumunim Photo.jpg" alt="Alumunim Photo">
+      <h3>Personalized Alumunim Photo</h3>
+    </a>
+
+    <a href="leds.html" class="product-card" id="leds">
+      <img src="images/leds.jpg" alt="LED Signs">
+      <h3>Personalized LED Glass Photo</h3>
+    </a>
+
+    <a href="bottles.html" class="product-card" id="bottles">
+      <img src="images/bottles.jpg" alt="Water Bottles">
+      <h3>20-24oz Customized Water Bottles</h3>
+    </a>
+
+    <a href="prints.html" class="product-card" id="Photo Frames">
+      <img src="images/Photo Frames.jpg" alt="Photo Frames">
+      <h3>Photo Frames</h3>
+    </a>
+  </div>
+</section>
+
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
