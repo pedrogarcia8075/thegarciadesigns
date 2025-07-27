@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Garcia Designs</title>
+  
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -261,27 +264,20 @@
 </section>
 
   <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+  <h2>Contact Us</h2>
+  <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
 
-      <input type="text" name="_honey" style="display:none">
-      <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
-      <input type="hidden" name="_subject" value="New message from your website!">
+    <input type="text" name="_honey" style="display:none">
+    <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
+    <input type="hidden" name="_subject" value="New message from your website!">
 
-      <input type="submit" value="Send Message" />
-    </form>
-  </section>
+    <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAAAJsMq_5D9wfxn-N5rRYY2agt53"></div>
 
-  <footer>
-    <p>© 2025 The Garcia Designs | Follow us on  
-      <a href="https://facebook.com/" target="_blank">Facebook</a> & 
-      <a href="https://instagram.com/" target="_blank">Instagram</a>
-    </p>
-  </footer>
+    <input type="submit" value="Send Message" />
+  </form>
+</section>
 
-</body>
-</html>
 
