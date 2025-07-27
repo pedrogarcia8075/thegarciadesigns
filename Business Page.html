@@ -6,55 +6,112 @@
   <title>The Garcia Designs</title>
   <style>
     body {
-      font-family: 'Times New Roman';
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
-      background: #fdfdfd;
+      background: linear-gradient(to bottom, #3b0000, #990000, #ff4d4d);
+      color: #fff;
     }
     header {
-      background: #952626e6;
-      color: #070505;
-      padding: 1rem 2rem;
       text-align: center;
+      padding: 2rem;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
     }
     nav {
       background: #1a1a1a;
-      color: white;
       display: flex;
       justify-content: center;
-      padding: 0.5rem;
+      gap: 2rem;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     nav a {
-      color: white;
-      margin: 0 1rem;
+      color: #fff;
+      text-decoration: none;
+      position: relative;
+      padding: 0.5rem;
+    }
+    nav a:hover {
+      background: #cc0000;
+      border-radius: 4px;
+    }
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 2.5rem;
+      background-color: #fff;
+      color: #000;
+      min-width: 200px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+    .dropdown-content a {
+      color: #000;
+      padding: 0.75rem 1rem;
+      display: block;
       text-decoration: none;
     }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
     .hero {
-      background: #eee;
-      padding: 2rem;
       text-align: center;
+      padding: 3rem 2rem;
+      max-width: 800px;
+      margin: auto;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #ffe6e6;
     }
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      padding: 2rem;
+      padding: 3rem;
     }
     .product {
-      background: white;
-      border: 1px solid #ddd;
+      background: #fff;
+      color: #000;
       padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
     }
     .product img {
       width: 100%;
-      height: auto;
+      border-radius: 6px;
+    }
+    .product input, .product button, .product select {
+      margin-top: 1rem;
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
       border-radius: 6px;
     }
     .contact {
-      padding: 2rem;
-      background: #f4f4f4;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 3rem 2rem;
+    }
+    .contact h2 {
+      text-align: center;
+      margin-bottom: 1rem;
     }
     .contact form {
       max-width: 600px;
@@ -62,14 +119,29 @@
     }
     .contact input, .contact textarea {
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.75rem;
       margin-bottom: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+    }
+    .contact input[type="submit"] {
+      background-color: #cc0000;
+      color: white;
+      cursor: pointer;
+    }
+    .contact input[type="submit"]:hover {
+      background-color: #ff1a1a;
     }
     footer {
       text-align: center;
-      padding: 1rem;
-      background: #222;
+      padding: 1.5rem;
+      background: #111;
       color: #fff;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -81,71 +153,69 @@
   </header>
 
   <nav>
-    <a href="#products">Products</a>
+    <div class="dropdown">
+      <a href="#products">Products ▾</a>
+      <div class="dropdown-content">
+        <a href="#">Tumblers</a>
+        <a href="#">Mugs</a>
+        <a href="#">Water Bottles</a>
+        <a href="#">Photo Prints</a>
+        <a href="#">LED Frames</a>
+      </div>
+    </div>
     <a href="#contact">Contact</a>
     <a href="https://thegarciasdesigns.etsy.com" target="_blank">Etsy Shop</a>
   </nav>
 
   <section class="hero">
-    <h2>Welcome to The Garcia Designs</h2>
-    <p>Personalized, Custom Design for every occasion.</p>
+    <h2>Welcome to TheGarciasDesigns!</h2>
+    <p>
+      We specialize in personalized tumblers, mugs, and unique gifts made just for you!
+      Whether you're celebrating a special occasion or just want something with your name on it, we've got you covered.
+      Every item is made with care, creativity, and a splash of personality.
+      Custom orders are always welcome—because you deserve something one-of-a-kind! Thank you for supporting our small business!
+    </p>
   </section>
 
   <section id="products" class="products">
     <div class="product">
-      <img src="images/metal-print.jpg" alt="Metal Photo Print">
-      <h3>8”x10” Metal Photo Print</h3>
-      <p>Custom prints featuring anime, family photos, or your favorite image.</p>
-    </div>
-    <div class="product">
-      <img src="images/glass-print.jpg" alt="Tempered Glass Print">
-      <h3>7.87x11.8” Glass Wall Mount</h3>
-      <p>Tempered glass photo display—perfect for family memories or custom designs.</p>
-    </div>
-    <div class="product">
-      <img src="images/night-light.jpg" alt="LED Night Light Frame">
-      <h3>LED Glass Night Light Frame</h3>
-      <p>8”x10” with warm light & wood stand, USB-C powered (block not included).</p>
+      <img src="images/tumbler.jpg" alt="20oz Custom Tumbler">
+      <h3>20oz Custom Tumbler</h3>
+      <p>Durable, insulated, and tailored to your custom design ideas.</p>
+      <input type="file" name="upload" accept="image/*">
+      <input type="number" name="quantity" placeholder="Quantity" min="1">
     </div>
     <div class="product">
       <img src="images/water-bottle.jpg" alt="24oz Water Bottle">
       <h3>24oz Insulated Water Bottle</h3>
       <p>Perfect for sports and travel. Personalized to your style and needs.</p>
+      <input type="file" name="upload" accept="image/*">
+      <input type="number" name="quantity" placeholder="Quantity" min="1">
     </div>
-    <div class="product">
-      <img src="images/tumbler.jpg" alt="20oz Tumbler">
-      <h3>20oz Custom Tumbler</h3>
-      <p>Durable, insulated, and tailored to your custom design ideas.</p>
-    </div>
+    <!-- Add more product cards similarly -->
   </section>
 
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
-    <form action="mailto:<form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
-  <input type="text" name="name" placeholder="Your Name" required />
-  <input type="email" name="email" placeholder="Your Email" required />
-  <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-  
-  <!-- Hidden field to prevent spam -->
-  <input type="text" name="_honey" style="display:none">
-  
-  <!-- Redirect to thank you page after submission -->
-  <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
-  
-  <!-- Optional subject line -->
-  <input type="hidden" name="_subject" value="New message from your website!">
-  
-  <input type="submit" value="Send Message" />
+    <form action="https://formsubmit.co/YOUR_EMAIL@example.com" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+
+      <input type="text" name="_honey" style="display:none">
+      <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
+      <input type="hidden" name="_subject" value="New message from your website!">
+
+      <input type="submit" value="Send Message" />
     </form>
   </section>
 
   <footer>
     <p>© 2025 The Garcia Designs | Follow us on  
-      <a href="https://facebook.com/" target="_blank" style="color: #fff;">Facebook</a> & 
-      <a href="https://instagram.com/" target="_blank" style="color: #fff;">Instagram</a>
+      <a href="https://facebook.com/" target="_blank">Facebook</a> & 
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
     </p>
   </footer>
 
 </body>
 </html>
-
