@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Mugs | The Garcia Designs</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .gallery img { width: 200px; margin: 10px; }
+    form { margin-top: 20px; }
+    label { display: block; margin-top: 10px; }
+    select, input, textarea, button { width: 100%; max-width: 400px; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Custom Mugs</h1>
+  <div class="gallery">
+    <img src="images/mug1.jpg" alt="Mug 1">
+    <img src="images/mug2.jpg" alt="Mug 2">
+    <img src="images/mug3.jpg" alt="Mug 3">
+  </div>
+
+  <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
+    <label for="quantity">Quantity</label>
+    <select name="quantity" id="quantity" required>
+      <option value="">Select...</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3+</option>
+    </select>
+
+    <label for="design">Choose a Design</label>
+    <select name="design" id="design">
+      <option>Design A</option>
+      <option>Design B</option>
+      <option>Design C</option>
+    </select>
+
+    <label for="upload">Upload Your Image</label>
+    <input type="file" name="upload" id="upload" accept="image/*">
+
+    <label for="notes">Notes</label>
+    <textarea name="notes" id="notes" rows="4"></textarea>
+
+    <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
+    <input type="hidden" name="_subject" value="New Custom Mug Order">
+    <input type="text" name="_honey" style="display:none">
+
+    <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
+
+    <button type="submit">Submit Order</button>
+  </form>
+</body>
+</html>
