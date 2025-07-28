@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aluminum Photo Prints | The Garcia Designs</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background-color: #fff; }
+    h1 { margin-bottom: 20px; }
+    .gallery img { width: 200px; margin: 10px; display: inline-block; }
+    form { margin-top: 30px; max-width: 600px; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    select, input[type="file"], textarea, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+    textarea { resize: vertical; }
+    button {
+      margin-top: 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover { background-color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Aluminum Photo Prints</h1>
+
+  <div class="gallery">
+    <img src="images/prints1.jpg" alt="Aluminum Print 1">
+    <img src="images/prints2.jpg" alt="Aluminum Print 2">
+    <img src="images/prints3.jpg" alt="Aluminum Print 3">
+  </div>
+
+  <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
+    <label for="quantity">Quantity</label>
+    <select name="quantity" id="quantity" required>
+      <option value="">Select...</option>
+      <option>1</option>
+      <option>2</option>
+      <option>3+</option>
+    </select>
+
+    <label for="design">Choose a Design</label>
+    <select name="design" id="design">
+      <option>Design A</option>
+      <option>Design B</option>
+      <option>Design C</option>
+    </select>
+
+    <label for="upload">Upload Your Image</label>
+    <input type="file" name="upload" id="upload" accept="image/*">
+
+    <label for="notes">Notes</label>
+    <textarea name="notes" id="notes" rows="4"></textarea>
+
+    <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
+    <input type="hidden" name="_subject" value="New Aluminum Photo Print Order">
+    <input type="text" name="_honey" style="display:none">
+
+    <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
+
+    <button type="submit">Submit Order</button>
+  </form>
+</body>
+</html>
