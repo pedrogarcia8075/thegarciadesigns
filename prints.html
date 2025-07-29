@@ -21,6 +21,7 @@
       overflow-x: hidden;
     }
 
+    /* 🌥️ Cloud overlay background image */
     body::before {
       content: "";
       position: fixed;
@@ -28,10 +29,10 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: url('https://images.unsplash.com/photo-1501973801540-537f08ccae7d') no-repeat center center / cover;
+      background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center / cover;
       opacity: 0.25;
       z-index: -1;
-      filter: blur(4px);
+      filter: blur(6px);
     }
 
     h1 {
@@ -54,7 +55,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s ease;
-      animation: fadeIn 1s ease-in-out;
+      animation: fadeIn 1.2s ease-in-out;
     }
 
     .gallery img:hover {
@@ -68,7 +69,7 @@
       max-width: 600px;
       margin: 0 auto;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-      animation: fadeInUp 1s ease-in-out;
+      animation: fadeInUp 1.3s ease-in-out;
     }
 
     label {
@@ -78,7 +79,10 @@
       color: #6b4e71;
     }
 
-    select, input[type="file"], textarea, button {
+    select,
+    input[type="file"],
+    textarea,
+    button {
       width: 100%;
       padding: 10px;
       margin-top: 8px;
@@ -114,7 +118,7 @@
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
@@ -135,25 +139,15 @@
         padding: 20px;
       }
     }
-
-    .audio-player {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .audio-player audio {
-      width: 90%;
-      max-width: 400px;
-    }
   </style>
 </head>
 <body>
   <h1>Aluminum Photo Prints</h1>
 
   <div class="gallery">
-    <img src="images/prints1.jpg" alt="Aluminum Print 1">
-    <img src="images/prints2.jpg" alt="Aluminum Print 2">
-    <img src="images/prints3.jpg" alt="Aluminum Print 3">
+    <img src="https://images.unsplash.com/photo-1600573479516-1bbec5f78c9c?auto=format&fit=crop&w=600&q=80" alt="Sample Print 1">
+    <img src="https://images.unsplash.com/photo-1611075380492-2ad4ac56fb9d?auto=format&fit=crop&w=600&q=80" alt="Sample Print 2">
+    <img src="https://images.unsplash.com/photo-1604697800974-b5dc5a89ddbb?auto=format&fit=crop&w=600&q=80" alt="Sample Print 3">
   </div>
 
   <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
@@ -186,15 +180,8 @@
 
     <button type="submit">Submit Order</button>
   </form>
-
-  <div class="audio-player">
-    <p style="margin-top: 20px; color:#5f3c8f;">Enjoy some relaxing vibes 🎶</p>
-    <audio controls autoplay muted loop>
-      <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Monplaisir/The_End_Of_The_Beginning/Monplaisir_-_05_-_Blank_Eyed_Sky.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  </div>
 </body>
 </html>
+
 
 
