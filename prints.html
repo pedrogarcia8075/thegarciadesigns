@@ -6,19 +6,40 @@
   <title>Aluminum Photo Prints | The Garcia Designs</title>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(to right, #ffecd2, #fcb69f, #d1c4e9); /* sunset tones */
+      background: linear-gradient(to right, #ffecd2, #fcb69f, #d1c4e9);
       color: #333;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1501973801540-537f08ccae7d') no-repeat center center / cover;
+      opacity: 0.25;
+      z-index: -1;
+      filter: blur(4px);
     }
 
     h1 {
       text-align: center;
-      font-size: 2em;
+      font-size: 2rem;
       margin-bottom: 30px;
       color: #5f3c8f;
+      animation: fadeIn 1s ease-in-out;
     }
 
     .gallery {
@@ -27,12 +48,13 @@
     }
 
     .gallery img {
-      width: 200px;
+      width: 100%;
+      max-width: 200px;
       margin: 10px;
-      display: inline-block;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s ease;
+      animation: fadeIn 1s ease-in-out;
     }
 
     .gallery img:hover {
@@ -40,12 +62,13 @@
     }
 
     form {
-      background-color: #fff;
-      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 25px;
       border-radius: 20px;
       max-width: 600px;
       margin: 0 auto;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      animation: fadeInUp 1s ease-in-out;
     }
 
     label {
@@ -59,7 +82,6 @@
       width: 100%;
       padding: 10px;
       margin-top: 8px;
-      box-sizing: border-box;
       border: 1px solid #ccc;
       border-radius: 8px;
     }
@@ -82,6 +104,46 @@
     button:hover {
       background: linear-gradient(to right, #f6d365, #fda085);
       color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .gallery img {
+        width: 90%;
+      }
+
+      form {
+        padding: 20px;
+      }
+    }
+
+    .audio-player {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .audio-player audio {
+      width: 90%;
+      max-width: 400px;
     }
   </style>
 </head>
@@ -124,6 +186,15 @@
 
     <button type="submit">Submit Order</button>
   </form>
+
+  <div class="audio-player">
+    <p style="margin-top: 20px; color:#5f3c8f;">Enjoy some relaxing vibes 🎶</p>
+    <audio controls autoplay muted loop>
+      <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Monplaisir/The_End_Of_The_Beginning/Monplaisir_-_05_-_Blank_Eyed_Sky.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 </body>
 </html>
+
 
