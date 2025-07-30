@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart | The Garcia Designs</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+    }
+
+    .topbar {
+      background-color: #000;
+      padding: 10px;
+      text-align: right;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .cart-icon {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin-right: 20px;
+      font-size: 1.1rem;
+    }
+
+    h1 {
+      margin-top: 2rem;
+      font-size: 2.5rem;
+    }
+
+    .cart-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .cart-item p {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    .remove-btn {
+      background-color: #cb0101;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      background-color: #a30000;
+    }
+
+    .empty-message {
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      color: #eee;
+    }
+
+    .checkout-btn {
+      background-color: #cb0101;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 2rem;
+    }
+
+    .checkout-btn:hover {
+      background-color: #a30000;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <a href="index.html" class="cart-icon">← Back to Shop</a>
+  </div>
+
+  <h1>Your Cart</h1>
+  <div class="cart-container" id="cartContainer">
+    <p class="empty-message" id="emptyMessage">Your cart is currently empty.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function loadCart() {
+      const cartContainer = document.getElementById('cartContainer');
+      const emptyMessage = document.getElementById('emptyMessage');
+      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+      if (cartItems.length === 0) {
+        emptyMessage.style.display = 'block';
+        return;
+      }
+
+      emptyMessage.style.display = 'none';
+
+      cartItems.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+
+        const info = document.createElement('p');
+        info.textContent = `${item.quantity} × ${item.product} - $30.00 each`;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = 'Remove';
+        removeBtn.onclick = function () {
+          cartItems.splice(index, 1);
+          localStorage.setItem('cartItems', JSON.stringify(cartItems));
+          location.reload();
+        };
+
+        itemDiv.appendChild(info);
+        itemDiv.appendChild(removeBtn);
+        cartContainer.appendChild(itemDiv);
+      });
+
+      const checkoutBtn = document.createElement('button');
+      checkoutBtn.className = 'checkout-btn';
+      checkoutBtn.textContent = 'Proceed to Checkout';
+      checkoutBtn.onclick = function () {
+        alert('This would lead to your checkout or payment process.');
+      };
+
+      cartContainer.appendChild(checkoutBtn);
+    }
+
+    document.addEventListener('DOMContentLoaded', loadCart);
+  </script>
+</body>
+</html>
