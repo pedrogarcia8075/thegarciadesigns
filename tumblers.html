@@ -5,166 +5,155 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Tumblers | The Garcia Designs</title>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  <style>/* same style as template */</style>
   <style>
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
-  background-attachment: fixed;
-  background-size: cover;
-  color: #fff;
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #fff;
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+    }
 
-header {
-  text-align: center;
-  padding: 2rem;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
+    .topbar {
+      background-color: #000;
+      padding: 10px;
+      text-align: right;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-header h1 {
-  font-size: 2.5rem;
-  margin: 0;
-}
+    .cart-icon {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      margin-right: 20px;
+      font-size: 1.1rem;
+    }
 
-nav {
-  background-color: #1a1a1a;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
+    .cart-count {
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 0 7px;
+      margin-left: 5px;
+      font-size: 0.9rem;
+    }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.2s;
-}
+    header {
+      text-align: center;
+      padding: 2rem;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
 
-nav a:hover {
-  text-decoration: underline;
-  transform: scale(1.1);
-}
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
 
-.product-section {
-  padding: 2rem;
-}
+    .gallery {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 1rem;
+    }
 
-.product-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-items: center;
-}
+    .gallery img {
+      max-width: 120px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-.product-card {
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  border-radius: 10px;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(4px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  max-width: 300px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-}
+    .gallery img:hover {
+      transform: scale(1.1);
+    }
 
-.product-card:hover {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
-}
+    #mainImage {
+      display: block;
+      margin: 1rem auto;
+      max-width: 300px;
+      border-radius: 10px;
+    }
 
-.product-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
+    form {
+      padding: 2rem;
+      max-width: 500px;
+      margin: auto;
+    }
 
-.product-card h3 {
-  margin-top: 1rem;
-  font-size: 1.1rem;
-}
+    form label,
+    form select,
+    form input,
+    form textarea,
+    form button {
+      display: block;
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
 
-.contact {
-  background: rgba(0, 0, 0, 0.4);
-  padding: 3rem 2rem;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
-}
+    form button {
+      background-color: #cb0101;
+      color: white;
+      cursor: pointer;
+    }
 
-.contact h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
+    form button:hover {
+      background-color: #fe0b0b;
+    }
 
-.contact form {
-  max-width: 600px;
-  margin: auto;
-}
-
-.contact input,
-.contact textarea {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-.contact input[type="submit"] {
-  background-color: #cb0101;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.contact input[type="submit"]:hover {
-  background-color: #fe0b0b;
-}
-
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  background: #111;
-  color: #fff;
-  box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.1);
-}
-
-footer a {
-  color: #fff;
-  text-decoration: underline;
-}
-
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.1);
+    }
   </style>
 </head>
 <body>
-  <h1>Custom Tumblers</h1>
-  <div class="gallery">
-    <img src="images/tumbler1.jpg" alt="Tumbler 1">
-    <img src="images/tumbler2.jpg" alt="Tumbler 2">
-    <img src="images/tumbler3.jpg" alt="Tumbler 3">
+  <div class="topbar">
+    <a href="cart.html" class="cart-icon">Cart <span id="cartCount" class="cart-count">0</span></a>
   </div>
-  
- <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
+
+  <header>
+    <h1>Custom Tumblers</h1>
+    <p>Design your very own tumbler — customized with your favorite photos, names, or artwork! Each tumbler is crafted with high-quality sublimation printing, ensuring vibrant color and long-lasting durability. Perfect for gifts, events, or daily personal use.</p>
+  </header>
+
+  <img id="mainImage" src="images/tumbler1.jpg" alt="Main Tumbler Image">
+
+  <div class="gallery">
+    <img src="images/tumbler1.jpg" alt="Tumbler 1" onclick="changeImage(this)">
+    <img src="images/tumbler2.jpg" alt="Tumbler 2" onclick="changeImage(this)">
+    <img src="images/tumbler3.jpg" alt="Tumbler 3" onclick="changeImage(this)">
+  </div>
+
+  <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
     <label for="quantity">Quantity</label>
     <select name="quantity" id="quantity" required>
       <option value="">Select...</option>
       <option value="1">1</option>
       <option value="2">2</option>
-      <option value="3">3+</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10+">10+</option>
     </select>
 
-    <div id="priceDisplay"></div>
+    <p><strong>Price: $30.00</strong></p>
 
     <label for="design">Choose a Design</label>
     <select name="design" id="design">
@@ -176,29 +165,41 @@ footer a {
     <label for="upload">Upload Your Image</label>
     <input type="file" name="upload" id="upload" accept="image/*">
 
-    <img id="imagePreview" src="" alt="" style="display:none;" />
+    <img id="imagePreview" src="" alt="Preview" style="display:none; max-width: 100%; border-radius: 8px;" />
 
     <label for="notes">Notes</label>
     <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
 
-    <!-- Hidden fields for FormSubmit -->
     <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
-    <input type="hidden" name="_subject" value="New LED Glass Photo Order">
+    <input type="hidden" name="_subject" value="New Custom Tumbler Order">
     <input type="text" name="_honey" style="display:none">
 
     <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
 
-    <div id="spinner"><div class="spinner"></div></div>
-
-    <button type="submit">Submit Order</button>
+    <button type="submit">Add to Cart</button>
   </form>
+
+  <section class="details">
+    <h2 style="text-align:center; margin-top:2rem;">Details</h2>
+    <p style="text-align:center; max-width:600px; margin:auto;">
+      Our tumblers are made with stainless steel and feature double-wall insulation to keep drinks hot or cold for hours. Each item is professionally printed using sublimation, ensuring the design won't peel or fade over time.
+    </p>
+
+    <h2 style="text-align:center; margin-top:2rem;">Description</h2>
+    <p style="text-align:center; max-width:600px; margin:auto;">
+      Ideal for birthdays, holidays, sports teams, or just treating yourself! Customize with names, photos, characters, quotes, and more. Choose your design, upload your photo, and let us create a drinkware masterpiece just for you!
+    </p>
+  </section>
 
   <footer>
     <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
   </footer>
 
   <script>
-    // Image preview
+    function changeImage(img) {
+      document.getElementById('mainImage').src = img.src;
+    }
+
     document.getElementById('upload').addEventListener('change', function (event) {
       const file = event.target.files[0];
       const preview = document.getElementById('imagePreview');
@@ -210,18 +211,9 @@ footer a {
       }
     });
 
-    // Price display
-    document.getElementById('quantity').addEventListener('change', function () {
-      const quantity = this.value;
-      const priceMap = { '1': 25, '2': 45, '3': 60 };
-      const price = priceMap[quantity] ? `$${priceMap[quantity]}` : '';
-      document.getElementById('priceDisplay').textContent = price ? `Total Price: ${price}` : '';
-    });
-
-    // Loading spinner
-    document.getElementById('orderForm').addEventListener('submit', function () {
-      document.getElementById('spinner').style.display = 'block';
-      this.querySelector('button').disabled = true;
+    document.addEventListener("DOMContentLoaded", function () {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      document.getElementById("cartCount").textContent = cartItems.length;
     });
   </script>
 </body>
