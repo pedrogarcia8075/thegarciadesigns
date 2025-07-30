@@ -7,13 +7,11 @@
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
-      background-attachment: fixed;
-      background-size: cover;
-      color: #fff;
+      background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
+      color: #333;
       text-align: center;
     }
 
@@ -21,7 +19,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      background: rgba(0, 0, 0, 0.3);
+      background: #cb0101;
       padding: 10px 20px;
       position: sticky;
       top: 0;
@@ -37,8 +35,8 @@
     }
 
     .cart-count {
-      background-color: red;
-      color: white;
+      background-color: white;
+      color: #cb0101;
       font-size: 0.7rem;
       border-radius: 50%;
       padding: 2px 6px;
@@ -48,7 +46,7 @@
     h1 {
       margin-top: 2rem;
       font-size: 2.5rem;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      color: #cb0101;
     }
 
     .gallery {
@@ -61,42 +59,41 @@
 
     .gallery img {
       width: 100%;
-      max-width: 400px;
+      max-width: 300px;
       height: auto;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
       cursor: pointer;
     }
 
     .gallery img:hover {
-      transform: scale(1.02);
+      transform: scale(1.05);
     }
 
     .main-image {
       width: 100%;
-      max-width: 500px;
-      height: auto;
-      margin: auto;
+      max-width: 450px;
       border-radius: 10px;
-      display: block;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      margin-top: 1rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
     form, .details-section {
       max-width: 600px;
       margin: 2rem auto;
       padding: 2rem;
-      background: rgba(0, 0, 0, 0.3);
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      position: relative;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: left;
     }
 
     label {
       display: block;
       margin-bottom: 0.5rem;
-      text-align: left;
+      font-weight: bold;
+      color: #444;
     }
 
     select,
@@ -106,7 +103,7 @@
       width: 100%;
       margin-bottom: 1rem;
       padding: 0.75rem;
-      border: none;
+      border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
     }
@@ -117,6 +114,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      border: none;
     }
 
     button:hover {
@@ -127,13 +125,14 @@
       margin-bottom: 1rem;
       max-height: 250px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     #priceDisplay {
       font-weight: bold;
       font-size: 1.2rem;
       margin-bottom: 1rem;
+      color: #222;
     }
 
     #spinner {
@@ -156,6 +155,18 @@
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #ffadad;
     }
   </style>
 </head>
@@ -220,9 +231,10 @@
 
   <div class="details-section">
     <h2>Details</h2>
-    <p><!-- Add your product details here --></p>
+    <p>These high-quality aluminum photo prints are made with premium 0.45mm metal and feature vibrant, high-resolution designs. They're waterproof, UV-resistant, and perfect for wall decor, gifts, or memorials.</p>
+
     <h2>Description</h2>
-    <p><!-- Add your product description here --></p>
+    <p>Customize your aluminum photo with a personal image, artwork, or special message. Ideal for family portraits, pets, celebrations, and more. Each piece is carefully pressed for vivid results that last.</p>
   </div>
 
   <footer>
@@ -246,7 +258,6 @@
       this.querySelector('button').disabled = true;
     });
 
-    // Optional cart count logic using localStorage
     document.addEventListener("DOMContentLoaded", function () {
       let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       document.getElementById("cartCount").textContent = cartItems.length;
@@ -254,8 +265,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
