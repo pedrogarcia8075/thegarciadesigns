@@ -6,177 +6,183 @@
   <title>Photo Frames | The Garcia Designs</title>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
-  background-attachment: fixed;
-  background-size: cover;
-  color: #fff;
-  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
-  text-align: center;
-}
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #fff;
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
 
-header {
-  text-align: center;
-  padding: 2rem;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-}
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-header h1 {
-  font-size: 2.5rem;
-  margin: 0;
-}
+    .cart-icon {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+      position: relative;
+    }
 
-nav {
-  background-color: #1a1a1a;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
+    .cart-count {
+      background-color: red;
+      color: white;
+      font-size: 0.7rem;
+      border-radius: 50%;
+      padding: 2px 6px;
+      margin-left: 4px;
+    }
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  transition: transform 0.2s;
-}
+    header {
+      text-align: center;
+      padding: 2rem;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
 
-nav a:hover {
-  text-decoration: underline;
-  transform: scale(1.1);
-}
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
 
-.product-section {
-  padding: 2rem;
-}
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
 
-.product-grid {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-items: center;
-}
+    .gallery img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
 
-.product-card {
-  text-align: center;
-  text-decoration: none;
-  color: #fff;
-  border-radius: 10px;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(4px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 100%;
-  max-width: 300px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-}
+    .gallery img:hover {
+      transform: scale(1.02);
+    }
 
-.product-card:hover {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
-}
+    .main-image {
+      max-width: 500px;
+      width: 100%;
+      border-radius: 10px;
+      margin: auto;
+      display: block;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
 
-.product-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
+    form, .details-section {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
 
-/* ✅ Responsive gallery image styling */
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  padding: 2rem;
-}
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      text-align: left;
+    }
 
-.gallery img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
-}
+    select,
+    input[type="file"],
+    textarea,
+    button {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
 
-.gallery img:hover {
-  transform: scale(1.02);
-}
+    button {
+      background-color: #cb0101;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-@media (max-width: 600px) {
-  .gallery {
-    flex-direction: column;
-    align-items: center;
-  }
-}
+    button:hover {
+      background-color: #a30000;
+    }
 
-.contact {
-  background: rgba(0, 0, 0, 0.4);
-  padding: 3rem 2rem;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
-}
+    #imagePreview {
+      margin-bottom: 1rem;
+      max-height: 250px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
 
-.contact h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
+    #priceDisplay {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
 
-.contact form {
-  max-width: 600px;
-  margin: auto;
-}
+    #spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-.contact input,
-.contact textarea {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 6px;
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
-}
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #cb0101;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
 
-.contact input[type="submit"] {
-  background-color: #cb0101;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+    .details-section {
+      color: #fff;
+    }
 
-.contact input[type="submit"]:hover {
-  background-color: #fe0b0b;
-}
-
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  background: #111;
-  color: #fff;
-  box-shadow: inset 0 2px 5px rgba(255, 255, 255, 0.1);
-}
-
-footer a {
-  color: #fff;
-  text-decoration: underline;
-}
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 <body>
+  <div class="topbar">
+    <a href="cart.html" class="cart-icon">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+
   <h1>Photo Frames</h1>
 
+  <img src="images/frame1.jpg" id="mainDisplay" class="main-image" alt="Main Frame Image" />
+
   <div class="gallery">
-    <img src="images/frame1.jpg" alt="Photo Frame 1">
-    <img src="images/frame2.jpg" alt="Photo Frame 2">
-    <img src="images/frame3.jpg" alt="Photo Frame 3">
+    <img src="images/frame1.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Frame 1">
+    <img src="images/frame2.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Frame 2">
+    <img src="images/frame3.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Frame 3">
   </div>
 
   <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
@@ -185,10 +191,17 @@ footer a {
       <option value="">Select...</option>
       <option value="1">1</option>
       <option value="2">2</option>
-      <option value="3">3+</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10+</option>
     </select>
 
-    <div id="priceDisplay"></div>
+    <div id="priceDisplay">Price: $30.00</div>
 
     <label for="design">Choose a Design</label>
     <select name="design" id="design">
@@ -199,30 +212,33 @@ footer a {
 
     <label for="upload">Upload Your Image</label>
     <input type="file" name="upload" id="upload" accept="image/*">
-
     <img id="imagePreview" src="" alt="" style="display:none;" />
 
     <label for="notes">Notes</label>
     <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
 
-    <!-- Hidden fields for FormSubmit -->
     <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
-    <input type="hidden" name="_subject" value="New LED Glass Photo Order">
+    <input type="hidden" name="_subject" value="New Photo Frame Order">
     <input type="text" name="_honey" style="display:none">
 
     <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
-
     <div id="spinner"><div class="spinner"></div></div>
 
-    <button type="submit">Submit Order</button>
+    <button type="submit">Add to Cart</button>
   </form>
+
+  <div class="details-section">
+    <h2>Details</h2>
+    <p><!-- Add your photo frame product details here --></p>
+    <h2>Description</h2>
+    <p><!-- Add your product description here --></p>
+  </div>
 
   <footer>
     <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
   </footer>
 
   <script>
-    // Image preview
     document.getElementById('upload').addEventListener('change', function (event) {
       const file = event.target.files[0];
       const preview = document.getElementById('imagePreview');
@@ -234,20 +250,17 @@ footer a {
       }
     });
 
-    // Price display
-    document.getElementById('quantity').addEventListener('change', function () {
-      const quantity = this.value;
-      const priceMap = { '1': 25, '2': 45, '3': 60 };
-      const price = priceMap[quantity] ? `$${priceMap[quantity]}` : '';
-      document.getElementById('priceDisplay').textContent = price ? `Total Price: ${price}` : '';
-    });
-
-    // Loading spinner
     document.getElementById('orderForm').addEventListener('submit', function () {
       document.getElementById('spinner').style.display = 'block';
       this.querySelector('button').disabled = true;
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      document.getElementById("cartCount").textContent = cartItems.length;
+    });
   </script>
 </body>
 </html>
+
 
