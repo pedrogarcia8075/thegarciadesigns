@@ -7,14 +7,11 @@
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
-      background-attachment: fixed;
-      background-size: cover;
-      color: #fff;
-      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
+      color: #333;
       text-align: center;
     }
 
@@ -22,7 +19,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      background: rgba(0, 0, 0, 0.3);
+      background: #cb0101;
       padding: 10px 20px;
       position: sticky;
       top: 0;
@@ -38,45 +35,27 @@
     }
 
     .cart-count {
-      background-color: red;
-      color: white;
+      background-color: white;
+      color: #cb0101;
       font-size: 0.7rem;
       border-radius: 50%;
       padding: 2px 6px;
       margin-left: 4px;
     }
 
-    header {
-      text-align: center;
-      padding: 2rem;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    header h1 {
+    h1 {
+      margin-top: 2rem;
       font-size: 2.5rem;
-      margin: 0;
+      color: #cb0101;
     }
 
-    nav {
-      background-color: #1a1a1a;
-      padding: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      transition: transform 0.2s;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-      transform: scale(1.1);
+    .main-image {
+      max-width: 500px;
+      width: 100%;
+      border-radius: 10px;
+      margin: 1rem auto;
+      display: block;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
     .gallery {
@@ -89,41 +68,33 @@
 
     .gallery img {
       width: 100%;
-      max-width: 400px;
+      max-width: 300px;
       height: auto;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
       cursor: pointer;
     }
 
     .gallery img:hover {
-      transform: scale(1.02);
-    }
-
-    .main-image {
-      max-width: 500px;
-      width: 100%;
-      border-radius: 10px;
-      margin: auto;
-      display: block;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transform: scale(1.05);
     }
 
     form, .details-section {
       max-width: 600px;
       margin: 2rem auto;
       padding: 2rem;
-      background: rgba(0, 0, 0, 0.3);
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      position: relative;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: left;
     }
 
     label {
       display: block;
       margin-bottom: 0.5rem;
-      text-align: left;
+      font-weight: bold;
+      color: #444;
     }
 
     select,
@@ -133,7 +104,7 @@
       width: 100%;
       margin-bottom: 1rem;
       padding: 0.75rem;
-      border: none;
+      border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
     }
@@ -144,6 +115,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      border: none;
     }
 
     button:hover {
@@ -154,13 +126,14 @@
       margin-bottom: 1rem;
       max-height: 250px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     #priceDisplay {
       font-weight: bold;
       font-size: 1.2rem;
       margin-bottom: 1rem;
+      color: #222;
     }
 
     #spinner {
@@ -180,13 +153,21 @@
       animation: spin 1s linear infinite;
     }
 
-    .details-section {
-      color: #fff;
-    }
-
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #ffadad;
     }
   </style>
 </head>
@@ -251,9 +232,10 @@
 
   <div class="details-section">
     <h2>Details</h2>
-    <p><!-- Add your LED product details here --></p>
+    <p>Each LED glass photo is printed on high-gloss sublimation glass and mounted on a wooden stand with USB-powered warm LED lighting. Perfect for keepsakes, family portraits, pets, or gifts that light up the room.</p>
+
     <h2>Description</h2>
-    <p><!-- Add your LED product description here --></p>
+    <p>Customize your piece with your image or message and see it shine! Designed to stand on desks, shelves, or bedside tables—these luminous displays are crafted with care and made to last.</p>
   </div>
 
   <footer>
@@ -284,4 +266,3 @@
   </script>
 </body>
 </html>
-
