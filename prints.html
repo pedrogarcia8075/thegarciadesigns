@@ -6,7 +6,6 @@
   <title>Aluminum Photo Prints | The Garcia Designs</title>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
-    /* Existing styles remain unchanged */
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
@@ -18,12 +17,33 @@
       text-align: center;
     }
 
-    <div class="topbar">
-    <a href="cart.html" class="cart-icon">
-    🛒 Cart
-    <span class="cart-count" id="cartCount">0</span>
-    </a>
-    </div>
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .cart-icon {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+      position: relative;
+    }
+
+    .cart-count {
+      background-color: red;
+      color: white;
+      font-size: 0.7rem;
+      border-radius: 50%;
+      padding: 2px 6px;
+      margin-left: 4px;
+    }
 
     h1 {
       margin-top: 2rem;
@@ -137,44 +157,15 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    .topbar {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 10px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.cart-icon {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 1.1rem;
-  position: relative;
-}
-
-.cart-count {
-  background-color: red;
-  color: white;
-  font-size: 0.7rem;
-  border-radius: 50%;
-  padding: 2px 6px;
-  margin-left: 4px;
-}
-
-   <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    document.getElementById("cartCount").textContent = cartItems.length;
-  });
-</script>
- 
   </style>
 </head>
 <body>
+  <div class="topbar">
+    <a href="cart.html" class="cart-icon">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+
   <h1>Aluminum Photo Prints</h1>
 
   <img src="images/prints1.jpg" id="mainDisplay" class="main-image" alt="Main Preview">
@@ -254,9 +245,16 @@
       document.getElementById('spinner').style.display = 'block';
       this.querySelector('button').disabled = true;
     });
+
+    // Optional cart count logic using localStorage
+    document.addEventListener("DOMContentLoaded", function () {
+      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      document.getElementById("cartCount").textContent = cartItems.length;
+    });
   </script>
 </body>
 </html>
+
 
 
 
