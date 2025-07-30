@@ -7,13 +7,11 @@
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
-      background-attachment: fixed;
-      background-size: cover;
-      color: #fff;
+      background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
+      color: #333;
       text-align: center;
     }
 
@@ -21,7 +19,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      background: rgba(0, 0, 0, 0.3);
+      background: #cb0101;
       padding: 10px 20px;
       position: sticky;
       top: 0;
@@ -37,8 +35,8 @@
     }
 
     .cart-count {
-      background-color: red;
-      color: white;
+      background-color: white;
+      color: #cb0101;
       font-size: 0.7rem;
       border-radius: 50%;
       padding: 2px 6px;
@@ -48,16 +46,16 @@
     h1 {
       margin-top: 2rem;
       font-size: 2.5rem;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      color: #cb0101;
     }
 
     .main-image {
       max-width: 400px;
       width: 100%;
       border-radius: 10px;
-      margin: auto;
+      margin: 1rem auto;
       display: block;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .gallery {
@@ -73,29 +71,30 @@
       max-width: 150px;
       height: auto;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
       transition: transform 0.3s ease;
       cursor: pointer;
     }
 
     .gallery img:hover {
-      transform: scale(1.02);
+      transform: scale(1.05);
     }
 
     form, .details-section {
       max-width: 600px;
       margin: 2rem auto;
       padding: 2rem;
-      background: rgba(0, 0, 0, 0.3);
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      position: relative;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: left;
     }
 
     label {
       display: block;
       margin-bottom: 0.5rem;
-      text-align: left;
+      font-weight: bold;
+      color: #444;
     }
 
     select,
@@ -105,7 +104,7 @@
       width: 100%;
       margin-bottom: 1rem;
       padding: 0.75rem;
-      border: none;
+      border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
     }
@@ -116,6 +115,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      border: none;
     }
 
     button:hover {
@@ -126,13 +126,14 @@
       margin-bottom: 1rem;
       max-height: 250px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     #priceDisplay {
       font-weight: bold;
       font-size: 1.2rem;
       margin-bottom: 1rem;
+      color: #222;
     }
 
     #spinner {
@@ -156,9 +157,20 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #ffadad;
+    }
   </style>
 </head>
-
 <body>
   <div class="topbar">
     <a href="cart.html" class="cart-icon">
@@ -213,7 +225,6 @@
     <input type="text" name="_honey" style="display:none">
 
     <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
-
     <div id="spinner"><div class="spinner"></div></div>
 
     <button type="submit">Add to Cart</button>
@@ -221,9 +232,10 @@
 
   <div class="details-section">
     <h2>Details</h2>
-    <p><!-- Add your mug product details here --></p>
+    <p>Our mugs are crafted from high-quality ceramic and sublimation-coated for vibrant, long-lasting prints. Dishwasher-safe and microwave-friendly, they make the perfect gift or personal keepsake.</p>
+
     <h2>Description</h2>
-    <p><!-- Add your product description here --></p>
+    <p>Customize with names, photos, or messages. Great for birthdays, holidays, graduations, or daily coffee lovers. Upload your image and let us bring your mug to life!</p>
   </div>
 
   <footer>
@@ -254,5 +266,3 @@
   </script>
 </body>
 </html>
-
-
