@@ -58,6 +58,7 @@
       background: rgba(0, 0, 0, 0.3);
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      position: relative;
     }
 
     label {
@@ -89,6 +90,41 @@
     button:hover {
       background-color: #a30000;
     }
+
+    #imagePreview {
+      margin-bottom: 1rem;
+      max-height: 250px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    #priceDisplay {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    #spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #cb0101;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
 </head>
 
@@ -101,14 +137,16 @@
     <img src="images/prints3.jpg" alt="prints 3">
   </div>
 
-  <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
+  <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
     <label for="quantity">Quantity</label>
     <select name="quantity" id="quantity" required>
       <option value="">Select...</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3+</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3+</option>
     </select>
+
+    <div id="priceDisplay"></div>
 
     <label for="design">Choose a Design</label>
     <select name="design" id="design">
@@ -120,6 +158,8 @@
     <label for="upload">Upload Your Image</label>
     <input type="file" name="upload" id="upload" accept="image/*">
 
+    <img id="imagePreview" src="" alt="" style="display:none;" />
+
     <label for="notes">Notes</label>
     <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
 
@@ -130,13 +170,44 @@
 
     <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
 
+    <div id="spinner"><div class="spinner"></div></div>
+
     <button type="submit">Submit Order</button>
   </form>
 
   <footer>
     <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Image preview
+    document.getElementById('upload').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      const preview = document.getElementById('imagePreview');
+      if (file && file.type.startsWith('image/')) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+      } else {
+        preview.style.display = 'none';
+      }
+    });
+
+    // Price display
+    document.getElementById('quantity').addEventListener('change', function () {
+      const quantity = this.value;
+      const priceMap = { '1': 25, '2': 45, '3': 60 };
+      const price = priceMap[quantity] ? `$${priceMap[quantity]}` : '';
+      document.getElementById('priceDisplay').textContent = price ? `Total Price: ${price}` : '';
+    });
+
+    // Loading spinner
+    document.getElementById('orderForm').addEventListener('submit', function () {
+      document.getElementById('spinner').style.display = 'block';
+      this.querySelector('button').disabled = true;
+    });
+  </script>
 </body>
 </html>
+
 
 
