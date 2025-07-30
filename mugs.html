@@ -6,158 +6,160 @@
   <title>Custom Mugs | The Garcia Designs</title>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
-    background-attachment: fixed;
-    background-size: cover;
-    color: #fff;
-    text-align: center;
-  }
-
-  .topbar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 10px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-
-  .cart-icon {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 1.1rem;
-    position: relative;
-  }
-
-  .cart-count {
-    background-color: red;
-    color: white;
-    font-size: 0.7rem;
-    border-radius: 50%;
-    padding: 2px 6px;
-    margin-left: 4px;
-  }
-
-  h1 {
-    margin-top: 2rem;
-    font-size: 2.5rem;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  }
-
-  .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    padding: 2rem;
-  }
-
-  .gallery img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-  }
-
-  .gallery img:hover {
-    transform: scale(1.02);
-  }
-
-  @media (max-width: 600px) {
-    .gallery {
-      flex-direction: column;
-      align-items: center;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #ebe7e7 100%);
+      background-attachment: fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
     }
-  }
 
-  form {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    position: relative;
-  }
+    .topbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    text-align: left;
-  }
+    .cart-icon {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1.1rem;
+      position: relative;
+    }
 
-  select,
-  input[type="file"],
-  textarea,
-  button {
-    width: 100%;
-    margin-bottom: 1rem;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
+    .cart-count {
+      background-color: red;
+      color: white;
+      font-size: 0.7rem;
+      border-radius: 50%;
+      padding: 2px 6px;
+      margin-left: 4px;
+    }
 
-  button {
-    background-color: #cb0101;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+    h1 {
+      margin-top: 2rem;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
 
-  button:hover {
-    background-color: #a30000;
-  }
+    .main-image {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 10px;
+      margin: auto;
+      display: block;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
 
-  #imagePreview {
-    margin-bottom: 1rem;
-    max-height: 250px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
 
-  #priceDisplay {
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
+    .gallery img {
+      width: 100%;
+      max-width: 150px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
 
-  #spinner {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+    .gallery img:hover {
+      transform: scale(1.02);
+    }
 
-  .spinner {
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #cb0101;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    animation: spin 1s linear infinite;
-  }
+    form, .details-section {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-</style>
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      text-align: left;
+    }
+
+    select,
+    input[type="file"],
+    textarea,
+    button {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #cb0101;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #a30000;
+    }
+
+    #imagePreview {
+      margin-bottom: 1rem;
+      max-height: 250px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    #priceDisplay {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    #spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #cb0101;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 
 <body>
-  <!-- 🛒 Cart Icon Section -->
   <div class="topbar">
     <a href="cart.html" class="cart-icon">
       🛒 Cart <span class="cart-count" id="cartCount">0</span>
@@ -165,10 +167,13 @@
   </div>
 
   <h1>Custom Mugs</h1>
+
+  <img src="images/mug1.jpg" id="mainDisplay" class="main-image" alt="Main Mug View" />
+
   <div class="gallery">
-    <img src="images/mug1.jpg" alt="Mug 1">
-    <img src="images/mug2.jpg" alt="Mug 2">
-    <img src="images/mug3.jpg" alt="Mug 3">
+    <img src="images/mug1.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Thumb 1" />
+    <img src="images/mug2.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Thumb 2" />
+    <img src="images/mug3.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Thumb 3" />
   </div>
 
   <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
@@ -177,7 +182,14 @@
       <option value="">Select...</option>
       <option value="1">1</option>
       <option value="2">2</option>
-      <option value="3">3+</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10+</option>
     </select>
 
     <div id="priceDisplay">Price: $30.00</div>
@@ -190,31 +202,35 @@
     </select>
 
     <label for="upload">Upload Your Image</label>
-    <input type="file" name="upload" id="upload" accept="image/*">
-
+    <input type="file" name="upload" id="upload" accept="image/*" />
     <img id="imagePreview" src="" alt="" style="display:none;" />
 
     <label for="notes">Notes</label>
     <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
 
-    <!-- Hidden fields for FormSubmit -->
     <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
-    <input type="hidden" name="_subject" value="New LED Glass Photo Order">
+    <input type="hidden" name="_subject" value="New Mug Order">
     <input type="text" name="_honey" style="display:none">
 
     <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
 
     <div id="spinner"><div class="spinner"></div></div>
 
-    <button type="submit">Submit Order</button>
+    <button type="submit">Add to Cart</button>
   </form>
+
+  <div class="details-section">
+    <h2>Details</h2>
+    <p><!-- Add your mug product details here --></p>
+    <h2>Description</h2>
+    <p><!-- Add your product description here --></p>
+  </div>
 
   <footer>
     <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
   </footer>
 
   <script>
-    // Image preview
     document.getElementById('upload').addEventListener('change', function (event) {
       const file = event.target.files[0];
       const preview = document.getElementById('imagePreview');
@@ -226,21 +242,11 @@
       }
     });
 
-    // Price display
-    document.getElementById('quantity').addEventListener('change', function () {
-      const quantity = this.value;
-      const priceMap = { '1': 25, '2': 45, '3': 60 };
-      const price = priceMap[quantity] ? `$${priceMap[quantity]}` : '';
-      document.getElementById('priceDisplay').textContent = price ? `Total Price: ${price}` : '';
-    });
-
-    // Loading spinner
     document.getElementById('orderForm').addEventListener('submit', function () {
       document.getElementById('spinner').style.display = 'block';
       this.querySelector('button').disabled = true;
     });
 
-    // Optional: Dynamic cart count from localStorage
     document.addEventListener("DOMContentLoaded", function () {
       let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
       document.getElementById("cartCount").textContent = cartItems.length;
@@ -248,4 +254,5 @@
   </script>
 </body>
 </html>
+
 
