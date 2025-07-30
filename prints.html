@@ -6,6 +6,7 @@
   <title>Aluminum Photo Prints | The Garcia Designs</title>
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
+    /* Existing styles remain unchanged */
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
@@ -38,20 +39,24 @@
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
     .gallery img:hover {
       transform: scale(1.02);
     }
 
-    @media (max-width: 600px) {
-      .gallery {
-        flex-direction: column;
-        align-items: center;
-      }
+    .main-image {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      margin: auto;
+      border-radius: 10px;
+      display: block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
-    form {
+    form, .details-section {
       max-width: 600px;
       margin: 2rem auto;
       padding: 2rem;
@@ -127,14 +132,15 @@
     }
   </style>
 </head>
-
 <body>
   <h1>Aluminum Photo Prints</h1>
 
+  <img src="images/prints1.jpg" id="mainDisplay" class="main-image" alt="Main Preview">
+
   <div class="gallery">
-    <img src="images/prints1.jpg" alt="prints 1">
-    <img src="images/prints2.jpg" alt="prints 2">
-    <img src="images/prints3.jpg" alt="prints 3">
+    <img src="images/prints1.jpg" onclick="document.getElementById('mainDisplay').src=this.src">
+    <img src="images/prints2.jpg" onclick="document.getElementById('mainDisplay').src=this.src">
+    <img src="images/prints3.jpg" onclick="document.getElementById('mainDisplay').src=this.src">
   </div>
 
   <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
@@ -143,10 +149,17 @@
       <option value="">Select...</option>
       <option value="1">1</option>
       <option value="2">2</option>
-      <option value="3">3+</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10+</option>
     </select>
 
-    <div id="priceDisplay"></div>
+    <div id="priceDisplay">Price: $30.00</div>
 
     <label for="design">Choose a Design</label>
     <select name="design" id="design">
@@ -157,30 +170,33 @@
 
     <label for="upload">Upload Your Image</label>
     <input type="file" name="upload" id="upload" accept="image/*">
-
     <img id="imagePreview" src="" alt="" style="display:none;" />
 
     <label for="notes">Notes</label>
     <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
 
-    <!-- Hidden fields for FormSubmit -->
     <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
-    <input type="hidden" name="_subject" value="New LED Glass Photo Order">
+    <input type="hidden" name="_subject" value="New Aluminum Photo Order">
     <input type="text" name="_honey" style="display:none">
 
     <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
-
     <div id="spinner"><div class="spinner"></div></div>
 
-    <button type="submit">Submit Order</button>
+    <button type="submit">Add to Cart</button>
   </form>
+
+  <div class="details-section">
+    <h2>Details</h2>
+    <p><!-- Add your product details here --></p>
+    <h2>Description</h2>
+    <p><!-- Add your product description here --></p>
+  </div>
 
   <footer>
     <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
   </footer>
 
   <script>
-    // Image preview
     document.getElementById('upload').addEventListener('change', function (event) {
       const file = event.target.files[0];
       const preview = document.getElementById('imagePreview');
@@ -192,15 +208,6 @@
       }
     });
 
-    // Price display
-    document.getElementById('quantity').addEventListener('change', function () {
-      const quantity = this.value;
-      const priceMap = { '1': 25, '2': 45, '3': 60 };
-      const price = priceMap[quantity] ? `$${priceMap[quantity]}` : '';
-      document.getElementById('priceDisplay').textContent = price ? `Total Price: ${price}` : '';
-    });
-
-    // Loading spinner
     document.getElementById('orderForm').addEventListener('submit', function () {
       document.getElementById('spinner').style.display = 'block';
       this.querySelector('button').disabled = true;
@@ -208,6 +215,7 @@
   </script>
 </body>
 </html>
+
 
 
 
