@@ -14,100 +14,148 @@
       background-attachment: fixed;
       background-size: cover;
       color: #fff;
-      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2);
+      text-align: center;
     }
 
     .topbar {
-      background-color: #000;
-      padding: 10px;
-      text-align: right;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px 20px;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
 
     .cart-icon {
-      color: #fff;
-      text-decoration: none;
+      color: white;
       font-weight: bold;
-      margin-right: 20px;
+      text-decoration: none;
       font-size: 1.1rem;
+      position: relative;
     }
 
     .cart-count {
-      background: red;
+      background-color: red;
       color: white;
+      font-size: 0.7rem;
       border-radius: 50%;
-      padding: 0 7px;
-      margin-left: 5px;
-      font-size: 0.9rem;
+      padding: 2px 6px;
+      margin-left: 4px;
     }
 
-    header {
-      text-align: center;
-      padding: 2rem;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    }
-
-    header h1 {
+    h1 {
+      margin-top: 2rem;
       font-size: 2.5rem;
-      margin: 0;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
 
     .gallery {
       display: flex;
+      flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      flex-wrap: wrap;
-      padding: 1rem;
+      padding: 2rem;
     }
 
     .gallery img {
-      max-width: 120px;
-      border-radius: 8px;
-      cursor: pointer;
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
     .gallery img:hover {
-      transform: scale(1.1);
+      transform: scale(1.02);
     }
 
-    #mainImage {
-      display: block;
-      margin: 1rem auto;
-      max-width: 300px;
-      border-radius: 10px;
-    }
-
-    form {
-      padding: 2rem;
+    .main-image {
+      width: 100%;
       max-width: 500px;
+      height: auto;
       margin: auto;
+      border-radius: 10px;
+      display: block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
-    form label,
-    form select,
-    form input,
-    form textarea,
-    form button {
+    form, .details-section {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    label {
       display: block;
+      margin-bottom: 0.5rem;
+      text-align: left;
+    }
+
+    select,
+    input[type="file"],
+    textarea,
+    button {
       width: 100%;
       margin-bottom: 1rem;
       padding: 0.75rem;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 1rem;
     }
 
-    form button {
+    button {
       background-color: #cb0101;
       color: white;
+      font-weight: bold;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
 
-    form button:hover {
-      background-color: #fe0b0b;
+    button:hover {
+      background-color: #a30000;
+    }
+
+    #imagePreview {
+      margin-bottom: 1rem;
+      max-height: 250px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    #priceDisplay {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    #spinner {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #cb0101;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     footer {
@@ -121,20 +169,19 @@
 </head>
 <body>
   <div class="topbar">
-    <a href="cart.html" class="cart-icon">Cart <span id="cartCount" class="cart-count">0</span></a>
+    <a href="cart.html" class="cart-icon">
+      🛒 Cart <span class="cart-count" id="cartCount">0</span>
+    </a>
   </div>
 
-  <header>
-    <h1>Custom Tumblers</h1>
-    <p>Design your very own tumbler — customized with your favorite photos, names, or artwork! Each tumbler is crafted with high-quality sublimation printing, ensuring vibrant color and long-lasting durability. Perfect for gifts, events, or daily personal use.</p>
-  </header>
+  <h1>Custom Tumblers</h1>
 
-  <img id="mainImage" src="images/tumbler1.jpg" alt="Main Tumbler Image">
+  <img src="images/tumbler1.jpg" id="mainDisplay" class="main-image" alt="Main Preview">
 
   <div class="gallery">
-    <img src="images/tumbler1.jpg" alt="Tumbler 1" onclick="changeImage(this)">
-    <img src="images/tumbler2.jpg" alt="Tumbler 2" onclick="changeImage(this)">
-    <img src="images/tumbler3.jpg" alt="Tumbler 3" onclick="changeImage(this)">
+    <img src="images/tumbler1.jpg" onclick="document.getElementById('mainDisplay').src=this.src">
+    <img src="images/tumbler2.jpg" onclick="document.getElementById('mainDisplay').src=this.src">
+    <img src="images/tumbler3.jpg" onclick="document.getElementById('mainDisplay').src=this.src">
   </div>
 
   <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
@@ -150,10 +197,10 @@
       <option value="7">7</option>
       <option value="8">8</option>
       <option value="9">9</option>
-      <option value="10+">10+</option>
+      <option value="10">10+</option>
     </select>
 
-    <p><strong>Price: $30.00</strong></p>
+    <div id="priceDisplay">Price: $30.00</div>
 
     <label for="design">Choose a Design</label>
     <select name="design" id="design">
@@ -164,8 +211,7 @@
 
     <label for="upload">Upload Your Image</label>
     <input type="file" name="upload" id="upload" accept="image/*">
-
-    <img id="imagePreview" src="" alt="Preview" style="display:none; max-width: 100%; border-radius: 8px;" />
+    <img id="imagePreview" src="" alt="" style="display:none;" />
 
     <label for="notes">Notes</label>
     <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
@@ -175,31 +221,23 @@
     <input type="text" name="_honey" style="display:none">
 
     <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
+    <div id="spinner"><div class="spinner"></div></div>
 
     <button type="submit">Add to Cart</button>
   </form>
 
-  <section class="details">
-    <h2 style="text-align:center; margin-top:2rem;">Details</h2>
-    <p style="text-align:center; max-width:600px; margin:auto;">
-      Our tumblers are made with stainless steel and feature double-wall insulation to keep drinks hot or cold for hours. Each item is professionally printed using sublimation, ensuring the design won't peel or fade over time.
-    </p>
-
-    <h2 style="text-align:center; margin-top:2rem;">Description</h2>
-    <p style="text-align:center; max-width:600px; margin:auto;">
-      Ideal for birthdays, holidays, sports teams, or just treating yourself! Customize with names, photos, characters, quotes, and more. Choose your design, upload your photo, and let us create a drinkware masterpiece just for you!
-    </p>
-  </section>
+  <div class="details-section">
+    <h2>Details</h2>
+    <p>Our tumblers are made with stainless steel and feature double-wall insulation to keep drinks hot or cold for hours. Each item is professionally printed using sublimation, ensuring the design won't peel or fade over time.</p>
+    <h2>Description</h2>
+    <p>Ideal for birthdays, holidays, sports teams, or just treating yourself! Customize with names, photos, characters, quotes, and more. Choose your design, upload your photo, and let us create a drinkware masterpiece just for you!</p>
+  </div>
 
   <footer>
     <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
   </footer>
 
   <script>
-    function changeImage(img) {
-      document.getElementById('mainImage').src = img.src;
-    }
-
     document.getElementById('upload').addEventListener('change', function (event) {
       const file = event.target.files[0];
       const preview = document.getElementById('imagePreview');
@@ -209,6 +247,11 @@
       } else {
         preview.style.display = 'none';
       }
+    });
+
+    document.getElementById('orderForm').addEventListener('submit', function () {
+      document.getElementById('spinner').style.display = 'block';
+      this.querySelector('button').disabled = true;
     });
 
     document.addEventListener("DOMContentLoaded", function () {
