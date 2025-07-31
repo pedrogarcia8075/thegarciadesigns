@@ -10,9 +10,7 @@
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top left, #fc4b4b 0%, #f26c6c 40%, #fff 100%);
-      background-attachment: fixed;
-      background-size: cover;
+      background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
       color: #333;
       text-align: center;
     }
@@ -21,7 +19,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      background: rgba(0, 0, 0, 0.2);
+      background: #cb0101;
       padding: 10px 20px;
       position: sticky;
       top: 0;
@@ -29,7 +27,7 @@
     }
 
     .cart-icon {
-      color: #fff;
+      color: white;
       font-weight: bold;
       text-decoration: none;
       font-size: 1.1rem;
@@ -37,8 +35,8 @@
     }
 
     .cart-count {
-      background-color: red;
-      color: white;
+      background-color: white;
+      color: #cb0101;
       font-size: 0.7rem;
       border-radius: 50%;
       padding: 2px 6px;
@@ -52,12 +50,12 @@
     }
 
     .main-image {
-      max-width: 400px;
+      max-width: 500px;
       width: 100%;
       border-radius: 10px;
       margin: 1rem auto;
       display: block;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
 
     .gallery {
@@ -70,10 +68,10 @@
 
     .gallery img {
       width: 100%;
-      max-width: 150px;
+      max-width: 300px;
       height: auto;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease;
       cursor: pointer;
     }
@@ -88,14 +86,15 @@
       padding: 2rem;
       background: #fff;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      color: #333;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: left;
     }
 
     label {
       display: block;
       margin-bottom: 0.5rem;
-      text-align: left;
+      font-weight: bold;
+      color: #444;
     }
 
     select,
@@ -116,6 +115,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      border: none;
     }
 
     button:hover {
@@ -126,14 +126,14 @@
       margin-bottom: 1rem;
       max-height: 250px;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     #priceDisplay {
       font-weight: bold;
       font-size: 1.2rem;
       margin-bottom: 1rem;
-      color: #cb0101;
+      color: #222;
     }
 
     #spinner {
@@ -153,14 +153,21 @@
       animation: spin 1s linear infinite;
     }
 
-    footer {
-      padding: 2rem;
-      color: #666;
-    }
-
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #ffadad;
     }
   </style>
 </head>
@@ -171,7 +178,7 @@
     </a>
   </div>
 
-  <h1>Photo Frames</h1>
+  <h1>Custom Photo Frames</h1>
 
   <img src="images/frame1.jpg" id="mainDisplay" class="main-image" alt="Main Frame Image" />
 
@@ -225,9 +232,10 @@
 
   <div class="details-section">
     <h2>Details</h2>
-    <p><!-- Add your photo frame product details here --></p>
+    <p>Our photo frames feature vibrant sublimation-ready glossy glass and warm LED lighting. Each piece includes a wooden stand with USB connection, making it ideal for gifts, home décor, or keepsakes.</p>
+
     <h2>Description</h2>
-    <p><!-- Add your product description here --></p>
+    <p>Customize your frame with any photo—pets, family, memorials, or anime. Simply upload your image, choose a design, and we'll create a one-of-a-kind glowing memory display for you.</p>
   </div>
 
   <footer>
@@ -258,3 +266,4 @@
   </script>
 </body>
 </html>
+
