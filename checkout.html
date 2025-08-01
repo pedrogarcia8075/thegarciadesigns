@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout | The Garcia Designs</title>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -85,11 +84,14 @@
       <label>Shipping Address</label>
       <textarea name="address" rows="3" required></textarea>
 
-      <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
-      <input type="hidden" name="_subject" value="New Checkout Order">
-      <input type="hidden" name="_next" value="thank-you.html">
+      <!-- Hidden field to capture cart summary -->
+      <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
 
-      <button type="submit">Place Order</button>
+      <input type="hidden" name="_subject" value="New Checkout Order">
+      <input type="hidden" name="_next" value="https://thegarciasdesigns.com/thank-you.html">
+      <input type="hidden" name="_captcha" value="false">
+
+      <button type="submit" id="submitBtn">Place Order</button>
     </form>
   </div>
 
@@ -99,23 +101,30 @@
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const summaryDiv = document.getElementById("cartSummary");
+    const submitBtn = document.getElementById("submitBtn");
 
     function renderCart() {
       if(cart.length === 0){
         summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
+        submitBtn.disabled = true;
         return;
       }
+      submitBtn.disabled = false;
 
       let subtotal = 0;
+      let orderSummary = "Your Order:\n\n";
+
       summaryDiv.innerHTML = "<h3>Your Order</h3>";
 
       cart.forEach((item, index) => {
         subtotal += item.price * (item.qty || 1);
+        const line = `${item.qty || 1} × ${item.name} - $${item.price.toFixed(2)} each`;
+        orderSummary += line + "\n";
         summaryDiv.innerHTML += `
           <div class="cart-item">
             <div class="cart-item-info">
               <img src="${item.img || 'images/default.jpg'}" alt="${item.name}">
-              <span>${item.qty || 1} × ${item.name} - $${item.price.toFixed(2)} each</span>
+              <span>${line}</span>
             </div>
             <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
           </div>
@@ -124,6 +133,10 @@
 
       const tax = subtotal * TAX_RATE;
       const total = subtotal + tax + SHIPPING_RATE;
+      orderSummary += `\nSubtotal: $${subtotal.toFixed(2)}\nTax: $${tax.toFixed(2)}\nShipping: $${SHIPPING_RATE.toFixed(2)}\nTOTAL: $${total.toFixed(2)}`;
+
+      // Push summary into hidden field for FormSubmit
+      document.getElementById("orderDetails").value = orderSummary;
 
       summaryDiv.innerHTML += `
         <hr>
@@ -150,4 +163,3 @@
   </script>
 </body>
 </html>
-
