@@ -12,10 +12,9 @@
       padding: 0;
       background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
       color: #333;
-      text-align: center;
     }
 
-    /* Topbar & Cart */
+    /* Topbar */
     .topbar {
       display: flex;
       justify-content: flex-end;
@@ -29,7 +28,6 @@
     .cart-icon {
       color: white;
       font-weight: bold;
-      text-decoration: none;
       font-size: 1.2rem;
       position: relative;
       cursor: pointer;
@@ -47,102 +45,141 @@
     }
 
     h1 {
-      margin-top: 2rem;
+      text-align: center;
+      margin: 1.5rem 0 0.5rem;
       font-size: 2.5rem;
       color: #cb0101;
     }
+    p.subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
 
-    /* Main Image & Gallery */
+    /* Container layout */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    /* Left - Gallery */
+    .left-gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 450px;
+    }
     .main-image {
       width: 100%;
       max-width: 450px;
       border-radius: 10px;
-      margin-top: 1rem;
+      margin-bottom: 1rem;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
-    .gallery {
+    .thumbnail-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      padding: 2rem;
+      gap: 0.5rem;
     }
-    .gallery img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .thumbnail-row img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
       cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s, border 0.2s;
+      border: 2px solid transparent;
     }
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    .thumbnail-row img:hover {
+      transform: scale(1.1);
+    }
+    .thumbnail-row img.selected {
+      border: 2px solid #cb0101;
     }
 
-    /* Form */
-    form, .details-section {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
+    /* Right Section */
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 450px;
+      width: 100%;
+    }
+
+    /* Ready-made products */
+    .section-title {
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+
+    .product-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .product-card {
       background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .product-card img {
+      width: 100%;
+      max-width: 120px;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    .price { font-weight: bold; color: #cb0101; margin-bottom: 0.5rem; }
+    .add-to-cart {
+      background: #cb0101; color: white; padding: 0.5rem 1rem;
+      border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
+    }
+    .add-to-cart:hover { background: #a30000; }
+
+    /* Custom Form */
+    form {
+      background: #fff;
+      padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       text-align: left;
     }
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-      color: #444;
-    }
-    select,
-    input[type="file"],
-    input[type="text"],
-    textarea,
-    button {
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
+    label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+    select, input[type="file"], input[type="text"], textarea, button {
+      width: 100%; margin-bottom: 1rem; padding: 0.75rem;
+      border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;
     }
     button {
-      background-color: #cb0101;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      border: none;
+      background-color: #cb0101; color: white; font-weight: bold;
+      cursor: pointer; border: none;
     }
     button:hover { background-color: #a30000; }
-
     #imagePreview {
       margin-bottom: 1rem;
-      max-height: 250px;
+      max-height: 200px;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       display: none;
     }
+    #priceDisplay { font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; }
 
-    #priceDisplay {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: #222;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #111;
-      color: #fff;
-      font-size: 0.9rem;
-    }
-
-    /* Floating Cart Sidebar */
+    /* Cart Sidebar */
     .cart-sidebar {
       position: fixed;
       top: 0;
@@ -159,192 +196,214 @@
     }
     .cart-sidebar.active { right: 0; }
     .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: #cb0101;
-      color: #fff;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem; background: #cb0101; color: #fff;
     }
-    .close-cart {
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-    }
-    .cart-items p {
-      margin: 0.5rem 0;
-      font-size: 0.95rem;
-    }
-    .cart-footer {
-      padding: 1rem;
-      border-top: 1px solid #ddd;
-    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+    .cart-items p { margin: 0.5rem 0; font-size: 0.95rem; }
+    .cart-footer { padding: 1rem; border-top: 1px solid #ddd; }
     .checkout-btn {
-      display: block;
-      background: #cb0101;
-      color: #fff;
-      text-align: center;
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
+      display: block; background: #cb0101; color: #fff;
+      text-align: center; padding: 0.75rem; border-radius: 8px;
+      font-weight: bold; text-decoration: none;
     }
-    .checkout-btn:hover { background: #a30000; }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .container { flex-direction: column; align-items: center; }
+      .thumbnail-row img { width: 55px; height: 55px; }
+      .product-options { grid-template-columns: 1fr 1fr; }
+    }
   </style>
 </head>
 <body>
-  <!-- Floating Cart Sidebar -->
-  <div id="cartSidebar" class="cart-sidebar">
-    <div class="cart-header">
-      <h3>Your Cart</h3>
-      <span id="closeCart" class="close-cart">&times;</span>
+
+<!-- Cart Sidebar -->
+<div id="cartSidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <span id="closeCart" class="close-cart">&times;</span>
+  </div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <p id="cartTotal">Total: $0.00</p>
+    <a href="checkout.html" class="checkout-btn">Checkout</a>
+  </div>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <span class="cart-icon" id="openCart">
+    🛒 Cart <span class="cart-count" id="cartCount">0</span>
+  </span>
+</div>
+
+<h1>LED Glass Photos</h1>
+<p class="subtitle">💡 Light-Up Memories | 🖼 Fully Customizable | 🎁 Perfect Keepsakes</p>
+
+<div class="container">
+  <!-- Left: Gallery -->
+  <div class="left-gallery">
+    <img src="images/led1.jpg" id="mainDisplay" class="main-image" alt="LED Glass Preview">
+    <div class="thumbnail-row">
+      <img src="images/led1.jpg" class="selected">
+      <img src="images/led2.jpg">
+      <img src="images/led3.jpg">
+      <img src="images/led4.jpg">
+      <img src="images/led5.jpg">
+      <img src="images/led6.jpg">
     </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-footer">
-      <p id="cartTotal">Total: $0.00</p>
-      <a href="checkout.html" class="checkout-btn">Checkout</a>
+  </div>
+
+  <!-- Right: Ready-made + Custom Form -->
+  <div class="right-section">
+    <div>
+      <div class="section-title">Ready-Made Options</div>
+      <div class="product-options" id="productOptions"></div>
+    </div>
+
+    <div>
+      <div class="section-title">Create Your Own</div>
+      <form id="customForm">
+        <label for="quantity">Quantity</label>
+        <select name="quantity" id="quantity" required>
+          <option value="">Select...</option>
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3">3</option><option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+
+        <div id="priceDisplay">Price: $30.00 each</div>
+
+        <label for="personalText">Add Custom Text (Optional)</label>
+        <input type="text" name="personalText" id="personalText" placeholder="e.g., Family Forever">
+
+        <label for="upload">Upload Your Image</label>
+        <input type="file" name="upload" id="upload" accept="image/*">
+        <img id="imagePreview" src="" alt="Preview" />
+
+        <label for="notes">Notes</label>
+        <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
+
+        <button type="submit">Add Custom LED Photo to Cart</button>
+      </form>
     </div>
   </div>
+</div>
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <span class="cart-icon" id="openCart">
-      🛒 Cart <span class="cart-count" id="cartCount">0</span>
-    </span>
-  </div>
+<footer>
+  &copy; 2025 The Garcia Designs. All rights reserved.
+</footer>
 
-  <h1>LED Glass Photos</h1>
-  <p style="font-size:1.1rem; color:#555;">💡 Light-Up Memories | 🖼 Fully Customizable | 🎁 Perfect Keepsakes</p>
-
-  <!-- Main Display -->
-  <img src="images/led1.jpg" id="mainDisplay" class="main-image" alt="LED Glass Preview">
-
-  <!-- Gallery -->
-  <div class="gallery">
-    <img src="images/led1.jpg" alt="LED 1">
-    <img src="images/led2.jpg" alt="LED 2">
-    <img src="images/led3.jpg" alt="LED 3">
-  </div>
-
-  <!-- Order Form -->
-  <form id="orderForm">
-    <label for="quantity">Quantity</label>
-    <select name="quantity" id="quantity" required>
-      <option value="">Select...</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-
-    <div id="priceDisplay">Price: $30.00 each</div>
-
-    <label for="design">Choose a Design</label>
-    <select name="design" id="design">
-      <option>Design A</option>
-      <option>Design B</option>
-      <option>Design C</option>
-    </select>
-
-    <label for="personalText">Add Custom Text (Optional)</label>
-    <input type="text" name="personalText" id="personalText" placeholder="e.g., Family Forever">
-
-    <label for="upload">Upload Your Image</label>
-    <input type="file" name="upload" id="upload" accept="image/*">
-    <img id="imagePreview" src="" alt="Preview" />
-
-    <label for="notes">Notes</label>
-    <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
-
-    <button type="submit">Add to Cart</button>
-  </form>
-
-  <!-- Product Details -->
-  <div class="details-section">
-    <h2>Details</h2>
-    <p>Our LED glass photos are printed on premium sublimation glass and mounted on a wooden LED stand with USB power. Perfect for family photos, pets, memorials, and personalized gifts.</p>
-    <h2>Description</h2>
-    <p>Upload your image and add optional text to create a glowing memory that lights up any room. A beautiful and long-lasting keepsake for any occasion.</p>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // Main image preview
-    const mainDisplay = document.getElementById('mainDisplay');
-    document.querySelectorAll('.gallery img').forEach(img => {
-      img.addEventListener('click', () => mainDisplay.src = img.src);
+<script>
+  // Thumbnail click
+  const mainDisplay = document.getElementById('mainDisplay');
+  document.querySelectorAll('.thumbnail-row img').forEach(img => {
+    img.addEventListener('click', () => {
+      mainDisplay.src = img.src;
+      document.querySelectorAll('.thumbnail-row img').forEach(i => i.classList.remove('selected'));
+      img.classList.add('selected');
     });
+  });
 
-    // Image upload preview
-    document.getElementById('upload').addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      const preview = document.getElementById('imagePreview');
-      if (file && file.type.startsWith('image/')) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = 'block';
-      } else {
-        preview.style.display = 'none';
-      }
-    });
+  // Product options
+  const productOptions = document.getElementById('productOptions');
+  for (let i = 1; i <= 6; i++) {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <img src="images/led${i}.jpg" alt="LED ${i}">
+      <div class="price">$30.00</div>
+      <button class="add-to-cart" data-img="images/led${i}.jpg">Add to Cart</button>
+    `;
+    productOptions.appendChild(card);
+  }
 
-    // Live price calculation
-    const quantity = document.getElementById("quantity");
-    const priceDisplay = document.getElementById("priceDisplay");
-    quantity.addEventListener("change", function(){
-      const qty = parseInt(this.value || 0);
-      const price = 30 * qty;
-      priceDisplay.textContent = qty ? `Total: $${price}.00` : "Price: $30.00 each";
-    });
+  // Cart functionality
+  const cartSidebar = document.getElementById("cartSidebar");
+  const closeCart = document.getElementById("closeCart");
+  const cartItemsDiv = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  const cartCount = document.getElementById("cartCount");
+  const openCartBtn = document.getElementById("openCart");
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    // Cart functionality
-    const cartSidebar = document.getElementById("cartSidebar");
-    const closeCart = document.getElementById("closeCart");
-    const cartItemsDiv = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const cartCount = document.getElementById("cartCount");
-    const openCartBtn = document.getElementById("openCart");
-
-    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    function updateCartDisplay() {
-      cartItemsDiv.innerHTML = "";
-      let total = 0;
-      if (cart.length === 0) {
-        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-      } else {
-        cart.forEach(item => {
-          total += item.price;
-          cartItemsDiv.innerHTML += `<p>${item.quantity}x ${item.design} - $${item.price}.00</p>`;
-        });
-      }
-      cartCount.textContent = cart.length;
-      cartTotal.textContent = "Total: $" + total + ".00";
-      localStorage.setItem("cartItems", JSON.stringify(cart));
+  function updateCartDisplay() {
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item => {
+        total += item.price;
+        cartItemsDiv.innerHTML += `<p><img src="${item.img}" width="30" style="vertical-align:middle;margin-right:5px;"> ${item.name} - $${item.price}.00</p>`;
+      });
     }
+    cartCount.textContent = cart.length;
+    cartTotal.textContent = "Total: $" + total + ".00";
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+  }
 
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const quantity = parseInt(document.getElementById("quantity").value);
-      const design = document.getElementById("design").value;
-      const price = 30 * quantity;
-      cart.push({ quantity, design, price });
+  // Ready-made add to cart
+  document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("add-to-cart")) {
+      const img = e.target.dataset.img;
+      cart.push({ img, name: "LED Photo", price: 30 });
       updateCartDisplay();
       cartSidebar.classList.add("active");
-      this.reset();
-      document.getElementById('imagePreview').style.display = 'none';
-    });
+    }
+  });
 
-    openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
-    closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
-    document.addEventListener("DOMContentLoaded", updateCartDisplay);
-  </script>
+  // Custom add to cart
+  document.getElementById("customForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const qty = parseInt(document.getElementById("quantity").value || 1);
+    const customText = document.getElementById("personalText").value || "Custom LED Photo";
+    const img = document.getElementById("imagePreview").src || "images/led1.jpg";
+    for(let i=0;i<qty;i++){
+      cart.push({ img, name: customText, price: 30 });
+    }
+    updateCartDisplay();
+    cartSidebar.classList.add("active");
+    this.reset();
+    document.getElementById('imagePreview').style.display = 'none';
+  });
+
+  // Live price calculation
+  const quantity = document.getElementById("quantity");
+  const priceDisplay = document.getElementById("priceDisplay");
+  quantity.addEventListener("change", function(){
+    const qty = parseInt(this.value || 0);
+    const price = 30 * qty;
+    priceDisplay.textContent = qty ? `Total: $${price}.00` : "Price: $30.00 each";
+  });
+
+  // Image upload preview
+  document.getElementById('upload').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('imagePreview');
+    if (file && file.type.startsWith('image/')) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
+  });
+
+  openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
+  closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+</script>
+
 </body>
 </html>
+
