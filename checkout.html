@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | The Garcia Designs</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f7f7f7;
+      margin: 0; padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 { text-align: center; color:#cb0101; }
+    label { font-weight: bold; display:block; margin:0.5rem 0; }
+    input, textarea, button {
+      width: 100%; padding: 0.75rem; margin-bottom: 1rem;
+      border-radius: 8px; border: 1px solid #ccc;
+    }
+    button {
+      background: #cb0101; color:#fff; font-weight:bold; border:none;
+    }
+    button:hover { background:#a30000; cursor:pointer; }
+    .cart-summary {
+      background: #ffeaea;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Checkout</h1>
+
+    <div class="cart-summary" id="cartSummary"></div>
+
+    <form action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST">
+      <label>Name</label>
+      <input type="text" name="name" required>
+
+      <label>Email</label>
+      <input type="email" name="email" required>
+
+      <label>Shipping Address</label>
+      <textarea name="address" rows="3" required></textarea>
+
+      <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+      <input type="hidden" name="_subject" value="New Checkout Order">
+      <input type="hidden" name="_next" value="thank-you.html">
+
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const summaryDiv = document.getElementById("cartSummary");
+    let total = 0;
+    if(cart.length===0){
+      summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      summaryDiv.innerHTML = "<h3>Your Order</h3>";
+      cart.forEach(item=>{
+        total+=item.price;
+        summaryDiv.innerHTML += `<p>${item.quantity}x ${item.design} - $${item.price}.00</p>`;
+      });
+      summaryDiv.innerHTML += `<hr><strong>Total: $${total}.00</strong>`;
+    }
+  </script>
+</body>
+</html>
