@@ -12,10 +12,9 @@
       padding: 0;
       background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
       color: #333;
-      text-align: center;
     }
 
-    /* Topbar & Cart */
+    /* Topbar */
     .topbar {
       display: flex;
       justify-content: flex-end;
@@ -47,102 +46,100 @@
     }
 
     h1 {
-      margin-top: 2rem;
+      text-align: center;
+      margin: 1.5rem 0 0.5rem;
       font-size: 2.5rem;
       color: #cb0101;
     }
+    p.subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
 
-    /* Main Image & Gallery */
+    /* Product Layout */
+    .product-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      flex-wrap: wrap;
+    }
+
+    /* Left side - Main image & thumbnails */
+    .image-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 400px;
+    }
     .main-image {
       width: 100%;
-      max-width: 450px;
+      max-width: 350px;
       border-radius: 10px;
-      margin-top: 1rem;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
-    .gallery {
+    .thumbnails {
       display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
       flex-wrap: wrap;
       justify-content: center;
+    }
+    .thumbnails img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.3s;
+    }
+    .thumbnails img:hover {
+      border: 2px solid #cb0101;
+    }
+
+    /* Right side - Product options */
+    .variants {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
       gap: 1rem;
-      padding: 2rem;
+      max-width: 500px;
     }
-    .gallery img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-    }
-
-    /* Form */
-    form, .details-section {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      text-align: left;
-    }
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-      color: #444;
-    }
-    select,
-    input[type="file"],
-    input[type="text"],
-    textarea,
-    button {
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
+    .variant-card {
+      background: white;
       border-radius: 8px;
-      font-size: 1rem;
-    }
-    button {
-      background-color: #cb0101;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      border: none;
-    }
-    button:hover {
-      background-color: #a30000;
-    }
-
-    #imagePreview {
-      margin-bottom: 1rem;
-      max-height: 250px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      display: none;
-    }
-
-    #priceDisplay {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: #222;
-    }
-
-    footer {
+      padding: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       text-align: center;
-      padding: 1.5rem;
-      background: #111;
-      color: #fff;
-      font-size: 0.9rem;
+      transition: 0.3s;
     }
+    .variant-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .variant-card img {
+      width: 100%;
+      max-height: 100px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .price {
+      font-weight: bold;
+      margin: 0.3rem 0;
+    }
+    .add-btn {
+      background: #cb0101;
+      color: white;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+    }
+    .add-btn:hover { background: #a30000; }
 
     /* Floating Cart Sidebar */
     .cart-sidebar {
@@ -168,23 +165,10 @@
       background: #cb0101;
       color: #fff;
     }
-    .close-cart {
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-    }
-    .cart-items p {
-      margin: 0.5rem 0;
-      font-size: 0.95rem;
-    }
-    .cart-footer {
-      padding: 1rem;
-      border-top: 1px solid #ddd;
-    }
+    .close-cart { font-size: 1.5rem; cursor: pointer; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+    .cart-items p { margin: 0.5rem 0; font-size: 0.95rem; }
+    .cart-footer { padding: 1rem; border-top: 1px solid #ddd; }
     .checkout-btn {
       display: block;
       background: #cb0101;
@@ -196,6 +180,15 @@
       text-decoration: none;
     }
     .checkout-btn:hover { background: #a30000; }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
@@ -220,94 +213,60 @@
   </div>
 
   <h1>Custom Water Bottles</h1>
-  <p style="font-size:1.1rem; color:#555;">💧 Durable & Customizable | 🖼 Upload Your Image | 🎁 Perfect Gift</p>
+  <p class="subtitle">💧 Durable & Customizable | 🖼 Upload Your Image | 🎁 Perfect Gift</p>
 
-  <!-- Main Display -->
-  <img src="images/bottle1.jpg" id="mainDisplay" class="main-image" alt="Main Water Bottle Preview">
+  <div class="product-container">
+    <!-- LEFT: Main image + thumbnails -->
+    <div class="image-section">
+      <img src="images/bottle1.jpg" id="mainDisplay" class="main-image" alt="Main Water Bottle">
+      <div class="thumbnails">
+        <img src="images/bottle1.jpg" alt="Thumb 1">
+        <img src="images/bottle2.jpg" alt="Thumb 2">
+        <img src="images/bottle3.jpg" alt="Thumb 3">
+        <img src="images/bottle4.jpg" alt="Thumb 4">
+        <img src="images/bottle5.jpg" alt="Thumb 5">
+      </div>
+    </div>
 
-  <!-- Gallery -->
-  <div class="gallery">
-    <img src="images/bottle1.jpg" alt="Bottle 1">
-    <img src="images/bottle2.jpg" alt="Bottle 2">
-    <img src="images/bottle3.jpg" alt="Bottle 3">
-    <img src="images/bottle4.jpg" alt="Bottle 4">
-    <img src="images/bottle5.jpg" alt="Bottle 5">
-  </div>
-
-  <!-- Order Form -->
-  <form id="orderForm">
-    <label for="quantity">Quantity</label>
-    <select name="quantity" id="quantity" required>
-      <option value="">Select...</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-    </select>
-
-    <div id="priceDisplay">Price: $30.00 each</div>
-
-    <label for="design">Choose a Design</label>
-    <select name="design" id="design">
-      <option>Design A</option>
-      <option>Design B</option>
-      <option>Design C</option>
-    </select>
-
-    <label for="personalText">Add Custom Text (Optional)</label>
-    <input type="text" name="personalText" id="personalText" placeholder="e.g., Drink Up, Sarah!">
-
-    <label for="upload">Upload Your Image</label>
-    <input type="file" name="upload" id="upload" accept="image/*">
-    <img id="imagePreview" src="" alt="Preview" />
-
-    <label for="notes">Notes</label>
-    <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
-
-    <button type="submit">Add to Cart</button>
-  </form>
-
-  <!-- Product Details -->
-  <div class="details-section">
-    <h2>Details</h2>
-    <p>Our water bottles are made with stainless steel or BPA-free plastic and feature leak-proof lids with flip handles. Perfect for hot or cold drinks and fully customizable with your own design.</p>
-    <h2>Description</h2>
-    <p>Hydrate in style with a bottle personalized just for you! Add names, photos, or graphics to make a one-of-a-kind water bottle perfect for the gym, office, school, or as a gift.</p>
+    <!-- RIGHT: Product options -->
+    <div class="variants">
+      <div class="variant-card" data-name="White Bottle" data-price="9.99">
+        <img src="images/bottle1.jpg" alt="White Bottle">
+        <p class="price">$9.99</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="variant-card" data-name="Blue Bottle" data-price="12.99">
+        <img src="images/bottle2.jpg" alt="Blue Bottle">
+        <p class="price">$12.99</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="variant-card" data-name="Pink Bottle" data-price="12.62">
+        <img src="images/bottle3.jpg" alt="Pink Bottle">
+        <p class="price">$12.62</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="variant-card" data-name="Green Bottle" data-price="11.98">
+        <img src="images/bottle4.jpg" alt="Green Bottle">
+        <p class="price">$11.98</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="variant-card" data-name="Purple Bottle" data-price="12.99">
+        <img src="images/bottle5.jpg" alt="Purple Bottle">
+        <p class="price">$12.99</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+    </div>
   </div>
 
   <footer>
     <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
   </footer>
 
-  <!-- Scripts -->
   <script>
-    // Main image preview
+    // Thumbnail click to change main image
     const mainDisplay = document.getElementById('mainDisplay');
-    document.querySelectorAll('.gallery img').forEach(img => {
+    document.querySelectorAll('.thumbnails img').forEach(img => {
       img.addEventListener('click', () => mainDisplay.src = img.src);
-    });
-
-    // Image upload preview
-    document.getElementById('upload').addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      const preview = document.getElementById('imagePreview');
-      if (file && file.type.startsWith('image/')) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = 'block';
-      } else {
-        preview.style.display = 'none';
-      }
-    });
-
-    // Live price calculation
-    const quantity = document.getElementById("quantity");
-    const priceDisplay = document.getElementById("priceDisplay");
-    quantity.addEventListener("change", function(){
-      const qty = parseInt(this.value || 0);
-      const price = 30 * qty;
-      priceDisplay.textContent = qty ? `Total: $${price}.00` : "Price: $30.00 each";
     });
 
     // Cart functionality
@@ -328,24 +287,23 @@
       } else {
         cart.forEach(item => {
           total += item.price;
-          cartItemsDiv.innerHTML += `<p>${item.quantity}x ${item.design} - $${item.price}.00</p>`;
+          cartItemsDiv.innerHTML += `<p>${item.name} - $${item.price.toFixed(2)}</p>`;
         });
       }
       cartCount.textContent = cart.length;
-      cartTotal.textContent = "Total: $" + total + ".00";
+      cartTotal.textContent = "Total: $" + total.toFixed(2);
       localStorage.setItem("cartItems", JSON.stringify(cart));
     }
 
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const quantity = parseInt(document.getElementById("quantity").value);
-      const design = document.getElementById("design").value;
-      const price = 30 * quantity;
-      cart.push({ quantity, design, price });
-      updateCartDisplay();
-      cartSidebar.classList.add("active");
-      this.reset();
-      document.getElementById('imagePreview').style.display = 'none';
+    document.querySelectorAll(".add-btn").forEach(btn => {
+      btn.addEventListener("click", function() {
+        const card = this.closest(".variant-card");
+        const name = card.getAttribute("data-name");
+        const price = parseFloat(card.getAttribute("data-price"));
+        cart.push({ name, price });
+        updateCartDisplay();
+        cartSidebar.classList.add("active");
+      });
     });
 
     openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
@@ -354,4 +312,3 @@
   </script>
 </body>
 </html>
-
