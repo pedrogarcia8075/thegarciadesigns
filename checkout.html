@@ -36,6 +36,23 @@
       margin-bottom: 1rem;
     }
     .cart-summary h3 { margin-top:0; }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .remove-btn {
+      background: #cb0101;
+      color: #fff;
+      padding: 0.3rem 0.6rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .remove-btn:hover { background:#a30000; }
   </style>
 </head>
 <body>
@@ -65,19 +82,26 @@
   <script>
     const TAX_RATE = 0.07; // 7% tax
     const SHIPPING_RATE = 12.00; // flat shipping
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const summaryDiv = document.getElementById("cartSummary");
 
-    if(cart.length === 0){
-      summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
-    } else {
+    function renderCart() {
+      if(cart.length === 0){
+        summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
+        return;
+      }
+
       let subtotal = 0;
       summaryDiv.innerHTML = "<h3>Your Order</h3>";
-      
-      cart.forEach(item => {
+
+      cart.forEach((item, index) => {
         subtotal += item.price * item.qty;
-        summaryDiv.innerHTML += `<p>${item.qty} × ${item.name} - $${item.price.toFixed(2)} each</p>`;
+        summaryDiv.innerHTML += `
+          <div class="cart-item">
+            <span>${item.qty} × ${item.name} - $${item.price.toFixed(2)} each</span>
+            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+          </div>
+        `;
       });
 
       const tax = subtotal * TAX_RATE;
@@ -91,6 +115,15 @@
         <strong>Total: $${total.toFixed(2)}</strong>
       `;
     }
+
+    function removeItem(index) {
+      cart.splice(index, 1); 
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    // Initial render
+    renderCart();
 
     // Clear cart on successful submit
     document.getElementById("checkoutForm").addEventListener("submit", function() {
