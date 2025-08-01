@@ -16,6 +16,7 @@
       background-size: cover;
     }
 
+    /* Top bar */
     .topbar {
       background-color: #111;
       padding: 10px;
@@ -24,7 +25,6 @@
       top: 0;
       z-index: 1000;
     }
-
     .cart-icon {
       color: #fff;
       text-decoration: none;
@@ -32,7 +32,6 @@
       margin-right: 20px;
       font-size: 1.1rem;
     }
-
     .cart-count {
       background: crimson;
       color: white;
@@ -42,19 +41,20 @@
       font-size: 0.9rem;
     }
 
+    /* Header */
     header {
       text-align: center;
       padding: 2rem;
       background: linear-gradient(to bottom, #ffe5e5, #fff9f9);
       color: #222;
     }
-
     header h1 {
       font-size: 2.75rem;
       color: #cb0101;
       margin-bottom: 0.5rem;
     }
 
+    /* Navigation */
     nav {
       background-color: #cb0101;
       padding: 1rem;
@@ -63,31 +63,47 @@
       gap: 1.5rem;
       flex-wrap: wrap;
     }
-
     nav a {
       color: #fff;
       text-decoration: none;
       font-weight: bold;
       transition: transform 0.2s;
     }
-
     nav a:hover {
       text-decoration: underline;
       transform: scale(1.1);
     }
 
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      padding: 0.5rem;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #cb0101;
+      text-decoration: none;
+    }
+    .dropdown-content a:hover {
+      background: #ffe5e5;
+    }
+
+    /* Product section */
     .product-section {
       padding: 3rem 2rem;
       background-color: #fff;
     }
-
     .product-grid {
       display: grid;
       gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       justify-items: center;
     }
-
     .product-card {
       background: #fff;
       color: #000;
@@ -97,32 +113,27 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       width: 100%;
-      max-width: 300px;
+      max-width: 280px;
     }
-
     .product-card:hover {
       transform: translateY(-6px) scale(1.03);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
     }
-
     .product-card img {
       width: 100%;
       height: auto;
       border-radius: 10px;
       margin-bottom: 0.75rem;
     }
-
     .product-card h3 {
       margin-top: 0.5rem;
       font-size: 1.1rem;
     }
-
     .product-card p {
       margin: 0.5rem 0;
       font-weight: bold;
       font-size: 1rem;
     }
-
     .product-card button {
       background: #cb0101;
       color: white;
@@ -133,27 +144,24 @@
       font-weight: bold;
       transition: background 0.3s;
     }
-
     .product-card button:hover {
       background: #e31a1a;
     }
 
+    /* Contact */
     .contact {
       background: #ffe5e5;
       padding: 3rem 2rem;
     }
-
     .contact h2 {
       text-align: center;
       margin-bottom: 1.5rem;
       color: #cb0101;
     }
-
     .contact form {
       max-width: 600px;
       margin: auto;
     }
-
     .contact input,
     .contact textarea {
       width: 100%;
@@ -163,7 +171,6 @@
       border: 1px solid #ccc;
       border-radius: 6px;
     }
-
     .contact input[type="submit"] {
       background-color: #cb0101;
       color: white;
@@ -172,11 +179,11 @@
       border: none;
       transition: background-color 0.3s;
     }
-
     .contact input[type="submit"]:hover {
       background-color: #e31a1a;
     }
 
+    /* Footer */
     footer {
       text-align: center;
       padding: 1.5rem;
@@ -184,7 +191,6 @@
       color: #fff;
       font-size: 0.9rem;
     }
-
     footer a {
       color: #ffadad;
       text-decoration: underline;
@@ -207,7 +213,7 @@
 
   <nav>
     <a href="#" class="dropdown">Products ▼</a>
-    <div class="dropdown-content" style="display:none;">
+    <div class="dropdown-content">
       <a href="tumblers.html">Tumblers</a>
       <a href="mugs.html">Mugs</a>
       <a href="leds.html">LED Glass Photos</a>
@@ -282,7 +288,7 @@
     <p>© 2025 The Garcia Designs | Follow us on
       <a href="https://www.facebook.com/profile.php?id=61579036433148&amp;rdid=g4N6yVd7cLkqI324&amp;share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15sowTiZ3d" target="_blank">
         Facebook
-      </a> &
+      </a> & 
       <a href="https://instagram.com/" target="_blank">Instagram</a>
     </p>
   </footer>
@@ -290,41 +296,31 @@
   <script>
     // ---------- CART SETUP ----------
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const TAX_RATE = 0.07; // Example 7%
-    const SHIPPING_RATE = 5.99; // Flat shipping
 
-    // Add item to cart
     function addToCart(name, price) {
-        cart.push({ name, price, qty: 1 });
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateCartCount();
-        alert(`${name} added to cart!`);
+      cart.push({ name, price, qty: 1 });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      alert(`${name} added to cart!`);
     }
 
-    // Update cart icon count
     function updateCartCount() {
-        document.getElementById("cartCount").textContent = cart.length;
+      document.getElementById("cartCount").textContent = cart.length;
     }
 
-    // Remove item from cart (used on cart.html)
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateCartCount();
-        if (typeof renderCart === 'function') renderCart();
-    }
-
-    // Call update on page load
     document.addEventListener("DOMContentLoaded", function () {
-        updateCartCount();
+      updateCartCount();
 
-        const dropdown = document.querySelector(".dropdown");
-        const dropdownContent = document.querySelector(".dropdown-content");
-        dropdown.addEventListener("click", function (e) {
-          e.preventDefault();
-          dropdownContent.style.display =
-            dropdownContent.style.display === "none" ? "block" : "none";
-        });
+      const dropdown = document.querySelector(".dropdown");
+      const dropdownContent = document.querySelector(".dropdown-content");
+
+      dropdown.addEventListener("click", function (e) {
+        e.preventDefault();
+        dropdownContent.style.display =
+          dropdownContent.style.display === "none" || dropdownContent.style.display === "" 
+          ? "block" 
+          : "none";
+      });
     });
   </script>
 </body>
