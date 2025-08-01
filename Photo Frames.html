@@ -14,7 +14,7 @@
       color: #333;
     }
 
-    /* Topbar */
+    /* Topbar & Cart */
     .topbar {
       display: flex;
       justify-content: flex-end;
@@ -28,7 +28,6 @@
     .cart-icon {
       color: white;
       font-weight: bold;
-      text-decoration: none;
       font-size: 1.2rem;
       position: relative;
       cursor: pointer;
@@ -58,7 +57,7 @@
       margin-bottom: 2rem;
     }
 
-    /* Layout */
+    /* Container Layout */
     .container {
       display: flex;
       justify-content: center;
@@ -79,12 +78,11 @@
       max-width: 350px;
       border-radius: 10px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      margin-bottom: 1rem;
     }
     .thumbnails {
       display: flex;
       gap: 0.5rem;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
       flex-wrap: wrap;
       justify-content: center;
     }
@@ -97,29 +95,18 @@
       border: 2px solid transparent;
       transition: 0.3s;
     }
-    .thumbnails img.selected {
+    .thumbnails img.active {
       border: 2px solid #cb0101;
     }
 
-    /* RIGHT: Ready-made + Custom */
+    /* RIGHT: Product options + Form */
     .right-section {
       max-width: 500px;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      width: 100%;
     }
 
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-      color: #cb0101;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 0.3rem;
-    }
-
-    /* Ready-Made Options */
     .product-options {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -165,7 +152,6 @@
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       padding: 1.5rem;
-      text-align: left;
     }
     label {
       display: block;
@@ -267,7 +253,6 @@
       }
       .product-card { flex: 0 0 150px; scroll-snap-align: start; }
       .right-section { width: 100%; }
-      .thumbnails img { width: 50px; height: 50px; }
     }
   </style>
 </head>
@@ -301,27 +286,62 @@
   <div class="left-section">
     <img src="images/frame1.jpg" id="mainDisplay" class="main-image" alt="Main Frame Preview">
     <div class="thumbnails">
-      <img src="images/frame1.jpg" class="selected">
+      <img src="images/frame1.jpg" class="active">
       <img src="images/frame2.jpg">
       <img src="images/frame3.jpg">
+      <img src="images/frame4.jpg">
+      <img src="images/frame5.jpg">
+      <img src="images/frame6.jpg">
     </div>
   </div>
 
   <!-- RIGHT SECTION -->
   <div class="right-section">
-    <!-- Ready-Made Options -->
-    <div class="section-title">Ready-Made Frames</div>
-    <div class="product-options" id="productOptions"></div>
+    <!-- Product Options -->
+    <div class="product-options">
+      <div class="product-card" data-name="Frame 1" data-price="30">
+        <img src="images/frame1.jpg" alt="">
+        <p class="price">$30.00</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Frame 2" data-price="30">
+        <img src="images/frame2.jpg" alt="">
+        <p class="price">$30.00</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Frame 3" data-price="30">
+        <img src="images/frame3.jpg" alt="">
+        <p class="price">$30.00</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Frame 4" data-price="30">
+        <img src="images/frame4.jpg" alt="">
+        <p class="price">$30.00</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Frame 5" data-price="30">
+        <img src="images/frame5.jpg" alt="">
+        <p class="price">$30.00</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+      <div class="product-card" data-name="Frame 6" data-price="30">
+        <img src="images/frame6.jpg" alt="">
+        <p class="price">$30.00</p>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+    </div>
 
-    <!-- Custom Form -->
-    <div class="section-title">Customize Your Frame</div>
-    <form id="customForm">
+    <!-- Customization Form -->
+    <form id="orderForm">
       <label for="quantity">Quantity</label>
       <select name="quantity" id="quantity" required>
         <option value="">Select...</option>
-        <option value="1">1</option><option value="2">2</option>
-        <option value="3">3</option><option value="4">4</option>
-        <option value="5">5</option><option value="6">6</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
       </select>
 
       <p id="priceDisplay">Price: $30.00 each</p>
@@ -346,76 +366,14 @@
 </footer>
 
 <script>
+  // Thumbnail click
   const mainDisplay = document.getElementById('mainDisplay');
   document.querySelectorAll('.thumbnails img').forEach(img => {
     img.addEventListener('click', () => {
-      document.querySelectorAll('.thumbnails img').forEach(i => i.classList.remove('selected'));
-      img.classList.add('selected');
+      document.querySelectorAll('.thumbnails img').forEach(i => i.classList.remove('active'));
+      img.classList.add('active');
       mainDisplay.src = img.src;
     });
-  });
-
-  // Populate 6 ready-made frames
-  const productOptions = document.getElementById('productOptions');
-  for (let i = 1; i <= 6; i++) {
-    const card = document.createElement('div');
-    card.className = 'product-card';
-    card.innerHTML = `
-      <img src="images/frame${i}.jpg" alt="Frame ${i}">
-      <div class="price">$30.00</div>
-      <button class="add-btn" data-img="images/frame${i}.jpg">Add to Cart</button>
-    `;
-    productOptions.appendChild(card);
-  }
-
-  // Cart
-  const cartSidebar = document.getElementById("cartSidebar");
-  const closeCart = document.getElementById("closeCart");
-  const cartItemsDiv = document.getElementById("cartItems");
-  const cartTotal = document.getElementById("cartTotal");
-  const cartCount = document.getElementById("cartCount");
-  const openCartBtn = document.getElementById("openCart");
-  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-  function updateCartDisplay() {
-    cartItemsDiv.innerHTML = "";
-    let total = 0;
-    if (cart.length === 0) {
-      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-    } else {
-      cart.forEach(item => {
-        total += item.price;
-        cartItemsDiv.innerHTML += `<p><img src="${item.img}" width="30" style="vertical-align:middle;margin-right:5px;"> ${item.name} - $${item.price}.00</p>`;
-      });
-    }
-    cartCount.textContent = cart.length;
-    cartTotal.textContent = "Total: $" + total + ".00";
-    localStorage.setItem("cartItems", JSON.stringify(cart));
-  }
-
-  // Add ready-made
-  document.addEventListener("click", function(e) {
-    if (e.target.classList.contains("add-btn")) {
-      const img = e.target.dataset.img;
-      cart.push({ img, name: "Photo Frame", price: 30 });
-      updateCartDisplay();
-      cartSidebar.classList.add("active");
-    }
-  });
-
-  // Add custom frame
-  document.getElementById("customForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const qty = parseInt(document.getElementById("quantity").value || 1);
-    const customText = document.getElementById("personalText").value || "Custom Frame";
-    const img = document.getElementById("imagePreview").src || "images/frame1.jpg";
-    for(let i=0;i<qty;i++){
-      cart.push({ img, name: customText, price: 30 });
-    }
-    updateCartDisplay();
-    cartSidebar.classList.add("active");
-    this.reset();
-    document.getElementById('imagePreview').style.display = 'none';
   });
 
   // Image upload preview
@@ -430,10 +388,69 @@
     }
   });
 
+  // Price calc
+  const quantity = document.getElementById("quantity");
+  const priceDisplay = document.getElementById("priceDisplay");
+  quantity.addEventListener("change", function(){
+    const qty = parseInt(this.value || 0);
+    const price = 30 * qty;
+    priceDisplay.textContent = qty ? `Total: $${price}.00` : "Price: $30.00 each";
+  });
+
+  // Cart functionality
+  const cartSidebar = document.getElementById("cartSidebar");
+  const closeCart = document.getElementById("closeCart");
+  const cartItemsDiv = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  const cartCount = document.getElementById("cartCount");
+  const openCartBtn = document.getElementById("openCart");
+
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+  function updateCartDisplay() {
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item => {
+        total += item.price;
+        cartItemsDiv.innerHTML += `<p>${item.name} - $${item.price.toFixed(2)}</p>`;
+      });
+    }
+    cartCount.textContent = cart.length;
+    cartTotal.textContent = "Total: $" + total.toFixed(2);
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+  }
+
+  // Variant add-to-cart
+  document.querySelectorAll(".add-btn").forEach(btn => {
+    btn.addEventListener("click", function() {
+      const card = this.closest(".product-card");
+      const name = card.getAttribute("data-name");
+      const price = parseFloat(card.getAttribute("data-price"));
+      cart.push({ name, price });
+      updateCartDisplay();
+      cartSidebar.classList.add("active");
+    });
+  });
+
+  // Custom form add-to-cart
+  document.getElementById("orderForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const qty = parseInt(document.getElementById("quantity").value);
+    const price = 30 * qty;
+    if (!qty) return;
+    cart.push({ name: qty + "x Custom Frame", price: price });
+    updateCartDisplay();
+    cartSidebar.classList.add("active");
+    this.reset();
+    document.getElementById('imagePreview').style.display = 'none';
+  });
+
   openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
   closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
   document.addEventListener("DOMContentLoaded", updateCartDisplay);
 </script>
-
 </body>
 </html>
