@@ -51,6 +51,7 @@
       opacity: 0;
       transform: translateY(10px);
       transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 999;
     }
     .dropdown-content a {
       display: block;
@@ -87,6 +88,10 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
       width: 100%;
       max-width: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 380px; /* Uniform card height */
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -98,18 +103,21 @@
     .product-card a {
       text-decoration: none;
       color: inherit;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
     .product-card img {
+      flex: 1;
+      object-fit: contain; /* Ensures full image fits */
       width: 100%;
-      height: auto;
       border-radius: 10px;
       margin-bottom: 0.75rem;
-      display: block;
     }
     .product-card h3 {
       margin: 0;
       font-size: 1.1rem;
-      min-height: 2.5rem; /* Ensures all titles align */
+      min-height: 2.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -243,10 +251,6 @@
     window.addEventListener('scroll', checkVisibility);
     window.addEventListener('load', checkVisibility);
   </script>
-
-</body>
-</html>
-
 
 </body>
 </html>
