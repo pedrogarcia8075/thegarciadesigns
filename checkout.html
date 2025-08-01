@@ -29,14 +29,12 @@
     }
     button:hover { background:#a30000; cursor:pointer; }
 
-    /* Cart Summary */
     .cart-summary {
       background: #ffeaea;
       padding: 1rem;
       border-radius: 8px;
       margin-bottom: 1rem;
     }
-    .cart-summary h3 { margin-top:0; }
     .cart-item {
       display: flex;
       justify-content: space-between;
@@ -56,35 +54,21 @@
       border-radius: 5px;
       margin-right: 10px;
     }
-    .remove-btn {
-      background: #cb0101;
-      color: #fff;
-      padding: 0.3rem 0.6rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-    .remove-btn:hover { background:#a30000; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Checkout</h1>
-
     <div class="cart-summary" id="cartSummary"></div>
 
     <form id="checkoutForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST">
       <label>Name</label>
       <input type="text" name="name" required>
-
       <label>Email</label>
       <input type="email" name="email" required>
-
       <label>Shipping Address</label>
       <textarea name="address" rows="3" required></textarea>
 
-      <!-- Hidden field to capture cart summary -->
       <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
 
       <input type="hidden" name="_subject" value="New Checkout Order">
@@ -95,8 +79,8 @@
   </div>
 
   <script>
-    const TAX_RATE = 0.07; // 7% tax
-    const SHIPPING_RATE = 12.00; // flat shipping
+    const TAX_RATE = 0.07;
+    const SHIPPING_RATE = 12.00;
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const summaryDiv = document.getElementById("cartSummary");
@@ -115,7 +99,7 @@
 
       summaryDiv.innerHTML = "<h3>Your Order</h3>";
 
-      cart.forEach((item, index) => {
+      cart.forEach((item) => {
         subtotal += item.price * (item.qty || 1);
         const line = `${item.qty || 1} × ${item.name} - $${item.price.toFixed(2)} each`;
         orderSummary += line + "\n";
@@ -125,7 +109,6 @@
               <img src="${item.img || 'images/default.jpg'}" alt="${item.name}">
               <span>${line}</span>
             </div>
-            <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
           </div>
         `;
       });
@@ -134,7 +117,6 @@
       const total = subtotal + tax + SHIPPING_RATE;
       orderSummary += `\nSubtotal: $${subtotal.toFixed(2)}\nTax: $${tax.toFixed(2)}\nShipping: $${SHIPPING_RATE.toFixed(2)}\nTOTAL: $${total.toFixed(2)}`;
 
-      // Push summary into hidden field for FormSubmit
       document.getElementById("orderDetails").value = orderSummary;
 
       summaryDiv.innerHTML += `
@@ -146,30 +128,10 @@
       `;
     }
 
-    function removeItem(index) {
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
-    }
-
-    // Initial render
     renderCart();
 
-    // Custom submission with popup
-    document.getElementById("checkoutForm").addEventListener("submit", function(event){
-      event.preventDefault(); // stop normal redirect
-      const form = this;
-
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-      }).then(() => {
-        alert("✅ Thank you! Your order has been placed successfully.");
-        localStorage.removeItem("cart");
-        window.location.href = "index.html"; // redirect home after success
-      }).catch(() => {
-        alert("❌ There was a problem submitting your order. Please try again.");
-      });
+    document.getElementById("checkoutForm").addEventListener("submit", function() {
+      localStorage.removeItem("cart");
     });
   </script>
 </body>
