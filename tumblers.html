@@ -12,139 +12,112 @@
       padding: 0;
       background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
       color: #333;
-      text-align: center;
     }
 
-    /* Topbar & Cart */
-    .topbar {
+    .container {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    /* Left: Gallery */
+    .left-gallery {
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      background: #cb0101;
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      max-width: 450px;
     }
-    .cart-icon {
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-      font-size: 1.2rem;
-      position: relative;
-      cursor: pointer;
-    }
-    .cart-count {
-      background-color: white;
-      color: #cb0101;
-      font-size: 0.7rem;
-      border-radius: 50%;
-      padding: 2px 6px;
-      position: absolute;
-      top: -8px;
-      right: -12px;
-      font-weight: bold;
-    }
-
-    h1 {
-      margin-top: 2rem;
-      font-size: 2.5rem;
-      color: #cb0101;
-    }
-
-    /* Main Image & Gallery */
     .main-image {
       width: 100%;
       max-width: 450px;
       border-radius: 10px;
-      margin-top: 1rem;
+      margin-bottom: 1rem;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
-    .gallery {
+    .thumbnail-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      padding: 2rem;
+      gap: 0.5rem;
     }
-    .gallery img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .thumbnail-row img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
       cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
     }
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    .thumbnail-row img:hover { transform: scale(1.1); }
+
+    /* Right: Products & Form */
+    .right-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 450px;
+      width: 100%;
     }
 
-    /* Form */
-    form, .details-section {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
+    .product-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .product-card {
       background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .product-card img {
+      width: 100%;
+      max-width: 120px;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    .price { font-weight: bold; color: #cb0101; margin-bottom: 0.5rem; }
+    .add-to-cart {
+      background: #cb0101; color: white; padding: 0.5rem 1rem;
+      border: none; border-radius: 8px; cursor: pointer; font-weight: bold;
+    }
+    .add-to-cart:hover { background: #a30000; }
+
+    /* Custom Form */
+    form {
+      background: #fff;
+      padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       text-align: left;
     }
     label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-      color: #444;
+      display: block; margin-bottom: 0.5rem; font-weight: bold;
     }
-    select,
-    input[type="file"],
-    input[type="text"],
-    textarea,
-    button {
-      width: 100%;
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
+    select, input[type="file"], input[type="text"], textarea, button {
+      width: 100%; margin-bottom: 1rem; padding: 0.75rem;
+      border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;
     }
     button {
-      background-color: #cb0101;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      border: none;
+      background-color: #cb0101; color: white; font-weight: bold;
+      cursor: pointer; border: none;
     }
-    button:hover {
-      background-color: #a30000;
-    }
+    button:hover { background-color: #a30000; }
 
     #imagePreview {
       margin-bottom: 1rem;
-      max-height: 250px;
+      max-height: 200px;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       display: none;
     }
 
-    #priceDisplay {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: #222;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #111;
-      color: #fff;
-      font-size: 0.9rem;
-    }
-
-    /* Floating Cart Sidebar */
+    /* Cart */
     .cart-sidebar {
       position: fixed;
       top: 0;
@@ -161,199 +134,189 @@
     }
     .cart-sidebar.active { right: 0; }
     .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: #cb0101;
-      color: #fff;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem; background: #cb0101; color: #fff;
     }
-    .close-cart {
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-    }
-    .cart-items p {
-      margin: 0.5rem 0;
-      font-size: 0.95rem;
-    }
-    .cart-footer {
-      padding: 1rem;
-      border-top: 1px solid #ddd;
-    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+    .cart-items p { margin: 0.5rem 0; font-size: 0.95rem; }
+    .cart-footer { padding: 1rem; border-top: 1px solid #ddd; }
     .checkout-btn {
-      display: block;
-      background: #cb0101;
-      color: #fff;
-      text-align: center;
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
+      display: block; background: #cb0101; color: #fff;
+      text-align: center; padding: 0.75rem; border-radius: 8px;
+      font-weight: bold; text-decoration: none;
     }
-    .checkout-btn:hover { background: #a30000; }
+
+    .topbar {
+      display: flex; justify-content: flex-end; align-items: center;
+      background: #cb0101; padding: 10px 20px; position: sticky; top: 0;
+    }
+    .cart-icon { color: white; font-weight: bold; font-size: 1.2rem; position: relative; cursor: pointer; }
+    .cart-count {
+      background-color: white; color: #cb0101; font-size: 0.7rem;
+      border-radius: 50%; padding: 2px 6px; position: absolute; top: -8px; right: -12px; font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <!-- Floating Cart Sidebar -->
-  <div id="cartSidebar" class="cart-sidebar">
-    <div class="cart-header">
-      <h3>Your Cart</h3>
-      <span id="closeCart" class="close-cart">&times;</span>
+
+<!-- Cart Sidebar -->
+<div id="cartSidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <span id="closeCart" class="close-cart">&times;</span>
+  </div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <p id="cartTotal">Total: $0.00</p>
+    <a href="checkout.html" class="checkout-btn">Checkout</a>
+  </div>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <span class="cart-icon" id="openCart">
+    🛒 Cart <span class="cart-count" id="cartCount">0</span>
+  </span>
+</div>
+
+<h1 style="text-align:center;">Custom Tumblers</h1>
+
+<div class="container">
+  <!-- Left: Gallery -->
+  <div class="left-gallery">
+    <img src="images/tumbler1.jpg" id="mainDisplay" class="main-image" alt="Main Preview">
+    <div class="thumbnail-row">
+      <img src="images/tumbler1.jpg">
+      <img src="images/tumbler2.jpg">
+      <img src="images/tumbler3.jpg">
+      <img src="images/tumbler4.jpg">
+      <img src="images/tumbler5.jpg">
+      <img src="images/tumbler6.jpg">
     </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-footer">
-      <p id="cartTotal">Total: $0.00</p>
-      <a href="checkout.html" class="checkout-btn">Checkout</a>
-    </div>
   </div>
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <span class="cart-icon" id="openCart">
-      🛒 Cart <span class="cart-count" id="cartCount">0</span>
-    </span>
+  <!-- Right: Products + Custom Form -->
+  <div class="right-section">
+    <!-- Product Variants -->
+    <div class="product-options" id="productOptions"></div>
+
+    <!-- Custom Form -->
+    <form id="customForm">
+      <label for="quantity">Quantity</label>
+      <select name="quantity" id="quantity" required>
+        <option value="">Select...</option>
+        <option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option>
+        <option value="5">5</option><option value="6">6</option>
+      </select>
+
+      <div id="priceDisplay">Price: $30.00 each</div>
+
+      <label for="personalText">Add Custom Text (Optional)</label>
+      <input type="text" name="personalText" id="personalText" placeholder="e.g., Happy Birthday Sarah!">
+
+      <label for="upload">Upload Your Image</label>
+      <input type="file" name="upload" id="upload" accept="image/*">
+      <img id="imagePreview" src="" alt="Preview" />
+
+      <label for="notes">Notes</label>
+      <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
+
+      <button type="submit">Add Custom Tumbler to Cart</button>
+    </form>
   </div>
+</div>
 
-  <h1>Custom Tumblers</h1>
-  <p style="font-size:1.1rem; color:#555;">🔥 Fully Customizable | 🖼 Upload Your Image | 🎁 Perfect Gift Idea</p>
+<footer style="text-align:center;padding:1rem;background:#111;color:white;margin-top:2rem;">
+  &copy; 2025 The Garcia Designs. All rights reserved.
+</footer>
 
-  <!-- Main Display -->
-  <img src="images/tumbler1.jpg" id="mainDisplay" class="main-image" alt="Main Preview">
+<script>
+  // Thumbnail to main image
+  const mainDisplay = document.getElementById('mainDisplay');
+  document.querySelectorAll('.thumbnail-row img').forEach(img => {
+    img.addEventListener('click', () => mainDisplay.src = img.src);
+  });
 
-  <!-- Gallery -->
-  <div class="gallery">
-    <img src="images/tumbler1.jpg">
-    <img src="images/tumbler2.jpg">
-    <img src="images/tumbler3.jpg">
-    <img src="images/tumbler4.jpg">
-    <img src="images/tumbler5.jpg">
-    <img src="images/tumbler6.jpg">
-  </div>
+  // Product options
+  const productOptions = document.getElementById('productOptions');
+  for (let i = 1; i <= 12; i++) {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <img src="images/tumbler${i}.jpg" alt="Tumbler ${i}">
+      <div class="price">$30.00</div>
+      <button class="add-to-cart" data-img="images/tumbler${i}.jpg">Add to Cart</button>
+    `;
+    productOptions.appendChild(card);
+  }
 
-  <!-- Order Form -->
-  <form id="orderForm">
-    <label for="quantity">Quantity</label>
-    <select name="quantity" id="quantity" required>
-      <option value="">Select...</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-    </select>
+  // Cart
+  const cartSidebar = document.getElementById("cartSidebar");
+  const closeCart = document.getElementById("closeCart");
+  const cartItemsDiv = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  const cartCount = document.getElementById("cartCount");
+  const openCartBtn = document.getElementById("openCart");
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    <div id="priceDisplay">Price: $30.00 each</div>
-
-    <label for="design">Choose a Design</label>
-    <select name="design" id="design">
-      <option>Design A</option>
-      <option>Design B</option>
-      <option>Design C</option>
-    </select>
-
-    <label for="personalText">Add Custom Text (Optional)</label>
-    <input type="text" name="personalText" id="personalText" placeholder="e.g., Happy Birthday Sarah!">
-
-    <label for="upload">Upload Your Image</label>
-    <input type="file" name="upload" id="upload" accept="image/*">
-    <img id="imagePreview" src="" alt="Preview" />
-
-    <label for="notes">Notes</label>
-    <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
-
-    <button type="submit">Add to Cart</button>
-  </form>
-
-  <!-- Product Details -->
-  <div class="details-section">
-    <h2>Details</h2>
-    <p>Our tumblers are made with stainless steel and feature double-wall insulation to keep drinks hot or cold for hours. Each item is professionally printed using sublimation, ensuring the design won't peel or fade over time.</p>
-    <h2>Description</h2>
-    <p>Ideal for birthdays, holidays, sports teams, or just treating yourself! Customize with names, photos, characters, quotes, and more. Choose your design, upload your photo, and let us create a drinkware masterpiece just for you!</p>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
-  </footer>
-
-  <!-- Scripts -->
-  <script>
-    // Main image preview
-    const mainDisplay = document.getElementById('mainDisplay');
-    document.querySelectorAll('.gallery img').forEach(img => {
-      img.addEventListener('click', () => mainDisplay.src = img.src);
-    });
-
-    // Image upload preview
-    document.getElementById('upload').addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      const preview = document.getElementById('imagePreview');
-      if (file && file.type.startsWith('image/')) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = 'block';
-      } else {
-        preview.style.display = 'none';
-      }
-    });
-
-    // Live price calculation
-    const quantity = document.getElementById("quantity");
-    const priceDisplay = document.getElementById("priceDisplay");
-    quantity.addEventListener("change", function(){
-      const qty = parseInt(this.value || 0);
-      const price = 30 * qty;
-      priceDisplay.textContent = qty ? `Total: $${price}.00` : "Price: $30.00 each";
-    });
-
-    // Cart functionality
-    const cartSidebar = document.getElementById("cartSidebar");
-    const closeCart = document.getElementById("closeCart");
-    const cartItemsDiv = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const cartCount = document.getElementById("cartCount");
-    const openCartBtn = document.getElementById("openCart");
-
-    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    function updateCartDisplay() {
-      cartItemsDiv.innerHTML = "";
-      let total = 0;
-
-      if (cart.length === 0) {
-        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-      } else {
-        cart.forEach(item => {
-          total += item.price;
-          cartItemsDiv.innerHTML += `<p>${item.quantity}x ${item.design} - $${item.price}.00</p>`;
-        });
-      }
-
-      cartCount.textContent = cart.length;
-      cartTotal.textContent = "Total: $" + total + ".00";
-      localStorage.setItem("cartItems", JSON.stringify(cart));
+  function updateCartDisplay() {
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item => {
+        total += item.price;
+        cartItemsDiv.innerHTML += `<p><img src="${item.img}" width="30" style="vertical-align:middle;margin-right:5px;"> ${item.name} - $${item.price}.00</p>`;
+      });
     }
+    cartCount.textContent = cart.length;
+    cartTotal.textContent = "Total: $" + total + ".00";
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+  }
 
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const quantity = parseInt(document.getElementById("quantity").value);
-      const design = document.getElementById("design").value;
-      const price = 30 * quantity;
-      cart.push({ quantity, design, price });
+  // Add ready-made product
+  document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("add-to-cart")) {
+      const img = e.target.dataset.img;
+      cart.push({ img, name: "Tumbler", price: 30 });
       updateCartDisplay();
       cartSidebar.classList.add("active");
-      this.reset();
-      document.getElementById('imagePreview').style.display = 'none';
-    });
+    }
+  });
 
-    openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
-    closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
-    document.addEventListener("DOMContentLoaded", updateCartDisplay);
-  </script>
+  // Add custom tumbler
+  document.getElementById("customForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const qty = parseInt(document.getElementById("quantity").value || 1);
+    const customText = document.getElementById("personalText").value || "Custom Tumbler";
+    const img = document.getElementById("imagePreview").src || "images/tumbler1.jpg";
+    for(let i=0;i<qty;i++){
+      cart.push({ img, name: customText, price: 30 });
+    }
+    updateCartDisplay();
+    cartSidebar.classList.add("active");
+    this.reset();
+    document.getElementById('imagePreview').style.display = 'none';
+  });
+
+  // Image upload preview
+  document.getElementById('upload').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('imagePreview');
+    if (file && file.type.startsWith('image/')) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
+  });
+
+  openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
+  closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+</script>
+
 </body>
 </html>
