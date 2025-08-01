@@ -117,6 +117,27 @@
       font-size: 1.1rem;
     }
 
+    .product-card p {
+      margin: 0.5rem 0;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .product-card button {
+      background: #cb0101;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .product-card button:hover {
+      background: #e31a1a;
+    }
+
     .contact {
       background: #ffe5e5;
       padding: 3rem 2rem;
@@ -199,30 +220,47 @@
 
   <section class="product-section">
     <div class="product-grid">
-      <a href="tumblers.html" class="product-card">
+      <div class="product-card">
         <img src="images/tumblers.jpg" alt="Tumblers">
         <h3>Custom Tumblers</h3>
-      </a>
-      <a href="mugs.html" class="product-card">
+        <p>$30.00</p>
+        <button onclick="addToCart('Custom Tumbler', 30.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
         <img src="images/mugs.jpg" alt="Mugs">
         <h3>Custom Mugs</h3>
-      </a>
-      <a href="leds.html" class="product-card">
+        <p>$30.00</p>
+        <button onclick="addToCart('Custom Mug', 30.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
         <img src="images/leds.jpg" alt="LED Signs">
         <h3>LED Glass Photos</h3>
-      </a>
-      <a href="bottles.html" class="product-card">
+        <p>$45.00</p>
+        <button onclick="addToCart('LED Glass Photo', 45.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
         <img src="images/bottles.jpg" alt="Water Bottles">
         <h3>Custom Water Bottles</h3>
-      </a>
-      <a href="prints.html" class="product-card">
+        <p>$25.00</p>
+        <button onclick="addToCart('Water Bottle', 25.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
         <img src="images/Aluminum Photo Prints.jpg" alt="Aluminum Photo Prints">
         <h3>Aluminum Prints</h3>
-      </a>
-      <a href="Photo Frames.html" class="product-card">
+        <p>$40.00</p>
+        <button onclick="addToCart('Aluminum Print', 40.00)">Add to Cart</button>
+      </div>
+
+      <div class="product-card">
         <img src="images/Photo Frames.jpg" alt="Photo Frames">
         <h3>Photo Frames</h3>
-      </a>
+        <p>$35.00</p>
+        <button onclick="addToCart('Photo Frame', 35.00)">Add to Cart</button>
+      </div>
     </div>
   </section>
 
@@ -240,28 +278,53 @@
     </form>
   </section>
 
-<footer>
-  <p>© 2025 The Garcia Designs | Follow us on
-    <a href="https://www.facebook.com/profile.php?id=61579036433148&amp;rdid=g4N6yVd7cLkqI324&amp;share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15sowTiZ3d" target="_blank">
-      Facebook
-    </a> &
-    <a href="https://instagram.com/" target="_blank">Instagram</a>
-  </p>
-</footer>
+  <footer>
+    <p>© 2025 The Garcia Designs | Follow us on
+      <a href="https://www.facebook.com/profile.php?id=61579036433148&amp;rdid=g4N6yVd7cLkqI324&amp;share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F15sowTiZ3d" target="_blank">
+        Facebook
+      </a> &
+      <a href="https://instagram.com/" target="_blank">Instagram</a>
+    </p>
+  </footer>
 
   <script>
+    // ---------- CART SETUP ----------
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const TAX_RATE = 0.07; // Example 7%
+    const SHIPPING_RATE = 5.99; // Flat shipping
+
+    // Add item to cart
+    function addToCart(name, price) {
+        cart.push({ name, price, qty: 1 });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(`${name} added to cart!`);
+    }
+
+    // Update cart icon count
+    function updateCartCount() {
+        document.getElementById("cartCount").textContent = cart.length;
+    }
+
+    // Remove item from cart (used on cart.html)
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        if (typeof renderCart === 'function') renderCart();
+    }
+
+    // Call update on page load
     document.addEventListener("DOMContentLoaded", function () {
-      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      document.getElementById("cartCount").textContent = cartItems.length;
+        updateCartCount();
 
-      const dropdown = document.querySelector(".dropdown");
-      const dropdownContent = document.querySelector(".dropdown-content");
-
-      dropdown.addEventListener("click", function (e) {
-        e.preventDefault();
-        dropdownContent.style.display =
-          dropdownContent.style.display === "none" ? "block" : "none";
-      });
+        const dropdown = document.querySelector(".dropdown");
+        const dropdownContent = document.querySelector(".dropdown-content");
+        dropdown.addEventListener("click", function (e) {
+          e.preventDefault();
+          dropdownContent.style.display =
+            dropdownContent.style.display === "none" ? "block" : "none";
+        });
     });
   </script>
 </body>
