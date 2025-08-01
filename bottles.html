@@ -180,15 +180,24 @@
 
   <h1>Custom Water Bottles</h1>
 
-  <img src="images/bottle1.jpg" id="mainDisplay" class="main-image" alt="Water Bottle Main" />
+ <img src="images/bottle1.jpg" id="mainDisplay" class="main-image" alt="Water Bottle Main">
 
-  <div class="gallery">
-    <img src="images/bottle1.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Water Bottle 1">
-    <img src="images/bottle2.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Water Bottle 2">
-    <img src="images/bottle3.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Water Bottle 3">
-    <img src="images/bottle4.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Water Bottle 4">
-    <img src="images/bottle5.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Water Bottle 5">
-  </div>
+<div class="gallery">
+  <img src="images/bottle1.jpg" alt="Water Bottle 1">
+  <img src="images/bottle2.jpg" alt="Water Bottle 2">
+  <img src="images/bottle3.jpg" alt="Water Bottle 3">
+  <img src="images/bottle4.jpg" alt="Water Bottle 4">
+  <img src="images/bottle5.jpg" alt="Water Bottle 5">
+</div>
+
+<script>
+  const mainDisplay = document.getElementById('mainDisplay');
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      mainDisplay.src = img.src;
+    });
+  });
+</script>
 
   <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
     <label for="quantity">Quantity</label>
