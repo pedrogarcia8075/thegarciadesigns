@@ -12,10 +12,9 @@
       padding: 0;
       background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
       color: #333;
-      text-align: center;
     }
 
-    /* Topbar & Cart */
+    /* Topbar */
     .topbar {
       display: flex;
       justify-content: flex-end;
@@ -47,61 +46,137 @@
     }
 
     h1 {
-      margin-top: 2rem;
+      text-align: center;
+      margin: 1.5rem 0 0.5rem;
       font-size: 2.5rem;
       color: #cb0101;
     }
+    p.subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
 
-    /* Main Image & Gallery */
+    /* Layout */
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+      flex-wrap: wrap;
+    }
+
+    /* LEFT: Main image & thumbnails */
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 400px;
+    }
     .main-image {
       width: 100%;
-      max-width: 450px;
+      max-width: 350px;
       border-radius: 10px;
-      margin-top: 1rem;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
     }
-    .gallery {
+    .thumbnails {
       display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem;
-      padding: 2rem;
     }
-    .gallery img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .thumbnails img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 6px;
       cursor: pointer;
+      border: 2px solid transparent;
+      transition: 0.3s;
     }
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    .thumbnails img.selected {
+      border: 2px solid #cb0101;
     }
 
-    /* Form */
-    form, .details-section {
-      max-width: 600px;
-      margin: 2rem auto;
-      padding: 2rem;
+    /* RIGHT: Ready-made + Custom */
+    .right-section {
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #cb0101;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.3rem;
+    }
+
+    /* Ready-Made Options */
+    .product-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .product-card {
+      background: white;
+      border-radius: 8px;
+      padding: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .product-card img {
+      width: 100%;
+      max-height: 100px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .price {
+      font-weight: bold;
+      margin: 0.3rem 0;
+    }
+    .add-btn {
+      background: #cb0101;
+      color: white;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      width: 100%;
+    }
+    .add-btn:hover { background: #a30000; }
+
+    /* Customization Form */
+    form {
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 1.5rem;
       text-align: left;
     }
     label {
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
       font-weight: bold;
       color: #444;
     }
-    select,
     input[type="file"],
     input[type="text"],
-    textarea,
-    button {
+    select,
+    textarea {
       width: 100%;
       margin-bottom: 1rem;
       padding: 0.75rem;
@@ -109,37 +184,26 @@
       border-radius: 8px;
       font-size: 1rem;
     }
-    button {
+    button[type="submit"] {
       background-color: #cb0101;
       color: white;
       font-weight: bold;
       cursor: pointer;
       transition: background-color 0.3s ease;
       border: none;
+      padding: 0.75rem;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 1rem;
     }
-    button:hover { background-color: #a30000; }
+    button[type="submit"]:hover { background-color: #a30000; }
 
     #imagePreview {
       margin-bottom: 1rem;
-      max-height: 250px;
+      max-height: 150px;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       display: none;
-    }
-
-    #priceDisplay {
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      color: #222;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #111;
-      color: #fff;
-      font-size: 0.9rem;
     }
 
     /* Floating Cart Sidebar */
@@ -166,23 +230,10 @@
       background: #cb0101;
       color: #fff;
     }
-    .close-cart {
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-    }
-    .cart-items p {
-      margin: 0.5rem 0;
-      font-size: 0.95rem;
-    }
-    .cart-footer {
-      padding: 1rem;
-      border-top: 1px solid #ddd;
-    }
+    .close-cart { font-size: 1.5rem; cursor: pointer; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+    .cart-items p { margin: 0.5rem 0; font-size: 0.95rem; }
+    .cart-footer { padding: 1rem; border-top: 1px solid #ddd; }
     .checkout-btn {
       display: block;
       background: #cb0101;
@@ -194,157 +245,195 @@
       text-decoration: none;
     }
     .checkout-btn:hover { background: #a30000; }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: #111;
+      color: #fff;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .container { flex-direction: column; align-items: center; }
+      .product-options {
+        display: flex;
+        overflow-x: auto;
+        gap: 0.75rem;
+        padding-bottom: 1rem;
+        scroll-snap-type: x mandatory;
+      }
+      .product-card { flex: 0 0 150px; scroll-snap-align: start; }
+      .right-section { width: 100%; }
+      .thumbnails img { width: 50px; height: 50px; }
+    }
   </style>
 </head>
 <body>
-  <!-- Floating Cart Sidebar -->
-  <div id="cartSidebar" class="cart-sidebar">
-    <div class="cart-header">
-      <h3>Your Cart</h3>
-      <span id="closeCart" class="close-cart">&times;</span>
+
+<!-- Floating Cart Sidebar -->
+<div id="cartSidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <span id="closeCart" class="close-cart">&times;</span>
+  </div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <p id="cartTotal">Total: $0.00</p>
+    <a href="checkout.html" class="checkout-btn">Checkout</a>
+  </div>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <span class="cart-icon" id="openCart">
+    🛒 Cart <span class="cart-count" id="cartCount">0</span>
+  </span>
+</div>
+
+<h1>Custom Photo Frames</h1>
+<p class="subtitle">🖼 LED Memory Frames | 🌟 Fully Customizable | 🎁 Perfect Gifts</p>
+
+<div class="container">
+  <!-- LEFT SECTION -->
+  <div class="left-section">
+    <img src="images/frame1.jpg" id="mainDisplay" class="main-image" alt="Main Frame Preview">
+    <div class="thumbnails">
+      <img src="images/frame1.jpg" class="selected">
+      <img src="images/frame2.jpg">
+      <img src="images/frame3.jpg">
     </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-footer">
-      <p id="cartTotal">Total: $0.00</p>
-      <a href="checkout.html" class="checkout-btn">Checkout</a>
-    </div>
   </div>
 
-  <!-- Topbar -->
-  <div class="topbar">
-    <span class="cart-icon" id="openCart">
-      🛒 Cart <span class="cart-count" id="cartCount">0</span>
-    </span>
+  <!-- RIGHT SECTION -->
+  <div class="right-section">
+    <!-- Ready-Made Options -->
+    <div class="section-title">Ready-Made Frames</div>
+    <div class="product-options" id="productOptions"></div>
+
+    <!-- Custom Form -->
+    <div class="section-title">Customize Your Frame</div>
+    <form id="customForm">
+      <label for="quantity">Quantity</label>
+      <select name="quantity" id="quantity" required>
+        <option value="">Select...</option>
+        <option value="1">1</option><option value="2">2</option>
+        <option value="3">3</option><option value="4">4</option>
+        <option value="5">5</option><option value="6">6</option>
+      </select>
+
+      <p id="priceDisplay">Price: $30.00 each</p>
+
+      <label for="personalText">Add Custom Text (Optional)</label>
+      <input type="text" name="personalText" id="personalText" placeholder="e.g., Forever in Our Hearts">
+
+      <label for="upload">Upload Your Image</label>
+      <input type="file" name="upload" id="upload" accept="image/*">
+      <img id="imagePreview" src="" alt="Preview" />
+
+      <label for="notes">Notes</label>
+      <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
+
+      <button type="submit">Add Custom Frame to Cart</button>
+    </form>
   </div>
+</div>
 
-  <h1>Custom Photo Frames</h1>
-  <p style="font-size:1.1rem; color:#555;">🖼 LED Memory Frames | 🌟 Fully Customizable | 🎁 Perfect Gifts</p>
+<footer>
+  <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
+</footer>
 
-  <!-- Main Display -->
-  <img src="images/frame1.jpg" id="mainDisplay" class="main-image" alt="Main Frame Preview">
-
-  <!-- Gallery -->
-  <div class="gallery">
-    <img src="images/frame1.jpg" alt="Frame 1">
-    <img src="images/frame2.jpg" alt="Frame 2">
-    <img src="images/frame3.jpg" alt="Frame 3">
-  </div>
-
-  <!-- Order Form -->
-  <form id="orderForm">
-    <label for="quantity">Quantity</label>
-    <select name="quantity" id="quantity" required>
-      <option value="">Select...</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-
-    <div id="priceDisplay">Price: $30.00 each</div>
-
-    <label for="design">Choose a Design</label>
-    <select name="design" id="design">
-      <option>Design A</option>
-      <option>Design B</option>
-      <option>Design C</option>
-    </select>
-
-    <label for="personalText">Add Custom Text (Optional)</label>
-    <input type="text" name="personalText" id="personalText" placeholder="e.g., Forever in Our Hearts">
-
-    <label for="upload">Upload Your Image</label>
-    <input type="file" name="upload" id="upload" accept="image/*">
-    <img id="imagePreview" src="" alt="Preview" />
-
-    <label for="notes">Notes</label>
-    <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
-
-    <button type="submit">Add to Cart</button>
-  </form>
-
-  <!-- Product Details -->
-  <div class="details-section">
-    <h2>Details</h2>
-    <p>Our LED photo frames feature vibrant sublimation-ready glass and warm LED lighting with a USB wooden base. They are perfect for home décor, memorials, and personalized gifts.</p>
-    <h2>Description</h2>
-    <p>Upload your favorite photo—pets, family, anime, or memorials—and we’ll create a one-of-a-kind glowing frame to cherish for years to come.</p>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
-  </footer>
-
-  <script>
-    // Main image preview
-    const mainDisplay = document.getElementById('mainDisplay');
-    document.querySelectorAll('.gallery img').forEach(img => {
-      img.addEventListener('click', () => mainDisplay.src = img.src);
+<script>
+  const mainDisplay = document.getElementById('mainDisplay');
+  document.querySelectorAll('.thumbnails img').forEach(img => {
+    img.addEventListener('click', () => {
+      document.querySelectorAll('.thumbnails img').forEach(i => i.classList.remove('selected'));
+      img.classList.add('selected');
+      mainDisplay.src = img.src;
     });
+  });
 
-    // Image upload preview
-    document.getElementById('upload').addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      const preview = document.getElementById('imagePreview');
-      if (file && file.type.startsWith('image/')) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = 'block';
-      } else {
-        preview.style.display = 'none';
-      }
-    });
+  // Populate 6 ready-made frames
+  const productOptions = document.getElementById('productOptions');
+  for (let i = 1; i <= 6; i++) {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <img src="images/frame${i}.jpg" alt="Frame ${i}">
+      <div class="price">$30.00</div>
+      <button class="add-btn" data-img="images/frame${i}.jpg">Add to Cart</button>
+    `;
+    productOptions.appendChild(card);
+  }
 
-    // Live price calculation
-    const quantity = document.getElementById("quantity");
-    const priceDisplay = document.getElementById("priceDisplay");
-    quantity.addEventListener("change", function(){
-      const qty = parseInt(this.value || 0);
-      const price = 30 * qty;
-      priceDisplay.textContent = qty ? `Total: $${price}.00` : "Price: $30.00 each";
-    });
+  // Cart
+  const cartSidebar = document.getElementById("cartSidebar");
+  const closeCart = document.getElementById("closeCart");
+  const cartItemsDiv = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  const cartCount = document.getElementById("cartCount");
+  const openCartBtn = document.getElementById("openCart");
+  let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
-    // Cart functionality
-    const cartSidebar = document.getElementById("cartSidebar");
-    const closeCart = document.getElementById("closeCart");
-    const cartItemsDiv = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const cartCount = document.getElementById("cartCount");
-    const openCartBtn = document.getElementById("openCart");
-
-    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    function updateCartDisplay() {
-      cartItemsDiv.innerHTML = "";
-      let total = 0;
-      if (cart.length === 0) {
-        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-      } else {
-        cart.forEach(item => {
-          total += item.price;
-          cartItemsDiv.innerHTML += `<p>${item.quantity}x ${item.design} - $${item.price}.00</p>`;
-        });
-      }
-      cartCount.textContent = cart.length;
-      cartTotal.textContent = "Total: $" + total + ".00";
-      localStorage.setItem("cartItems", JSON.stringify(cart));
+  function updateCartDisplay() {
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
+    if (cart.length === 0) {
+      cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item => {
+        total += item.price;
+        cartItemsDiv.innerHTML += `<p><img src="${item.img}" width="30" style="vertical-align:middle;margin-right:5px;"> ${item.name} - $${item.price}.00</p>`;
+      });
     }
+    cartCount.textContent = cart.length;
+    cartTotal.textContent = "Total: $" + total + ".00";
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+  }
 
-    document.getElementById("orderForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const quantity = parseInt(document.getElementById("quantity").value);
-      const design = document.getElementById("design").value;
-      const price = 30 * quantity;
-      cart.push({ quantity, design, price });
+  // Add ready-made
+  document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("add-btn")) {
+      const img = e.target.dataset.img;
+      cart.push({ img, name: "Photo Frame", price: 30 });
       updateCartDisplay();
       cartSidebar.classList.add("active");
-      this.reset();
-      document.getElementById('imagePreview').style.display = 'none';
-    });
+    }
+  });
 
-    openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
-    closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
-    document.addEventListener("DOMContentLoaded", updateCartDisplay);
-  </script>
+  // Add custom frame
+  document.getElementById("customForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const qty = parseInt(document.getElementById("quantity").value || 1);
+    const customText = document.getElementById("personalText").value || "Custom Frame";
+    const img = document.getElementById("imagePreview").src || "images/frame1.jpg";
+    for(let i=0;i<qty;i++){
+      cart.push({ img, name: customText, price: 30 });
+    }
+    updateCartDisplay();
+    cartSidebar.classList.add("active");
+    this.reset();
+    document.getElementById('imagePreview').style.display = 'none';
+  });
+
+  // Image upload preview
+  document.getElementById('upload').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById('imagePreview');
+    if (file && file.type.startsWith('image/')) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
+  });
+
+  openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
+  closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+</script>
+
 </body>
 </html>
