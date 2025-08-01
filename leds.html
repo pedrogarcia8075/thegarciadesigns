@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LED Glass Photos | The Garcia Designs</title>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -15,6 +15,7 @@
       text-align: center;
     }
 
+    /* Topbar & Cart */
     .topbar {
       display: flex;
       justify-content: flex-end;
@@ -25,22 +26,24 @@
       top: 0;
       z-index: 1000;
     }
-
     .cart-icon {
       color: white;
       font-weight: bold;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       position: relative;
+      cursor: pointer;
     }
-
     .cart-count {
       background-color: white;
       color: #cb0101;
       font-size: 0.7rem;
       border-radius: 50%;
       padding: 2px 6px;
-      margin-left: 4px;
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      font-weight: bold;
     }
 
     h1 {
@@ -49,15 +52,14 @@
       color: #cb0101;
     }
 
+    /* Main Image & Gallery */
     .main-image {
-      max-width: 500px;
       width: 100%;
+      max-width: 450px;
       border-radius: 10px;
-      margin: 1rem auto;
-      display: block;
+      margin-top: 1rem;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
     }
-
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -65,21 +67,21 @@
       gap: 1rem;
       padding: 2rem;
     }
-
     .gallery img {
       width: 100%;
       max-width: 300px;
       height: auto;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
-
     .gallery img:hover {
       transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
 
+    /* Form */
     form, .details-section {
       max-width: 600px;
       margin: 2rem auto;
@@ -89,16 +91,15 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       text-align: left;
     }
-
     label {
       display: block;
       margin-bottom: 0.5rem;
       font-weight: bold;
       color: #444;
     }
-
     select,
     input[type="file"],
+    input[type="text"],
     textarea,
     button {
       width: 100%;
@@ -108,7 +109,6 @@
       border-radius: 8px;
       font-size: 1rem;
     }
-
     button {
       background-color: #cb0101;
       color: white;
@@ -117,16 +117,14 @@
       transition: background-color 0.3s ease;
       border: none;
     }
-
-    button:hover {
-      background-color: #a30000;
-    }
+    button:hover { background-color: #a30000; }
 
     #imagePreview {
       margin-bottom: 1rem;
       max-height: 250px;
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: none;
     }
 
     #priceDisplay {
@@ -134,28 +132,6 @@
       font-size: 1.2rem;
       margin-bottom: 1rem;
       color: #222;
-    }
-
-    #spinner {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .spinner {
-      border: 6px solid #f3f3f3;
-      border-top: 6px solid #cb0101;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
     }
 
     footer {
@@ -166,38 +142,96 @@
       font-size: 0.9rem;
     }
 
-    footer a {
-      color: #ffadad;
+    /* Floating Cart Sidebar */
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -350px;
+      width: 350px;
+      height: 100%;
+      background: #fff;
+      box-shadow: -4px 0 10px rgba(0,0,0,0.2);
+      transition: right 0.3s ease;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+    .cart-sidebar.active { right: 0; }
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: #cb0101;
+      color: #fff;
+    }
+    .close-cart {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    .cart-items p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    .cart-footer {
+      padding: 1rem;
+      border-top: 1px solid #ddd;
+    }
+    .checkout-btn {
+      display: block;
+      background: #cb0101;
+      color: #fff;
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .checkout-btn:hover { background: #a30000; }
   </style>
 </head>
 <body>
+  <!-- Floating Cart Sidebar -->
+  <div id="cartSidebar" class="cart-sidebar">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <span id="closeCart" class="close-cart">&times;</span>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <p id="cartTotal">Total: $0.00</p>
+      <a href="checkout.html" class="checkout-btn">Checkout</a>
+    </div>
+  </div>
+
+  <!-- Topbar -->
   <div class="topbar">
-    <a href="cart.html" class="cart-icon">
+    <span class="cart-icon" id="openCart">
       🛒 Cart <span class="cart-count" id="cartCount">0</span>
-    </a>
+    </span>
   </div>
 
   <h1>LED Glass Photos</h1>
+  <p style="font-size:1.1rem; color:#555;">💡 Light-Up Memories | 🖼 Fully Customizable | 🎁 Perfect Keepsakes</p>
 
-  <img src="images/led1.jpg" id="mainDisplay" class="main-image" alt="LED Main" />
+  <!-- Main Display -->
+  <img src="images/led1.jpg" id="mainDisplay" class="main-image" alt="LED Glass Preview">
 
+  <!-- Gallery -->
   <div class="gallery">
-    <img src="images/led1.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="LED 1" />
-    <img src="images/led2.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="LED 2" />
-    <img src="images/led3.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="LED 3" />
+    <img src="images/led1.jpg" alt="LED 1">
+    <img src="images/led2.jpg" alt="LED 2">
+    <img src="images/led3.jpg" alt="LED 3">
   </div>
 
-  <script>
-  const mainDisplay = document.getElementById('mainDisplay');
-  document.querySelectorAll('.gallery img').forEach(img => {
-    img.addEventListener('click', () => {
-      mainDisplay.src = img.src;
-    });
-  });
-</script>
-
-  <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
+  <!-- Order Form -->
+  <form id="orderForm">
     <label for="quantity">Quantity</label>
     <select name="quantity" id="quantity" required>
       <option value="">Select...</option>
@@ -206,14 +240,9 @@
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-      <option value="8">8</option>
-      <option value="9">9</option>
-      <option value="10">10+</option>
     </select>
 
-    <div id="priceDisplay">Price: $30.00</div>
+    <div id="priceDisplay">Price: $30.00 each</div>
 
     <label for="design">Choose a Design</label>
     <select name="design" id="design">
@@ -222,29 +251,25 @@
       <option>Design C</option>
     </select>
 
+    <label for="personalText">Add Custom Text (Optional)</label>
+    <input type="text" name="personalText" id="personalText" placeholder="e.g., Family Forever">
+
     <label for="upload">Upload Your Image</label>
     <input type="file" name="upload" id="upload" accept="image/*">
-    <img id="imagePreview" src="" alt="" style="display:none;" />
+    <img id="imagePreview" src="" alt="Preview" />
 
     <label for="notes">Notes</label>
     <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
 
-    <input type="hidden" name="_next" value="https://thegarciadesigns.com/thank-you.html">
-    <input type="hidden" name="_subject" value="New LED Glass Photo Order">
-    <input type="text" name="_honey" style="display:none">
-
-    <div class="g-recaptcha" data-sitekey="6Lcc_ZArAAAAAF8BtQAmkmz-hpQg7gB1r3Pw9kOL"></div>
-    <div id="spinner"><div class="spinner"></div></div>
-
     <button type="submit">Add to Cart</button>
   </form>
 
+  <!-- Product Details -->
   <div class="details-section">
     <h2>Details</h2>
-    <p>Each LED glass photo is printed on high-gloss sublimation glass and mounted on a wooden stand with USB-powered warm LED lighting. Perfect for keepsakes, family portraits, pets, or gifts that light up the room.</p>
-
+    <p>Our LED glass photos are printed on premium sublimation glass and mounted on a wooden LED stand with USB power. Perfect for family photos, pets, memorials, and personalized gifts.</p>
     <h2>Description</h2>
-    <p>Customize your piece with your image or message and see it shine! Designed to stand on desks, shelves, or bedside tables—these luminous displays are crafted with care and made to last.</p>
+    <p>Upload your image and add optional text to create a glowing memory that lights up any room. A beautiful and long-lasting keepsake for any occasion.</p>
   </div>
 
   <footer>
@@ -252,6 +277,13 @@
   </footer>
 
   <script>
+    // Main image preview
+    const mainDisplay = document.getElementById('mainDisplay');
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', () => mainDisplay.src = img.src);
+    });
+
+    // Image upload preview
     document.getElementById('upload').addEventListener('change', function (event) {
       const file = event.target.files[0];
       const preview = document.getElementById('imagePreview');
@@ -263,15 +295,56 @@
       }
     });
 
-    document.getElementById('orderForm').addEventListener('submit', function () {
-      document.getElementById('spinner').style.display = 'block';
-      this.querySelector('button').disabled = true;
+    // Live price calculation
+    const quantity = document.getElementById("quantity");
+    const priceDisplay = document.getElementById("priceDisplay");
+    quantity.addEventListener("change", function(){
+      const qty = parseInt(this.value || 0);
+      const price = 30 * qty;
+      priceDisplay.textContent = qty ? `Total: $${price}.00` : "Price: $30.00 each";
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-      let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      document.getElementById("cartCount").textContent = cartItems.length;
+    // Cart functionality
+    const cartSidebar = document.getElementById("cartSidebar");
+    const closeCart = document.getElementById("closeCart");
+    const cartItemsDiv = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const cartCount = document.getElementById("cartCount");
+    const openCartBtn = document.getElementById("openCart");
+
+    let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    function updateCartDisplay() {
+      cartItemsDiv.innerHTML = "";
+      let total = 0;
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+      } else {
+        cart.forEach(item => {
+          total += item.price;
+          cartItemsDiv.innerHTML += `<p>${item.quantity}x ${item.design} - $${item.price}.00</p>`;
+        });
+      }
+      cartCount.textContent = cart.length;
+      cartTotal.textContent = "Total: $" + total + ".00";
+      localStorage.setItem("cartItems", JSON.stringify(cart));
+    }
+
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const quantity = parseInt(document.getElementById("quantity").value);
+      const design = document.getElementById("design").value;
+      const price = 30 * quantity;
+      cart.push({ quantity, design, price });
+      updateCartDisplay();
+      cartSidebar.classList.add("active");
+      this.reset();
+      document.getElementById('imagePreview').style.display = 'none';
     });
+
+    openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
+    closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
+    document.addEventListener("DOMContentLoaded", updateCartDisplay);
   </script>
 </body>
 </html>
