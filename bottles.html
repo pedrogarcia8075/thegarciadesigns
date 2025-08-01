@@ -65,7 +65,6 @@
       gap: 2rem;
       padding: 2rem;
       flex-wrap: wrap;
-      align-items: flex-start;
     }
 
     /* LEFT: Main image & thumbnails */
@@ -108,14 +107,6 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-    }
-
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: 600;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 0.3rem;
-      margin-bottom: 0.8rem;
     }
 
     .product-options {
@@ -296,56 +287,16 @@
     <!-- LEFT SECTION -->
     <div class="left-section">
       <img src="images/bottle1.jpg" id="mainDisplay" class="main-image" alt="Main Water Bottle">
-      <div class="thumbnails">
-        <img src="images/bottle1.jpg" class="selected">
-        <img src="images/bottle2.jpg">
-        <img src="images/bottle3.jpg">
-        <img src="images/bottle4.jpg">
-        <img src="images/bottle5.jpg">
-      </div>
+      <div class="thumbnails" id="thumbnailContainer"></div>
     </div>
 
     <!-- RIGHT SECTION -->
     <div class="right-section">
       <!-- Product Options -->
-      <div>
-        <div class="section-title">Ready-Made Options</div>
-        <div class="product-options">
-          <div class="product-card" data-name="White Bottle" data-price="9.99">
-            <img src="images/bottle1.jpg" alt="">
-            <p class="price">$9.99</p>
-            <button class="add-btn">Add to Cart</button>
-          </div>
-          <div class="product-card" data-name="Blue Bottle" data-price="12.99">
-            <img src="images/bottle2.jpg" alt="">
-            <p class="price">$12.99</p>
-            <button class="add-btn">Add to Cart</button>
-          </div>
-          <div class="product-card" data-name="Pink Bottle" data-price="12.62">
-            <img src="images/bottle3.jpg" alt="">
-            <p class="price">$12.62</p>
-            <button class="add-btn">Add to Cart</button>
-          </div>
-          <div class="product-card" data-name="Green Bottle" data-price="11.98">
-            <img src="images/bottle4.jpg" alt="">
-            <p class="price">$11.98</p>
-            <button class="add-btn">Add to Cart</button>
-          </div>
-          <div class="product-card" data-name="Purple Bottle" data-price="12.99">
-            <img src="images/bottle5.jpg" alt="">
-            <p class="price">$12.99</p>
-            <button class="add-btn">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Divider -->
-      <hr>
+      <div class="product-options" id="productOptions"></div>
 
       <!-- Customization Form -->
       <form id="orderForm">
-        <div class="section-title">Customize Your Bottle</div>
-
         <label for="quantity">Quantity</label>
         <select name="quantity" id="quantity" required>
           <option value="">Select...</option>
@@ -369,7 +320,7 @@
         <label for="notes">Notes</label>
         <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
 
-        <button type="submit">Add Custom Bottle to Cart</button>
+        <button type="submit">Add to Cart</button>
       </form>
     </div>
   </div>
@@ -379,15 +330,36 @@
   </footer>
 
   <script>
-    // Thumbnail click with highlight
     const mainDisplay = document.getElementById('mainDisplay');
-    document.querySelectorAll('.thumbnails img').forEach(img => {
-      img.addEventListener('click', function () {
-        document.querySelectorAll('.thumbnails img').forEach(i => i.classList.remove('selected'));
+    const thumbnailContainer = document.getElementById('thumbnailContainer');
+    const productOptions = document.getElementById('productOptions');
+
+    // Generate 12 thumbnails & 12 product cards
+    for (let i = 1; i <= 12; i++) {
+      // Thumbnail
+      const thumb = document.createElement('img');
+      thumb.src = `images/bottle${i}.jpg`;
+      thumb.alt = `Bottle ${i}`;
+      thumb.addEventListener('click', function() {
+        document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('selected'));
         this.classList.add('selected');
         mainDisplay.src = this.src;
       });
-    });
+      if (i === 1) thumb.classList.add('selected');
+      thumbnailContainer.appendChild(thumb);
+
+      // Product card
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.setAttribute('data-name', `Bottle ${i}`);
+      card.setAttribute('data-price', 30);
+      card.innerHTML = `
+        <img src="images/bottle${i}.jpg" alt="Bottle ${i}">
+        <p class="price">$30.00</p>
+        <button class="add-btn">Add to Cart</button>
+      `;
+      productOptions.appendChild(card);
+    }
 
     // Image upload preview
     document.getElementById('upload').addEventListener('change', function (event) {
@@ -401,7 +373,7 @@
       }
     });
 
-    // Price calc
+    // Live price calculation
     const quantity = document.getElementById("quantity");
     const priceDisplay = document.getElementById("priceDisplay");
     quantity.addEventListener("change", function(){
@@ -417,7 +389,6 @@
     const cartTotal = document.getElementById("cartTotal");
     const cartCount = document.getElementById("cartCount");
     const openCartBtn = document.getElementById("openCart");
-
     let cart = JSON.parse(localStorage.getItem("cartItems")) || [];
 
     function updateCartDisplay() {
@@ -428,37 +399,41 @@
       } else {
         cart.forEach(item => {
           total += item.price;
-          cartItemsDiv.innerHTML += `<p>${item.name || item.quantity + 'x Custom'} - $${item.price.toFixed(2)}</p>`;
+          cartItemsDiv.innerHTML += `<p><img src="${item.img}" width="30" style="vertical-align:middle;margin-right:5px;"> ${item.name} - $${item.price}.00</p>`;
         });
       }
       cartCount.textContent = cart.length;
-      cartTotal.textContent = "Total: $" + total.toFixed(2);
+      cartTotal.textContent = "Total: $" + total + ".00";
       localStorage.setItem("cartItems", JSON.stringify(cart));
     }
 
-    // Variant add-to-cart
-    document.querySelectorAll(".add-btn").forEach(btn => {
-      btn.addEventListener("click", function() {
-        const card = this.closest(".product-card");
+    // Ready-made add-to-cart
+    document.addEventListener("click", function(e) {
+      if (e.target.classList.contains("add-btn")) {
+        const card = e.target.closest(".product-card");
         const name = card.getAttribute("data-name");
         const price = parseFloat(card.getAttribute("data-price"));
-        cart.push({ name, price });
+        const img = card.querySelector('img').src;
+        cart.push({ name, price, img });
         updateCartDisplay();
         cartSidebar.classList.add("active");
-      });
+      }
     });
 
     // Custom form add-to-cart
     document.getElementById("orderForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      const qty = parseInt(document.getElementById("quantity").value);
-      const price = 30 * qty;
-      if (!qty) return;
-      cart.push({ name: qty + "x Custom Bottle", price: price });
+      const qty = parseInt(document.getElementById("quantity").value || 1);
+      const customText = document.getElementById("personalText").value || "Custom Bottle";
+      const img = document.getElementById("imagePreview").src || "images/bottle1.jpg";
+      for(let i=0;i<qty;i++){
+        cart.push({ img, name: customText, price: 30 });
+      }
       updateCartDisplay();
       cartSidebar.classList.add("active");
       this.reset();
       document.getElementById('imagePreview').style.display = 'none';
+      priceDisplay.textContent = "Price: $30.00 each";
     });
 
     openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
