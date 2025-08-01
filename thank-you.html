@@ -7,61 +7,59 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      margin: 0; padding: 0;
-      background: linear-gradient(135deg, #fff0f0, #ffeaea);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
     }
-    .thankyou-container {
+    .container {
+      max-width: 600px;
+      margin: 5rem auto;
       background: #fff;
-      padding: 2rem;
-      max-width: 500px;
+      padding: 3rem 2rem;
       border-radius: 12px;
+      text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: fadeIn 0.8s ease-in-out;
     }
     h1 {
       color: #cb0101;
-      font-size: 2rem;
       margin-bottom: 1rem;
     }
     p {
-      font-size: 1.1rem;
       color: #333;
-      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
     }
-    a {
-      display: inline-block;
+    .btn {
       background: #cb0101;
       color: white;
       text-decoration: none;
-      padding: 0.75rem 1.5rem;
+      padding: 0.8rem 2rem;
       border-radius: 8px;
       font-weight: bold;
+      display: inline-block;
       transition: background 0.3s;
     }
-    a:hover {
+    .btn:hover {
       background: #a30000;
     }
-    .etsy-link {
-      display: block;
-      margin-top: 1rem;
-      font-size: 0.95rem;
-      color: #cb0101;
-      text-decoration: underline;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="thankyou-container">
-    <h1>🎉 Thank You for Your Order!</h1>
-    <p>Your order has been submitted successfully.  
-    We’ll begin processing it shortly and contact you via email with updates.</p>
-
-    <a href="index.html">Return to Shop</a>
-    <a class="etsy-link" href="https://thegarciasdesigns.etsy.com" target="_blank">Visit Our Etsy Shop</a>
+  <div class="container">
+    <h1>Thank You! 🎉</h1>
+    <p>Your order has been successfully submitted.<br>
+       We will process it and send you a confirmation shortly.</p>
+    <a href="https://thegarciasdesigns.com" class="btn">Back to Shop</a>
   </div>
+
+  <script>
+    // Ensure local cart is cleared when arriving here
+    localStorage.removeItem("cart");
+  </script>
 </body>
 </html>
