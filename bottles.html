@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Custom Water Bottles | The Garcia Designs</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -55,7 +55,7 @@
     /* Main Image & Gallery */
     .main-image {
       width: 100%;
-      max-width: 500px;
+      max-width: 450px;
       border-radius: 10px;
       margin-top: 1rem;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
@@ -117,7 +117,9 @@
       transition: background-color 0.3s ease;
       border: none;
     }
-    button:hover { background-color: #a30000; }
+    button:hover {
+      background-color: #a30000;
+    }
 
     #imagePreview {
       margin-bottom: 1rem;
@@ -166,10 +168,23 @@
       background: #cb0101;
       color: #fff;
     }
-    .close-cart { font-size: 1.5rem; cursor: pointer; }
-    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
-    .cart-items p { margin: 0.5rem 0; font-size: 0.95rem; }
-    .cart-footer { padding: 1rem; border-top: 1px solid #ddd; }
+    .close-cart {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    .cart-items p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    .cart-footer {
+      padding: 1rem;
+      border-top: 1px solid #ddd;
+    }
     .checkout-btn {
       display: block;
       background: #cb0101;
@@ -208,7 +223,7 @@
   <p style="font-size:1.1rem; color:#555;">💧 Durable & Customizable | 🖼 Upload Your Image | 🎁 Perfect Gift</p>
 
   <!-- Main Display -->
-  <img src="images/bottle1.jpg" id="mainDisplay" class="main-image" alt="Water Bottle Main">
+  <img src="images/bottle1.jpg" id="mainDisplay" class="main-image" alt="Main Water Bottle Preview">
 
   <!-- Gallery -->
   <div class="gallery">
@@ -229,6 +244,7 @@
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
+      <option value="6">6</option>
     </select>
 
     <div id="priceDisplay">Price: $30.00 each</div>
@@ -253,18 +269,19 @@
     <button type="submit">Add to Cart</button>
   </form>
 
+  <!-- Product Details -->
   <div class="details-section">
     <h2>Details</h2>
-    <p>Our water bottles are made from premium stainless steel or BPA-free plastic, with leak-proof lids and flip handles. Perfect for hot or cold drinks and fully customizable with names, photos, and graphics.</p>
-
+    <p>Our water bottles are made with stainless steel or BPA-free plastic and feature leak-proof lids with flip handles. Perfect for hot or cold drinks and fully customizable with your own design.</p>
     <h2>Description</h2>
-    <p>Hydrate in style! Customize with your favorite design, text, or photo. Perfect for the gym, office, school, or as a unique gift. Stay refreshed with your own personal touch!</p>
+    <p>Hydrate in style with a bottle personalized just for you! Add names, photos, or graphics to make a one-of-a-kind water bottle perfect for the gym, office, school, or as a gift.</p>
   </div>
 
   <footer>
     <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
   </footer>
 
+  <!-- Scripts -->
   <script>
     // Main image preview
     const mainDisplay = document.getElementById('mainDisplay');
@@ -337,3 +354,4 @@
   </script>
 </body>
 </html>
+
