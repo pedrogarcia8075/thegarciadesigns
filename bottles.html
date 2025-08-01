@@ -65,6 +65,7 @@
       gap: 2rem;
       padding: 2rem;
       flex-wrap: wrap;
+      align-items: flex-start;
     }
 
     /* LEFT: Main image & thumbnails */
@@ -96,7 +97,8 @@
       border: 2px solid transparent;
       transition: 0.3s;
     }
-    .thumbnails img:hover {
+    .thumbnails img:hover,
+    .thumbnails img.selected {
       border: 2px solid #cb0101;
     }
 
@@ -106,6 +108,14 @@
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 0.3rem;
+      margin-bottom: 0.8rem;
     }
 
     .product-options {
@@ -134,6 +144,7 @@
     .price {
       font-weight: bold;
       margin: 0.3rem 0;
+      color: #cb0101;
     }
     .add-btn {
       background: #cb0101;
@@ -242,7 +253,7 @@
       margin-top: 2rem;
     }
 
-    /* Mobile: swipe product cards */
+    /* Mobile */
     @media (max-width: 768px) {
       .container { flex-direction: column; align-items: center; }
       .product-options {
@@ -286,7 +297,7 @@
     <div class="left-section">
       <img src="images/bottle1.jpg" id="mainDisplay" class="main-image" alt="Main Water Bottle">
       <div class="thumbnails">
-        <img src="images/bottle1.jpg">
+        <img src="images/bottle1.jpg" class="selected">
         <img src="images/bottle2.jpg">
         <img src="images/bottle3.jpg">
         <img src="images/bottle4.jpg">
@@ -297,37 +308,44 @@
     <!-- RIGHT SECTION -->
     <div class="right-section">
       <!-- Product Options -->
-      <div class="product-options">
-        <div class="product-card" data-name="White Bottle" data-price="9.99">
-          <img src="images/bottle1.jpg" alt="">
-          <p class="price">$9.99</p>
-          <button class="add-btn">Add to Cart</button>
+      <div>
+        <div class="section-title">Ready-Made Options</div>
+        <div class="product-options">
+          <div class="product-card" data-name="White Bottle" data-price="9.99">
+            <img src="images/bottle1.jpg" alt="">
+            <p class="price">$9.99</p>
+            <button class="add-btn">Add to Cart</button>
+          </div>
+          <div class="product-card" data-name="Blue Bottle" data-price="12.99">
+            <img src="images/bottle2.jpg" alt="">
+            <p class="price">$12.99</p>
+            <button class="add-btn">Add to Cart</button>
+          </div>
+          <div class="product-card" data-name="Pink Bottle" data-price="12.62">
+            <img src="images/bottle3.jpg" alt="">
+            <p class="price">$12.62</p>
+            <button class="add-btn">Add to Cart</button>
+          </div>
+          <div class="product-card" data-name="Green Bottle" data-price="11.98">
+            <img src="images/bottle4.jpg" alt="">
+            <p class="price">$11.98</p>
+            <button class="add-btn">Add to Cart</button>
+          </div>
+          <div class="product-card" data-name="Purple Bottle" data-price="12.99">
+            <img src="images/bottle5.jpg" alt="">
+            <p class="price">$12.99</p>
+            <button class="add-btn">Add to Cart</button>
+          </div>
         </div>
-        <div class="product-card" data-name="Blue Bottle" data-price="12.99">
-          <img src="images/bottle2.jpg" alt="">
-          <p class="price">$12.99</p>
-          <button class="add-btn">Add to Cart</button>
-        </div>
-        <div class="product-card" data-name="Pink Bottle" data-price="12.62">
-          <img src="images/bottle3.jpg" alt="">
-          <p class="price">$12.62</p>
-          <button class="add-btn">Add to Cart</button>
-        </div>
-        <div class="product-card" data-name="Green Bottle" data-price="11.98">
-          <img src="images/bottle4.jpg" alt="">
-          <p class="price">$11.98</p>
-          <button class="add-btn">Add to Cart</button>
-        </div>
-        <div class="product-card" data-name="Purple Bottle" data-price="12.99">
-          <img src="images/bottle5.jpg" alt="">
-          <p class="price">$12.99</p>
-          <button class="add-btn">Add to Cart</button>
-        </div>
-        <!-- Duplicate as needed up to 12 variants -->
       </div>
+
+      <!-- Divider -->
+      <hr>
 
       <!-- Customization Form -->
       <form id="orderForm">
+        <div class="section-title">Customize Your Bottle</div>
+
         <label for="quantity">Quantity</label>
         <select name="quantity" id="quantity" required>
           <option value="">Select...</option>
@@ -351,7 +369,7 @@
         <label for="notes">Notes</label>
         <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
 
-        <button type="submit">Add to Cart</button>
+        <button type="submit">Add Custom Bottle to Cart</button>
       </form>
     </div>
   </div>
@@ -361,10 +379,14 @@
   </footer>
 
   <script>
-    // Thumbnail click
+    // Thumbnail click with highlight
     const mainDisplay = document.getElementById('mainDisplay');
     document.querySelectorAll('.thumbnails img').forEach(img => {
-      img.addEventListener('click', () => mainDisplay.src = img.src);
+      img.addEventListener('click', function () {
+        document.querySelectorAll('.thumbnails img').forEach(i => i.classList.remove('selected'));
+        this.classList.add('selected');
+        mainDisplay.src = this.src;
+      });
     });
 
     // Image upload preview
