@@ -188,6 +188,15 @@
     <img src="images/mug3.jpg" onclick="document.getElementById('mainDisplay').src=this.src" alt="Thumb 3" />
   </div>
 
+  <script>
+  const mainDisplay = document.getElementById('mainDisplay');
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      mainDisplay.src = img.src;
+    });
+  });
+</script>
+
   <form id="orderForm" action="https://formsubmit.co/janice.garcia22@yahoo.com" method="POST" enctype="multipart/form-data">
     <label for="quantity">Quantity</label>
     <select name="quantity" id="quantity" required>
