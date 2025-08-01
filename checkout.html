@@ -54,6 +54,18 @@
       border-radius: 5px;
       margin-right: 10px;
     }
+
+    /* Success Message */
+    .success-message {
+      display: none;
+      text-align: center;
+      background: #d1ffd1;
+      color: #0a6a0a;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -69,6 +81,7 @@
       <label>Shipping Address</label>
       <textarea name="address" rows="3" required></textarea>
 
+      <!-- Hidden field for cart summary -->
       <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
 
       <input type="hidden" name="_subject" value="New Checkout Order">
@@ -76,6 +89,10 @@
 
       <button type="submit" id="submitBtn">Place Order</button>
     </form>
+
+    <div class="success-message" id="successMessage">
+      ✅ Thank you! Your order has been placed successfully.
+    </div>
   </div>
 
   <script>
@@ -85,6 +102,8 @@
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const summaryDiv = document.getElementById("cartSummary");
     const submitBtn = document.getElementById("submitBtn");
+    const successMessage = document.getElementById("successMessage");
+    const form = document.getElementById("checkoutForm");
 
     function renderCart() {
       if(cart.length === 0){
@@ -130,8 +149,23 @@
 
     renderCart();
 
-    document.getElementById("checkoutForm").addEventListener("submit", function() {
-      localStorage.removeItem("cart");
+    // Handle form submission with AJAX to avoid redirect
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // prevent page reload
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form)
+      })
+      .then(() => {
+        successMessage.style.display = "block"; // show success
+        localStorage.removeItem("cart"); // clear cart
+        summaryDiv.innerHTML = "<p>Your cart is now empty.</p>";
+        submitBtn.disabled = true;
+      })
+      .catch(() => {
+        alert("❌ There was a problem submitting your order. Please try again.");
+      });
     });
   </script>
 </body>
