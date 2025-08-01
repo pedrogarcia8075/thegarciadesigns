@@ -81,6 +81,13 @@
       color: #eee;
     }
 
+    .totals {
+      text-align: right;
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
     .checkout-btn {
       background-color: #cb0101;
       color: white;
@@ -120,32 +127,39 @@
   </footer>
 
   <script>
-    function loadCart() {
+    const TAX_RATE = 0.07; // 7% tax
+    const SHIPPING_RATE = 5.99; // flat shipping
+
+    function renderCart() {
       const cartContainer = document.getElementById('cartContainer');
       const emptyMessage = document.getElementById('emptyMessage');
-      let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-      if (cartItems.length === 0) {
+      cartContainer.innerHTML = '';
+      if (cart.length === 0) {
         emptyMessage.style.display = 'block';
         return;
       }
 
       emptyMessage.style.display = 'none';
 
-      cartItems.forEach((item, index) => {
+      let subtotal = 0;
+      cart.forEach((item, index) => {
+        subtotal += item.price * item.qty;
+
         const itemDiv = document.createElement('div');
         itemDiv.className = 'cart-item';
 
         const info = document.createElement('p');
-        info.textContent = `${item.quantity} × ${item.product} - $30.00 each`;
+        info.textContent = `${item.qty} × ${item.name} - $${item.price.toFixed(2)} each`;
 
         const removeBtn = document.createElement('button');
         removeBtn.className = 'remove-btn';
         removeBtn.textContent = 'Remove';
         removeBtn.onclick = function () {
-          cartItems.splice(index, 1);
-          localStorage.setItem('cartItems', JSON.stringify(cartItems));
-          location.reload();
+          cart.splice(index, 1);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
         };
 
         itemDiv.appendChild(info);
@@ -153,17 +167,30 @@
         cartContainer.appendChild(itemDiv);
       });
 
+      const tax = subtotal * TAX_RATE;
+      const total = subtotal + tax + SHIPPING_RATE;
+
+      const totalsDiv = document.createElement('div');
+      totalsDiv.className = 'totals';
+      totalsDiv.innerHTML = `
+        Subtotal: $${subtotal.toFixed(2)}<br>
+        Tax: $${tax.toFixed(2)}<br>
+        Shipping: $${SHIPPING_RATE.toFixed(2)}<br>
+        <strong>Total: $${total.toFixed(2)}</strong>
+      `;
+      cartContainer.appendChild(totalsDiv);
+
       const checkoutBtn = document.createElement('button');
       checkoutBtn.className = 'checkout-btn';
       checkoutBtn.textContent = 'Proceed to Checkout';
       checkoutBtn.onclick = function () {
-        alert('This would lead to your checkout or payment process.');
+        window.location.href = 'checkout.html';
       };
-
       cartContainer.appendChild(checkoutBtn);
     }
 
-    document.addEventListener('DOMContentLoaded', loadCart);
+    document.addEventListener('DOMContentLoaded', renderCart);
   </script>
 </body>
 </html>
+
