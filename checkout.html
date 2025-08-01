@@ -29,6 +29,8 @@
       background: #cb0101; color:#fff; font-weight:bold; border:none;
     }
     button:hover { background:#a30000; cursor:pointer; }
+
+    /* Cart Summary */
     .cart-summary {
       background: #ffeaea;
       padding: 1rem;
@@ -42,6 +44,18 @@
       align-items: center;
       padding: 0.4rem 0;
       border-bottom: 1px solid #ddd;
+    }
+    .cart-item-info {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+    .cart-item img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-right: 10px;
     }
     .remove-btn {
       background: #cb0101;
@@ -82,6 +96,7 @@
   <script>
     const TAX_RATE = 0.07; // 7% tax
     const SHIPPING_RATE = 12.00; // flat shipping
+
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const summaryDiv = document.getElementById("cartSummary");
 
@@ -95,10 +110,13 @@
       summaryDiv.innerHTML = "<h3>Your Order</h3>";
 
       cart.forEach((item, index) => {
-        subtotal += item.price * item.qty;
+        subtotal += item.price * (item.qty || 1);
         summaryDiv.innerHTML += `
           <div class="cart-item">
-            <span>${item.qty} × ${item.name} - $${item.price.toFixed(2)} each</span>
+            <div class="cart-item-info">
+              <img src="${item.img || 'images/default.jpg'}" alt="${item.name}">
+              <span>${item.qty || 1} × ${item.name} - $${item.price.toFixed(2)} each</span>
+            </div>
             <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
           </div>
         `;
@@ -117,7 +135,7 @@
     }
 
     function removeItem(index) {
-      cart.splice(index, 1); 
+      cart.splice(index, 1);
       localStorage.setItem("cart", JSON.stringify(cart));
       renderCart();
     }
@@ -132,3 +150,4 @@
   </script>
 </body>
 </html>
+
