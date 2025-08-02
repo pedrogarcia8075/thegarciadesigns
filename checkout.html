@@ -57,54 +57,55 @@
     <h1>Checkout</h1>
     <div class="cart-summary" id="cartSummary"></div>
 
+    <!-- Formspree Form -->
     <form id="checkoutForm" 
-          action="https://formspree.io/f/YOUR_FORM_ID" 
+          action="https://formspree.io/f/xblkalvo" 
           method="POST">
-      
+
       <div class="row">
         <div>
           <label for="firstName">First Name</label>
-          <input type="text" name="First Name" id="firstName" required>
+          <input type="text" name="firstName" id="firstName" required>
         </div>
         <div>
           <label for="lastName">Last Name</label>
-          <input type="text" name="Last Name" id="lastName" required>
+          <input type="text" name="lastName" id="lastName" required>
         </div>
       </div>
 
       <label for="email">Email</label>
-      <input type="email" name="Email" id="email" required>
+      <input type="email" name="email" id="email" required>
 
       <label for="phone">Phone</label>
-      <input type="tel" name="Phone" id="phone" placeholder="123-456-7890" required>
+      <input type="tel" name="phone" id="phone" placeholder="123-456-7890" required>
 
       <label for="address">Street Address</label>
-      <input type="text" name="Street Address" id="address" required>
+      <input type="text" name="address" id="address" required>
 
       <div class="row">
         <div>
           <label for="city">City</label>
-          <input type="text" name="City" id="city" required>
+          <input type="text" name="city" id="city" required>
         </div>
         <div>
           <label for="state">State</label>
-          <input type="text" name="State" id="state" maxlength="2" required>
+          <input type="text" name="state" id="state" maxlength="2" required>
         </div>
         <div>
           <label for="zip">ZIP Code</label>
-          <input type="text" name="ZIP Code" id="zip" required pattern="\d{5}">
+          <input type="text" name="zip" id="zip" required pattern="\d{5}">
         </div>
       </div>
 
       <!-- Hidden order details -->
-      <textarea name="Order Details" id="orderDetails" style="display:none;"></textarea>
+      <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
 
       <button type="submit" id="submitBtn">Place Order</button>
     </form>
   </div>
 
 <script>
-  const TAX_RATE = 0.07; // Iowa sales tax
+  const TAX_RATE = 0.07;
   const SHIPPING_RATE = 12.00;
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const summaryDiv = document.getElementById("cartSummary");
@@ -150,25 +151,25 @@
   }
   renderCart();
 
-  // Email validation
+  // Validate email format strictly
   document.getElementById("checkoutForm").addEventListener("submit", function(e) {
     const email = document.getElementById("email").value;
     const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
     if(!emailPattern.test(email)){
       e.preventDefault();
       alert("Please enter a valid email address.");
-      return;
+    } else {
+      localStorage.removeItem("cart");
     }
-    localStorage.removeItem("cart");
   });
 
-  // Phone auto-format
+  // Auto-format phone
   document.getElementById("phone").addEventListener("input", function(e){
     let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
     e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
   });
 
-  // ZIP auto-fill city/state
+  // Auto-fill city/state from ZIP using Zippopotam.us
   document.getElementById("zip").addEventListener("blur", function() {
     const zip = this.value;
     if(zip.length === 5 && /^\d+$/.test(zip)) {
@@ -186,4 +187,3 @@
 </script>
 </body>
 </html>
-
