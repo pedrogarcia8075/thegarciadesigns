@@ -101,8 +101,8 @@
       <!-- Hidden order details -->
       <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
 
-      <!-- Redirect to thank you page -->
-      <input type="hidden" name="_next" value="thank-you.html">
+      <!-- Redirect to custom thank you page -->
+      <input type="hidden" name="_redirect" value="https://YOUR-GITHUB-USERNAME.github.io/YOUR-REPO-NAME/thank-you.html">
 
       <button type="submit" id="submitBtn">Place Order</button>
     </form>
@@ -181,6 +181,7 @@
   document.getElementById("checkoutForm").addEventListener("submit", function() {
     const firstName = document.getElementById("firstName").value;
     localStorage.setItem("buyerName", firstName);
+    localStorage.setItem("cartBackup", JSON.stringify(cart));
   });
 </script>
 </body>
