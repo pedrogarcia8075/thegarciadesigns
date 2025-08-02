@@ -9,21 +9,22 @@
     body {
       font-family: 'Poppins', sans-serif;
       background: #ffeaea;
-      margin: 0; 
+      margin: 0;
       padding: 0;
-      display: flex; 
-      justify-content: center; 
+      display: flex;
+      justify-content: center;
       align-items: center;
       min-height: 100vh;
+      color: #333;
     }
     .container {
       background: #fff;
       padding: 2rem;
       border-radius: 12px;
-      max-width: 700px;
+      max-width: 600px;
       width: 90%;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       text-align: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
     }
     h1 {
       color: #cb0101;
@@ -41,28 +42,28 @@
       text-align: left;
     }
     .order-item {
-      display: flex; 
-      justify-content: space-between; 
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      padding: 0.4rem 0; 
+      padding: 0.4rem 0;
       border-bottom: 1px solid #ddd;
     }
     .order-item img {
-      width: 50px; 
-      height: 50px;
-      object-fit: cover; 
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
       border-radius: 5px;
       margin-right: 10px;
     }
     .order-item-info {
-      display: flex; 
-      align-items: center; 
+      display: flex;
+      align-items: center;
       flex: 1;
     }
     .total {
       font-weight: bold;
       text-align: right;
-      margin-top: 0.5rem;
+      margin-top: 1rem;
     }
     .btn {
       background: #cb0101;
@@ -73,7 +74,6 @@
       text-decoration: none;
       display: inline-block;
       transition: background 0.3s ease;
-      margin-top: 1rem;
     }
     .btn:hover {
       background: #a30000;
@@ -82,7 +82,7 @@
 </head>
 <body>
   <div class="container">
-    <h1 id="thankYouHeader">🎉 Thank You!</h1>
+    <h1 id="thankYouHeader">🎉 Thank You for Your Order!</h1>
     <p class="subtitle">Your order has been received and is now being processed.</p>
 
     <div id="orderSummary" class="order-summary"></div>
@@ -91,25 +91,20 @@
   </div>
 
   <script>
-    // Disable back button
-    history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-      history.go(1);
-    };
-
-    const TAX_RATE = 0.07;   // Iowa tax
+    const TAX_RATE = 0.07;
     const SHIPPING_RATE = 12.00;
-    
+
+    // Retrieve saved cart and buyer info
     let cart = JSON.parse(localStorage.getItem("cartBackup")) || [];
     const buyerName = localStorage.getItem("buyerName") || "";
 
-    // Personalize thank you message
+    // Personalize header
     if (buyerName) {
       document.getElementById("thankYouHeader").innerText = `🎉 Thank You, ${buyerName.toUpperCase()}!`;
     }
 
+    // Render order summary
     const summaryDiv = document.getElementById("orderSummary");
-
     if (cart.length === 0) {
       summaryDiv.innerHTML = "<p>Your cart is empty (or has already been cleared).</p>";
     } else {
@@ -117,16 +112,14 @@
       summaryDiv.innerHTML = "<h3>Order Summary</h3>";
 
       cart.forEach(item => {
-        const qty = item.qty || 1;
-        const itemTotal = item.price * qty;
-        subtotal += itemTotal;
+        subtotal += item.price * (item.qty || 1);
         summaryDiv.innerHTML += `
           <div class="order-item">
             <div class="order-item-info">
               <img src="${item.img || 'images/default.jpg'}" alt="${item.name}">
-              <span>${qty} × ${item.name}</span>
+              <span>${item.qty || 1} × ${item.name}</span>
             </div>
-            <span>$${itemTotal.toFixed(2)}</span>
+            <span>$${(item.price * (item.qty || 1)).toFixed(2)}</span>
           </div>
         `;
       });
@@ -142,9 +135,22 @@
       `;
     }
 
-    // Clear cart data after displaying
+    // Clear sensitive data
+    localStorage.removeItem("cart");
     localStorage.removeItem("cartBackup");
     localStorage.removeItem("buyerName");
+
+    // 🔹 Block the back button & prevent caching
+    history.pushState(null, null, location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
+    window.onload = function() {
+      window.history.forward();
+    };
+    window.onpageshow = function(event) {
+      if (event.persisted) window.location.reload();
+    };
   </script>
 </body>
 </html>
