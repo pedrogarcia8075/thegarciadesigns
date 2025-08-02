@@ -21,6 +21,8 @@
     .cart-item img { width: 40px; height: 40px; object-fit: cover; border-radius: 5px; margin-right: 10px; }
     .row { display: flex; gap: 1rem; }
     .row input { flex: 1; }
+    .back-btn { background:#777; margin-bottom:0.5rem; }
+    .back-btn:hover { background:#555; }
   </style>
 </head>
 <body>
@@ -64,7 +66,13 @@
         </div>
       </div>
 
+      <!-- Hidden order details to email -->
       <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
+
+      <!-- ✅ Back to Cart button -->
+      <button type="button" class="back-btn" onclick="window.location.href='cart.html'">
+        ← Back to Cart
+      </button>
 
       <button type="submit" id="submitBtn">Place Order</button>
     </form>
@@ -146,7 +154,7 @@
     e.preventDefault(); 
 
     const formData = new FormData(this);
-    fetch("https://formspree.io/f/meozlggo", {  // <-- New endpoint here
+    fetch("https://formspree.io/f/meozlggo", {  // ✅ New endpoint
       method: "POST",
       body: formData,
       headers: { "Accept": "application/json" }
