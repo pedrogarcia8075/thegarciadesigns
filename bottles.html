@@ -17,20 +17,13 @@
 
     /* Fancy Back Button */
     .back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #cb0101;
-      color: #fff;
-      padding: 0.5rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 30px;
-      cursor: pointer;
+      position: fixed; top: 20px; left: 20px;
+      background: #cb0101; color: #fff;
+      padding: 0.5rem 1.2rem; font-size: 1rem;
+      border-radius: 30px; cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-      z-index: 2100;
-      opacity: 0;
-      transform: translateY(-10px);
+      transition: all 0.3s ease; z-index: 2100;
+      opacity: 0; transform: translateY(-10px);
       animation: fadeSlideIn 0.8s ease forwards, pulseGlow 2.5s ease-in-out infinite 1.2s;
     }
     .back-btn:hover { background: #ff2e2e; transform: scale(1.05); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
@@ -46,6 +39,8 @@
     .thumbnails img.selected { border: 2px solid #cb0101; }
 
     .right-section { max-width: 500px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .section-heading { font-size: 1.3rem; color: #cb0101; border-bottom: 2px solid #eee; padding-bottom: 0.3rem; }
+
     .product-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     .product-card { background: white; border-radius: 8px; padding: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; }
     .product-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
@@ -54,6 +49,7 @@
     .add-btn { background: #cb0101; color: white; padding: 0.4rem 0.7rem; font-size: 0.9rem; border-radius: 6px; cursor: pointer; border: none; width: 100%; }
     .add-btn:hover { background: #a30000; }
 
+    /* Customization Form */
     form { background: #fff; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); padding: 1.5rem; }
     label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #444; }
     input[type="file"], input[type="text"], select, textarea { width: 100%; margin-bottom: 1rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
@@ -61,7 +57,7 @@
     button[type="submit"]:hover { background-color: #a30000; }
     #imagePreview { margin-bottom: 1rem; max-height: 150px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: none; }
 
-    /* Floating Cart Sidebar */
+    /* Cart Sidebar */
     .cart-sidebar { position: fixed; top: 0; right: -350px; width: 350px; height: 100%; background: #fff; box-shadow: -4px 0 10px rgba(0,0,0,0.2); transition: right 0.3s ease; z-index: 2000; display: flex; flex-direction: column; justify-content: space-between; }
     .cart-sidebar.active { right: 0; }
     .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #cb0101; color: #fff; }
