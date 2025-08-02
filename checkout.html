@@ -89,9 +89,11 @@
     summaryDiv.innerHTML = "<h3>Your Order</h3>";
 
     cart.forEach(item => {
-      subtotal += item.price * (item.qty || 1);
-      const line = `${item.qty || 1} × ${item.name} - $${item.price.toFixed(2)} each`;
-      orderSummary += line + "\n";
+      const qty = item.qty || 1;
+      subtotal += item.price * qty;
+      const line = `${qty} × ${item.name} - $${item.price.toFixed(2)} each`;
+      orderSummary += `${line}\nImage: ${item.img || 'No Image'}\n\n`;
+
       summaryDiv.innerHTML += `
         <div class="cart-item">
           <div class="cart-item-info">
@@ -117,11 +119,13 @@
   }
   renderCart();
 
+  // Auto-format phone
   document.getElementById("phone").addEventListener("input", function(e){
     let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
     e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
   });
 
+  // Auto-fill city/state from ZIP
   document.getElementById("zip").addEventListener("blur", function() {
     const zip = this.value;
     if(zip.length === 5 && /^\d+$/.test(zip)) {
@@ -137,25 +141,21 @@
     }
   });
 
+  // Submit order to Formspree via AJAX
   document.getElementById("checkoutForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent normal form submission
+    e.preventDefault(); 
 
     const formData = new FormData(this);
-    fetch("https://formspree.io/f/xblkalvo", {
+    fetch("https://formspree.io/f/meozlggo", {  // <-- New endpoint here
       method: "POST",
       body: formData,
       headers: { "Accept": "application/json" }
     })
     .then(response => {
       if(response.ok) {
-        // Save name and cart for thank-you page
         localStorage.setItem("buyerName", document.getElementById("firstName").value);
         localStorage.setItem("cartBackup", JSON.stringify(cart));
-
-        // Clear the live cart
         localStorage.removeItem("cart");
-
-        // Redirect to custom thank-you page
         window.location.href = "thank-you.html";
       } else {
         alert("There was an error submitting your order. Please try again.");
@@ -166,4 +166,3 @@
 </script>
 </body>
 </html>
-
