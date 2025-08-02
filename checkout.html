@@ -59,10 +59,7 @@
     <h1>Checkout</h1>
     <div class="cart-summary" id="cartSummary"></div>
 
-    <form id="checkoutForm" 
-          action="https://formspree.io/f/xblkalvo" 
-          method="POST">
-
+    <form id="checkoutForm">
       <div class="row">
         <div>
           <label for="firstName">First Name</label>
@@ -98,23 +95,23 @@
         </div>
       </div>
 
-      <!-- Hidden order details -->
+      <!-- Hidden order details for Formspree -->
       <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
-
-      <!-- Redirect to custom thank you page -->
-      <input type="hidden" name="_redirect" value="https://YOUR-GITHUB-USERNAME.github.io/YOUR-REPO-NAME/thank-you.html">
 
       <button type="submit" id="submitBtn">Place Order</button>
     </form>
   </div>
 
 <script>
-  const TAX_RATE = 0.07;
+  const TAX_RATE = 0.07;     // Iowa tax
   const SHIPPING_RATE = 12.00;
+  const FORMSPREE_URL = "https://formspree.io/f/xblkalvo";
+
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const summaryDiv = document.getElementById("cartSummary");
   const orderDetailsField = document.getElementById("orderDetails");
 
+  // Render Cart
   function renderCart() {
     if(cart.length === 0){
       summaryDiv.innerHTML = "<p>Your cart is empty.</p>";
@@ -177,11 +174,30 @@
     }
   });
 
-  // Save first name for thank-you page
-  document.getElementById("checkoutForm").addEventListener("submit", function() {
-    const firstName = document.getElementById("firstName").value;
-    localStorage.setItem("buyerName", firstName);
-    localStorage.setItem("cartBackup", JSON.stringify(cart));
+  // Handle AJAX Form Submission
+  document.getElementById("checkoutForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    const response = await fetch(FORMSPREE_URL, {
+      method: "POST",
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if(response.ok){
+      // Save buyer info for thank-you page
+      const firstName = document.getElementById("firstName").value;
+      localStorage.setItem("buyerName", firstName);
+      localStorage.setItem("cartBackup", JSON.stringify(cart));
+      localStorage.removeItem("cart");
+
+      // Redirect to your custom thank-you page
+      window.location.href = "thank-you.html";
+    } else {
+      alert("Oops! Something went wrong submitting the form.");
+    }
   });
 </script>
 </body>
