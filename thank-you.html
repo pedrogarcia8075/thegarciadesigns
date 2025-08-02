@@ -7,42 +7,45 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fff0f0, #ffeaea);
+      background: #f7f7f7;
       margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      text-align: center;
+      min-height: 100vh;
     }
-    .message-box {
+    .thank-you-container {
       background: #fff;
-      padding: 3rem;
+      padding: 3rem 2rem;
       border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      animation: fadeIn 1s ease-in;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in-out;
     }
-    h1 {
+    .thank-you-container h1 {
       color: #28a745;
-      font-size: 2rem;
       margin-bottom: 1rem;
+      font-size: 2rem;
     }
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 1.5rem;
+    .thank-you-container p {
       color: #333;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
     }
-    a {
+    .thank-you-container a {
       display: inline-block;
-      padding: 0.75rem 1.5rem;
       background: #cb0101;
-      color: white;
-      border-radius: 8px;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
       text-decoration: none;
+      border-radius: 8px;
       font-weight: bold;
       transition: background 0.3s;
     }
-    a:hover {
+    .thank-you-container a:hover {
       background: #a30000;
     }
     @keyframes fadeIn {
@@ -51,15 +54,17 @@
     }
   </style>
 
-  <!-- Auto redirect to homepage after 5 seconds -->
-  <meta http-equiv="refresh" content="5; url=index.html">
+  <!-- Auto redirect after 5 seconds -->
+  <meta http-equiv="refresh" content="5; url=https://thegarciasdesigns.com">
 </head>
 <body>
-  <div class="message-box">
+  <div class="thank-you-container">
     <h1>🎉 Thank You for Your Order!</h1>
-    <p>Your order has been successfully submitted. We will start processing it shortly.</p>
-    <p>You will be redirected to our homepage in <strong>5 seconds</strong>.</p>
-    <a href="index.html">Return to Homepage Now</a>
+    <p>Your order has been successfully placed and is being processed.  
+       A confirmation email has been sent to your inbox.</p>
+    <p>You will be redirected to our shop in a few seconds,  
+       or click below to return immediately.</p>
+    <a href="https://thegarciasdesigns.com">Return to Shop</a>
   </div>
 </body>
 </html>
