@@ -6,82 +6,27 @@
   <title>Thank You | The Garcia Designs</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
-      margin: 0; padding: 0;
-      color: #333;
-      display: flex; justify-content: center; align-items: center;
-      min-height: 100vh;
-    }
+    body { font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
+      margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #333; }
     .container {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      width: 90%;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      text-align: center;
-      animation: fadeIn 0.8s ease-in-out;
+      background: #fff; padding: 2rem; border-radius: 12px;
+      max-width: 600px; width: 90%; box-shadow: 0 6px 20px rgba(0,0,0,0.1); text-align: center;
     }
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    h1 {
-      color: #cb0101;
-      margin-bottom: 0.5rem;
-    }
-    p.subtitle {
-      color: #555;
-      margin-bottom: 2rem;
-    }
-    .order-summary {
-      background: #ffeaea;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-      text-align: left;
-      display: none;
-    }
-    .order-item {
-      display: flex; justify-content: space-between; 
-      align-items: center;
-      padding: 0.4rem 0; 
-      border-bottom: 1px solid #ddd;
-    }
-    .order-item img {
-      width: 40px; height: 40px;
-      object-fit: cover; border-radius: 5px;
-      margin-right: 10px;
-    }
-    .order-item-info {
-      display: flex; align-items: center; flex: 1;
-    }
-    .total {
-      font-weight: bold;
-      text-align: right;
-      margin-top: 1rem;
-    }
-    .btn {
-      background: #cb0101;
-      color: #fff;
-      font-weight: bold;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s ease;
-      display: inline-block;
-    }
-    .btn:hover {
-      background: #a30000;
-    }
+    h1 { color: #cb0101; margin-bottom: 0.5rem; }
+    p.subtitle { color: #555; margin-bottom: 2rem; }
+    .order-summary { background: #ffeaea; padding: 1rem; border-radius: 10px; margin-bottom: 2rem; text-align: left; }
+    .order-item { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid #ddd; }
+    .order-item img { width: 40px; height: 40px; object-fit: cover; border-radius: 5px; margin-right: 10px; }
+    .order-item-info { display: flex; align-items: center; flex: 1; }
+    .total { font-weight: bold; text-align: right; margin-top: 1rem; }
+    .btn { background: #cb0101; color: #fff; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; display: inline-block; transition: background 0.3s ease; }
+    .btn:hover { background: #a30000; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1 id="thankYouTitle">🎉 Thank You for Your Order!</h1>
-    <p class="subtitle" id="thankYouSubtitle">Your order has been received and is now being processed.</p>
+    <h1 id="thankYouHeader">🎉 Thank You for Your Order!</h1>
+    <p class="subtitle">Your order has been received and is now being processed.</p>
 
     <div id="orderSummary" class="order-summary"></div>
 
@@ -89,21 +34,21 @@
   </div>
 
   <script>
-    const TAX_RATE = 0.07;   // Iowa tax
+    const TAX_RATE = 0.07;
     const SHIPPING_RATE = 12.00;
     
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const summaryDiv = document.getElementById("orderSummary");
+    let cart = JSON.parse(localStorage.getItem("cartBackup")) || [];
+    const buyerName = localStorage.getItem("buyerName") || "";
 
-    // Display personalized greeting if name exists
-    const buyerName = localStorage.getItem("buyerName");
-    if(buyerName) {
-      document.getElementById("thankYouTitle").textContent = `🎉 Thank You, ${buyerName}!`;
-      document.getElementById("thankYouSubtitle").textContent = "Your order has been received and is now being processed.";
+    if(buyerName){
+      document.getElementById("thankYouHeader").innerText = `🎉 Thank You, ${buyerName}!`;
     }
 
-    if(cart.length > 0){
-      summaryDiv.style.display = "block"; 
+    const summaryDiv = document.getElementById("orderSummary");
+
+    if(cart.length === 0){
+      summaryDiv.innerHTML = "<p>Your cart is empty (or has already been cleared).</p>";
+    } else {
       let subtotal = 0;
       summaryDiv.innerHTML = "<h3>Order Summary</h3>";
 
@@ -129,14 +74,11 @@
         <div class="total">Shipping: $${SHIPPING_RATE.toFixed(2)}</div>
         <div class="total">Total: $${total.toFixed(2)}</div>
       `;
-
-      // Clear cart and buyer name after displaying
-      localStorage.removeItem("cart");
-      localStorage.removeItem("buyerName");
-    } else {
-      summaryDiv.style.display = "block"; 
-      summaryDiv.innerHTML = `<p>Your order summary is unavailable, but your order has been submitted successfully.</p>`;
     }
+
+    // Clear cart after displaying summary
+    localStorage.removeItem("cartBackup");
+    localStorage.removeItem("buyerName");
   </script>
 </body>
 </html>
