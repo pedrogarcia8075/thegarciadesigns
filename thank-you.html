@@ -42,6 +42,7 @@
       border-radius: 10px;
       margin-bottom: 2rem;
       text-align: left;
+      display: none;
     }
     .order-item {
       display: flex; justify-content: space-between; 
@@ -79,8 +80,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>🎉 Thank You for Your Order!</h1>
-    <p class="subtitle">Your order has been received and is now being processed.</p>
+    <h1 id="thankYouTitle">🎉 Thank You for Your Order!</h1>
+    <p class="subtitle" id="thankYouSubtitle">Your order has been received and is now being processed.</p>
 
     <div id="orderSummary" class="order-summary"></div>
 
@@ -94,9 +95,15 @@
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const summaryDiv = document.getElementById("orderSummary");
 
-    if(cart.length === 0){
-      summaryDiv.innerHTML = "<p>Your cart is empty (or has already been cleared).</p>";
-    } else {
+    // Display personalized greeting if name exists
+    const buyerName = localStorage.getItem("buyerName");
+    if(buyerName) {
+      document.getElementById("thankYouTitle").textContent = `🎉 Thank You, ${buyerName}!`;
+      document.getElementById("thankYouSubtitle").textContent = "Your order has been received and is now being processed.";
+    }
+
+    if(cart.length > 0){
+      summaryDiv.style.display = "block"; 
       let subtotal = 0;
       summaryDiv.innerHTML = "<h3>Order Summary</h3>";
 
@@ -122,10 +129,14 @@
         <div class="total">Shipping: $${SHIPPING_RATE.toFixed(2)}</div>
         <div class="total">Total: $${total.toFixed(2)}</div>
       `;
-    }
 
-    // Clear cart after displaying summary
-    localStorage.removeItem("cart");
+      // Clear cart and buyer name after displaying
+      localStorage.removeItem("cart");
+      localStorage.removeItem("buyerName");
+    } else {
+      summaryDiv.style.display = "block"; 
+      summaryDiv.innerHTML = `<p>Your order summary is unavailable, but your order has been submitted successfully.</p>`;
+    }
   </script>
 </body>
 </html>
