@@ -41,16 +41,14 @@
     <div id="orderSummary" class="order-summary"></div>
 
     <a href="index.html" class="btn">Continue Shopping</a>
-    <p class="redirect-msg" id="redirectMsg">
-      Redirecting to homepage in <span id="countdown">5</span> seconds...
-    </p>
+    <p class="redirect-msg" id="redirectMsg">You will be redirected to the homepage shortly...</p>
   </div>
 
   <script>
     const TAX_RATE = 0.07;
     const SHIPPING_RATE = 12.00;
 
-    // Retrieve backup cart and name
+    // Retrieve backup cart and buyer name
     let cart = JSON.parse(localStorage.getItem("cartBackup")) || [];
     const buyerName = localStorage.getItem("buyerName") || "";
 
@@ -95,28 +93,35 @@
     localStorage.removeItem("cartBackup");
     localStorage.removeItem("buyerName");
 
-    // --- Disable Back Button ---
+    // --- Full Back Button Lock ---
     history.pushState(null, null, location.href);
-    window.onpopstate = function () { 
-      window.location.href = "index.html"; // Redirect to homepage if back is pressed
+    window.onpopstate = function () {
+      history.pushState(null, null, location.href);
     };
 
-    // --- Auto Redirect with Countdown (5-12 seconds) ---
-    const redirectDelay = Math.floor(Math.random() * (12000 - 5000 + 1)) + 5000;
-    let countdown = Math.floor(redirectDelay / 1000);
-    const countdownElem = document.getElementById("countdown");
-    countdownElem.textContent = countdown;
+    // Disable keyboard back shortcuts
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Backspace" || (e.altKey && e.key === "ArrowLeft")) {
+        e.preventDefault();
+      }
+    });
+
+    // --- Auto Redirect with Countdown ---
+    const redirectDelay = Math.floor(Math.random() * (12000 - 5000 + 1)) + 5000; // 5-12s
+    const redirectMsg = document.getElementById("redirectMsg");
+    let countdown = Math.ceil(redirectDelay / 1000);
+
+    redirectMsg.innerText = `You will be redirected to the homepage in ${countdown} seconds...`;
 
     const timer = setInterval(() => {
       countdown--;
       if(countdown > 0){
-        countdownElem.textContent = countdown;
-      } else {
-        clearInterval(timer);
+        redirectMsg.innerText = `You will be redirected to the homepage in ${countdown} seconds...`;
       }
     }, 1000);
 
     setTimeout(() => {
+      clearInterval(timer);
       window.location.href = "index.html";
     }, redirectDelay);
   </script>
