@@ -145,6 +145,33 @@
     .checkout-btn { display: block; background: #cb0101; color: #fff; text-align: center; padding: 0.75rem; border-radius: 8px; font-weight: bold; text-decoration: none; }
     .checkout-btn:hover { background: #a30000; }
 
+    /* Fancy Back Button with Animation */
+    .back-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #cb0101;
+      color: #fff;
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      z-index: 2100;
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: fadeSlideIn 0.8s ease forwards;
+    }
+    .back-btn:hover {
+      background: #ff2e2e;
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+    @keyframes fadeSlideIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     footer { text-align: center; padding: 1.5rem; background: #111; color: #fff; font-size: 0.9rem; margin-top: 2rem; }
 
     /* MOBILE */
@@ -158,6 +185,9 @@
   </style>
 </head>
 <body>
+
+<!-- Fancy Back Button -->
+<div class="back-btn" onclick="window.history.back()">⬅ Back</div>
 
 <!-- Floating Cart Sidebar -->
 <div id="cartSidebar" class="cart-sidebar">
@@ -340,4 +370,3 @@
 
 </body>
 </html>
-
