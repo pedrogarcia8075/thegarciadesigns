@@ -7,40 +7,42 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: #f7f7f7;
+      background: linear-gradient(135deg, #fff0f0, #ffeaea);
       margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 600px;
-      margin: 5rem auto;
-      background: #fff;
-      padding: 3rem 2rem;
-      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      animation: fadeIn 0.8s ease-in-out;
+    }
+    .message-box {
+      background: #fff;
+      padding: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      animation: fadeIn 1s ease-in;
     }
     h1 {
-      color: #cb0101;
+      color: #28a745;
+      font-size: 2rem;
       margin-bottom: 1rem;
     }
     p {
-      color: #333;
       font-size: 1.1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      color: #333;
     }
-    .btn {
+    a {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
       background: #cb0101;
       color: white;
-      text-decoration: none;
-      padding: 0.8rem 2rem;
       border-radius: 8px;
+      text-decoration: none;
       font-weight: bold;
-      display: inline-block;
       transition: background 0.3s;
     }
-    .btn:hover {
+    a:hover {
       background: #a30000;
     }
     @keyframes fadeIn {
@@ -48,18 +50,16 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+
+  <!-- Auto redirect to homepage after 5 seconds -->
+  <meta http-equiv="refresh" content="5; url=index.html">
 </head>
 <body>
-  <div class="container">
-    <h1>Thank You! 🎉</h1>
-    <p>Your order has been successfully submitted.<br>
-       We will process it and send you a confirmation shortly.</p>
-    <a href="https://thegarciasdesigns.com" class="btn">Back to Shop</a>
+  <div class="message-box">
+    <h1>🎉 Thank You for Your Order!</h1>
+    <p>Your order has been successfully submitted. We will start processing it shortly.</p>
+    <p>You will be redirected to our homepage in <strong>5 seconds</strong>.</p>
+    <a href="index.html">Return to Homepage Now</a>
   </div>
-
-  <script>
-    // Ensure local cart is cleared when arriving here
-    localStorage.removeItem("cart");
-  </script>
 </body>
 </html>
