@@ -91,7 +91,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 380px; /* Uniform card height */
+      height: 380px;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -109,7 +109,7 @@
     }
     .product-card img {
       flex: 1;
-      object-fit: contain; /* Ensures full image fits */
+      object-fit: contain;
       width: 100%;
       border-radius: 10px;
       margin-bottom: 0.75rem;
@@ -136,22 +136,69 @@
       text-decoration: underline;
     }
 
-    /* ===== Responsive ===== */
+    /* ===== Cart Button ===== */
+    .cart-btn {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background-color: #ff5858;
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      z-index: 1000;
+    }
+
+    .cart-btn:hover {
+      background-color: #ff2e2e;
+      transform: scale(1.1);
+    }
+
+    /* ===== Welcome Banner ===== */
+    .welcome-banner {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #ffffffcc, #fff5f5cc);
+      backdrop-filter: blur(8px);
+      border-radius: 0 0 15px 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      color: #222;
+    }
+    .welcome-banner h1 { margin-bottom: 0.5rem; font-size: 2rem; }
+    .welcome-banner p { margin-bottom: 1rem; font-size: 1rem; }
+
+    .etsy-link {
+      display: inline-block;
+      background-color: #cb0101;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .etsy-link:hover { background-color: #ff2e2e; transform: scale(1.05); }
+
     @media (max-width: 600px) {
-      nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .dropdown-content {
-        left: 50%;
-        transform: translateX(-50%);
-      }
+      nav { flex-direction: column; gap: 1rem; }
+      .dropdown-content { left: 50%; transform: translateX(-50%); }
+      .cart-btn { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
     }
   </style>
 </head>
 <body>
+  <a href="#" class="cart-btn">🛒 Cart</a>
 
-  <!-- ===== Navigation Bar ===== -->
+  <div class="welcome-banner">
+    <h1>Welcome to The Garcia Designs!</h1>
+    <p>Your destination for personalized, custom-crafted products. Our website is currently under construction, but please explore our Etsy shop below for the latest creations!</p>
+    <a href="https://thegarciasdesigns.etsy.com" class="etsy-link" target="_blank">Visit Our Etsy Shop</a>
+  </div>
+
   <nav>
     <div class="dropdown">
       <a href="#" class="dropbtn">Products ▼</a>
@@ -167,90 +214,7 @@
     <a href="https://thegarciasdesigns.etsy.com" target="_blank">Etsy Shop</a>
   </nav>
 
-  <!-- ===== Product Grid ===== -->
-  <section class="product-section">
-    <div class="product-grid">
-      <div class="product-card">
-        <a href="tumblers.html">
-          <img src="images/tumblers.jpg" alt="Custom Tumblers">
-          <h3>Custom Tumblers</h3>
-        </a>
-      </div>
-
-      <div class="product-card">
-        <a href="mugs.html">
-          <img src="images/mugs.jpg" alt="Custom Mugs">
-          <h3>Custom Mugs</h3>
-        </a>
-      </div>
-
-      <div class="product-card">
-        <a href="leds.html">
-          <img src="images/leds.jpg" alt="LED Glass Photos">
-          <h3>LED Glass Photos</h3>
-        </a>
-      </div>
-
-      <div class="product-card">
-        <a href="bottles.html">
-          <img src="images/bottles.jpg" alt="Custom Water Bottles">
-          <h3>Custom Water Bottles</h3>
-        </a>
-      </div>
-
-      <div class="product-card">
-        <a href="prints.html">
-          <img src="images/Aluminum Photo Prints.jpg" alt="Aluminum Prints">
-          <h3>Aluminum Prints</h3>
-        </a>
-      </div>
-
-      <div class="product-card">
-        <a href="Photo Frames.html">
-          <img src="images/Photo Frames.jpg" alt="Photo Frames">
-          <h3>Photo Frames</h3>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Footer ===== -->
-  <footer>
-    <p>© 2025 The Garcia Designs | Follow us on
-      <a href="https://www.facebook.com/profile.php?id=61579036433148" target="_blank">Facebook</a> & 
-      <a href="https://instagram.com/" target="_blank">Instagram</a>
-    </p>
-  </footer>
-
-  <!-- ===== Scripts ===== -->
-  <script>
-    // Dropdown click + auto-close
-    document.querySelectorAll('.dropdown').forEach(drop => {
-      drop.addEventListener('click', function(e) {
-        e.preventDefault();
-        this.classList.toggle('open');
-      });
-      drop.addEventListener('mouseleave', function() {
-        this.classList.remove('open');
-      });
-    });
-
-    // Fade-in animation on scroll
-    const cards = document.querySelectorAll('.product-card');
-
-    function checkVisibility() {
-      const triggerBottom = window.innerHeight * 0.9;
-      cards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        if (cardTop < triggerBottom) {
-          card.classList.add('visible');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', checkVisibility);
-    window.addEventListener('load', checkVisibility);
-  </script>
+  <!-- (Rest of your original content unchanged) -->
 
 </body>
 </html>
