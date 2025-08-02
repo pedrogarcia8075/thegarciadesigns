@@ -93,17 +93,15 @@
     localStorage.removeItem("cartBackup");
     localStorage.removeItem("buyerName");
 
-    // --- Disable Back Navigation ---
-    // Push a dummy state and force redirect if they try to go back
+    // --- Disable Back Navigation & Force Homepage ---
     history.pushState(null, null, location.href);
     window.addEventListener('popstate', function () {
-      history.pushState(null, null, location.href);
-      window.location.replace("index.html"); // Immediately redirect to homepage
+      window.location.replace("index.html");
     });
 
-    // --- Detect if page loaded from back/forward cache ---
+    // If the page is loaded from cache (back/forward navigation)
     window.addEventListener('pageshow', function (event) {
-      if (event.persisted) {
+      if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
         window.location.replace("index.html");
       }
     });
@@ -111,7 +109,7 @@
     // --- Auto Redirect after 5–12 seconds ---
     const redirectDelay = Math.floor(Math.random() * (12000 - 5000 + 1)) + 5000; 
     setTimeout(() => {
-      window.location.href = "index.html";
+      window.location.replace("index.html");
     }, redirectDelay);
   </script>
 </body>
