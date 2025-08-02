@@ -48,7 +48,7 @@
     const TAX_RATE = 0.07;
     const SHIPPING_RATE = 12.00;
 
-    // Retrieve backup cart and buyer name
+    // Retrieve backup cart and name
     let cart = JSON.parse(localStorage.getItem("cartBackup")) || [];
     const buyerName = localStorage.getItem("buyerName") || "";
 
@@ -93,35 +93,24 @@
     localStorage.removeItem("cartBackup");
     localStorage.removeItem("buyerName");
 
-    // --- Full Back Button Lock ---
+    // --- Disable Back Navigation ---
+    // Push a dummy state and force redirect if they try to go back
     history.pushState(null, null, location.href);
-    window.onpopstate = function () {
+    window.addEventListener('popstate', function () {
       history.pushState(null, null, location.href);
-    };
+      window.location.replace("index.html"); // Immediately redirect to homepage
+    });
 
-    // Disable keyboard back shortcuts
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Backspace" || (e.altKey && e.key === "ArrowLeft")) {
-        e.preventDefault();
+    // --- Detect if page loaded from back/forward cache ---
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted) {
+        window.location.replace("index.html");
       }
     });
 
-    // --- Auto Redirect with Countdown ---
-    const redirectDelay = Math.floor(Math.random() * (12000 - 5000 + 1)) + 5000; // 5-12s
-    const redirectMsg = document.getElementById("redirectMsg");
-    let countdown = Math.ceil(redirectDelay / 1000);
-
-    redirectMsg.innerText = `You will be redirected to the homepage in ${countdown} seconds...`;
-
-    const timer = setInterval(() => {
-      countdown--;
-      if(countdown > 0){
-        redirectMsg.innerText = `You will be redirected to the homepage in ${countdown} seconds...`;
-      }
-    }, 1000);
-
+    // --- Auto Redirect after 5–12 seconds ---
+    const redirectDelay = Math.floor(Math.random() * (12000 - 5000 + 1)) + 5000; 
     setTimeout(() => {
-      clearInterval(timer);
       window.location.href = "index.html";
     }, redirectDelay);
   </script>
