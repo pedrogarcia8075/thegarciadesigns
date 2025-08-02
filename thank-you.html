@@ -6,20 +6,47 @@
   <title>Thank You | The Garcia Designs</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Poppins', sans-serif; background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
-      margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: #333; }
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
+      margin: 0; padding: 0; 
+      display: flex; justify-content: center; align-items: center; 
+      min-height: 100vh; color: #333; 
+    }
     .container {
       background: #fff; padding: 2rem; border-radius: 12px;
-      max-width: 600px; width: 90%; box-shadow: 0 6px 20px rgba(0,0,0,0.1); text-align: center;
+      max-width: 600px; width: 90%; 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1); 
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.8s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; transform: translateY(0); }
     }
     h1 { color: #cb0101; margin-bottom: 0.5rem; }
     p.subtitle { color: #555; margin-bottom: 2rem; }
-    .order-summary { background: #ffeaea; padding: 1rem; border-radius: 10px; margin-bottom: 2rem; text-align: left; }
-    .order-item { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid #ddd; }
-    .order-item img { width: 40px; height: 40px; object-fit: cover; border-radius: 5px; margin-right: 10px; }
+    .order-summary { 
+      background: #ffeaea; padding: 1rem; border-radius: 10px; 
+      margin-bottom: 2rem; text-align: left; 
+    }
+    .order-item { 
+      display: flex; justify-content: space-between; align-items: center; 
+      padding: 0.4rem 0; border-bottom: 1px solid #ddd; 
+    }
+    .order-item img { 
+      width: 40px; height: 40px; object-fit: cover; 
+      border-radius: 5px; margin-right: 10px; 
+    }
     .order-item-info { display: flex; align-items: center; flex: 1; }
     .total { font-weight: bold; text-align: right; margin-top: 1rem; }
-    .btn { background: #cb0101; color: #fff; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; display: inline-block; transition: background 0.3s ease; }
+    .btn { 
+      background: #cb0101; color: #fff; font-weight: bold; 
+      padding: 0.75rem 1.5rem; border-radius: 8px; 
+      text-decoration: none; display: inline-block; 
+      transition: background 0.3s ease; 
+    }
     .btn:hover { background: #a30000; }
   </style>
 </head>
@@ -37,8 +64,9 @@
     const TAX_RATE = 0.07;
     const SHIPPING_RATE = 12.00;
     
-    let cart = JSON.parse(localStorage.getItem("cartBackup")) || [];
+    // Load buyer and cart info
     const buyerName = localStorage.getItem("buyerName") || "";
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     if(buyerName){
       document.getElementById("thankYouHeader").innerText = `🎉 Thank You, ${buyerName}!`;
@@ -76,8 +104,8 @@
       `;
     }
 
-    // Clear cart after displaying summary
-    localStorage.removeItem("cartBackup");
+    // Clear everything after showing
+    localStorage.removeItem("cart");
     localStorage.removeItem("buyerName");
   </script>
 </body>
