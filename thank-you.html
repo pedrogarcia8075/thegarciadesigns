@@ -41,7 +41,9 @@
     <div id="orderSummary" class="order-summary"></div>
 
     <a href="index.html" class="btn">Continue Shopping</a>
-    <p class="redirect-msg" id="redirectMsg">You will be redirected to the homepage shortly...</p>
+    <p class="redirect-msg" id="redirectMsg">
+      Redirecting to homepage in <span id="countdown">5</span> seconds...
+    </p>
   </div>
 
   <script>
@@ -99,8 +101,21 @@
       window.location.href = "index.html"; // Redirect to homepage if back is pressed
     };
 
-    // --- Auto Redirect after 5-12 seconds ---
-    const redirectDelay = Math.floor(Math.random() * (12000 - 5000 + 1)) + 5000; // 5-12s
+    // --- Auto Redirect with Countdown (5-12 seconds) ---
+    const redirectDelay = Math.floor(Math.random() * (12000 - 5000 + 1)) + 5000;
+    let countdown = Math.floor(redirectDelay / 1000);
+    const countdownElem = document.getElementById("countdown");
+    countdownElem.textContent = countdown;
+
+    const timer = setInterval(() => {
+      countdown--;
+      if(countdown > 0){
+        countdownElem.textContent = countdown;
+      } else {
+        clearInterval(timer);
+      }
+    }, 1000);
+
     setTimeout(() => {
       window.location.href = "index.html";
     }, redirectDelay);
