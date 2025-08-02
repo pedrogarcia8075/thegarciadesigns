@@ -23,35 +23,14 @@
     input, textarea, button, select {
       width: 100%;
       padding: 0.75rem;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
       border-radius: 8px;
       border: 1px solid #ccc;
       font-size: 1rem;
-      transition: border-color 0.3s;
-    }
-    input.error, textarea.error {
-      border-color: #ff4d4d;
-      background: #fff0f0;
-    }
-    .error-message {
-      color: #ff4d4d;
-      font-size: 0.85rem;
-      margin-bottom: 0.5rem;
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.4s ease;
-    }
-    .error-message.show {
-      opacity: 1;
-      max-height: 40px;
-      margin-bottom: 0.5rem;
     }
     button {
-      margin-top: 0.5rem;
       background: #cb0101; color:#fff; font-weight:bold;
       border:none; transition: background 0.3s ease;
-      border-radius: 8px; padding: 0.75rem; width: 100%;
     }
     button:hover { background:#a30000; cursor:pointer; }
     .cart-summary {
@@ -78,59 +57,54 @@
     <h1>Checkout</h1>
     <div class="cart-summary" id="cartSummary"></div>
 
-    <form name="checkout" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="checkoutForm" novalidate>
-      <input type="hidden" name="form-name" value="checkout">
-      <input type="hidden" name="order_details" id="orderDetails">
-
+    <form id="checkoutForm" 
+          action="https://formspree.io/f/YOUR_FORM_ID" 
+          method="POST">
+      
       <div class="row">
         <div>
           <label for="firstName">First Name</label>
-          <input type="text" name="firstName" id="firstName" required>
-          <div class="error-message">First name is required.</div>
+          <input type="text" name="First Name" id="firstName" required>
         </div>
         <div>
           <label for="lastName">Last Name</label>
-          <input type="text" name="lastName" id="lastName" required>
-          <div class="error-message">Last name is required.</div>
+          <input type="text" name="Last Name" id="lastName" required>
         </div>
       </div>
 
       <label for="email">Email</label>
-      <input type="email" name="email" id="email" required>
-      <div class="error-message">Please enter a valid email address.</div>
+      <input type="email" name="Email" id="email" required>
 
       <label for="phone">Phone</label>
-      <input type="tel" name="phone" id="phone" placeholder="123-456-7890" required>
-      <div class="error-message">Please enter a valid phone number.</div>
+      <input type="tel" name="Phone" id="phone" placeholder="123-456-7890" required>
 
       <label for="address">Street Address</label>
-      <input type="text" name="address" id="address" required>
-      <div class="error-message">Street address is required.</div>
+      <input type="text" name="Street Address" id="address" required>
 
       <div class="row">
         <div>
           <label for="city">City</label>
-          <input type="text" name="city" id="city" required>
-          <div class="error-message">City is required.</div>
+          <input type="text" name="City" id="city" required>
         </div>
         <div>
           <label for="state">State</label>
-          <input type="text" name="state" id="state" maxlength="2" required>
-          <div class="error-message">State is required.</div>
+          <input type="text" name="State" id="state" maxlength="2" required>
         </div>
         <div>
           <label for="zip">ZIP Code</label>
-          <input type="text" name="zip" id="zip" required pattern="\d{5}">
-          <div class="error-message">Enter a valid 5-digit ZIP.</div>
+          <input type="text" name="ZIP Code" id="zip" required pattern="\d{5}">
         </div>
       </div>
+
+      <!-- Hidden order details -->
+      <textarea name="Order Details" id="orderDetails" style="display:none;"></textarea>
 
       <button type="submit" id="submitBtn">Place Order</button>
     </form>
   </div>
 
 <script>
-  const TAX_RATE = 0.07;
+  const TAX_RATE = 0.07; // Iowa sales tax
   const SHIPPING_RATE = 12.00;
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const summaryDiv = document.getElementById("cartSummary");
@@ -176,40 +150,25 @@
   }
   renderCart();
 
-  function validateEmail(email) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email); }
-  function validatePhone(phone) { return /^\d{3}-\d{3}-\d{4}$/.test(phone); }
-
-  function showError(input) {
-    input.classList.add("error");
-    const errorMsg = input.nextElementSibling;
-    if(errorMsg) errorMsg.classList.add("show");
-  }
-  function hideError(input) {
-    input.classList.remove("error");
-    const errorMsg = input.nextElementSibling;
-    if(errorMsg) errorMsg.classList.remove("show");
-  }
-
-  document.querySelectorAll("input[required]").forEach(input => {
-    input.addEventListener("blur", function() {
-      if (
-        this.value.trim() === "" ||
-        (this.type === "email" && !validateEmail(this.value)) ||
-        (this.id === "phone" && !validatePhone(this.value))
-      ) {
-        showError(this);
-      } else {
-        hideError(this);
-      }
-    });
+  // Email validation
+  document.getElementById("checkoutForm").addEventListener("submit", function(e) {
+    const email = document.getElementById("email").value;
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if(!emailPattern.test(email)){
+      e.preventDefault();
+      alert("Please enter a valid email address.");
+      return;
+    }
+    localStorage.removeItem("cart");
   });
 
+  // Phone auto-format
   document.getElementById("phone").addEventListener("input", function(e){
     let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
     e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
   });
 
-  // ZIP Auto-fill
+  // ZIP auto-fill city/state
   document.getElementById("zip").addEventListener("blur", function() {
     const zip = this.value;
     if(zip.length === 5 && /^\d+$/.test(zip)) {
@@ -224,27 +183,7 @@
         .catch(err => console.log("ZIP lookup failed:", err));
     }
   });
-
-  document.getElementById("checkoutForm").addEventListener("submit", function(e) {
-    let valid = true;
-    document.querySelectorAll("input[required]").forEach(input => {
-      if (
-        input.value.trim() === "" ||
-        (input.type === "email" && !validateEmail(input.value)) ||
-        (input.id === "phone" && !validatePhone(input.value))
-      ) {
-        showError(input);
-        valid = false;
-      }
-    });
-
-    if(!valid) {
-      e.preventDefault();
-      alert("Please correct the highlighted fields before submitting.");
-    } else {
-      localStorage.removeItem("cart");
-    }
-  });
 </script>
 </body>
 </html>
+
