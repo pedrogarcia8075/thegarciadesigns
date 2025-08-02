@@ -32,10 +32,9 @@
     button {
       background: #cb0101; color:#fff; font-weight:bold;
       border:none; transition: background 0.3s ease;
-      border-radius: 8px;
-      cursor:pointer;
+      border-radius: 8px; padding: 0.75rem; width: 100%;
     }
-    button:hover { background:#a30000; }
+    button:hover { background:#a30000; cursor:pointer; }
     .cart-summary {
       background: #ffeaea;
       padding: 1rem;
@@ -60,8 +59,10 @@
     <h1>Checkout</h1>
     <div class="cart-summary" id="cartSummary"></div>
 
-    <form id="checkoutForm" action="https://formspree.io/f/xblkalvo" method="POST">
-      
+    <form id="checkoutForm" 
+          action="https://formspree.io/f/xblkalvo" 
+          method="POST">
+
       <div class="row">
         <div>
           <label for="firstName">First Name</label>
@@ -99,6 +100,9 @@
 
       <!-- Hidden order details -->
       <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
+
+      <!-- Redirect to thank you page -->
+      <input type="hidden" name="_next" value="thank-you.html">
 
       <button type="submit" id="submitBtn">Place Order</button>
     </form>
@@ -151,27 +155,13 @@
   }
   renderCart();
 
-  // Email validation
-  document.getElementById("checkoutForm").addEventListener("submit", function(e) {
-    const email = document.getElementById("email").value;
-    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-    if(!emailPattern.test(email)){
-      e.preventDefault();
-      alert("Please enter a valid email address.");
-    } else {
-      // Let Formspree handle the submission and then clear the cart
-      localStorage.removeItem("cart");
-      window.location.href = "thank-you.html";
-    }
-  });
-
   // Auto-format phone
   document.getElementById("phone").addEventListener("input", function(e){
     let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
     e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2] + (x[3] ? '-' + x[3] : '');
   });
 
-  // Auto-fill city/state from ZIP using Zippopotam.us
+  // Auto-fill city/state from ZIP
   document.getElementById("zip").addEventListener("blur", function() {
     const zip = this.value;
     if(zip.length === 5 && /^\d+$/.test(zip)) {
@@ -185,6 +175,12 @@
         })
         .catch(err => console.log("ZIP lookup failed:", err));
     }
+  });
+
+  // Save first name for thank-you page
+  document.getElementById("checkoutForm").addEventListener("submit", function() {
+    const firstName = document.getElementById("firstName").value;
+    localStorage.setItem("buyerName", firstName);
   });
 </script>
 </body>
