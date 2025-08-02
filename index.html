@@ -15,7 +15,6 @@
       background-size: cover;
     }
 
-    /* ===== Navigation Bar ===== */
     nav {
       background-color: #cb0101;
       padding: 1rem 0;
@@ -24,195 +23,125 @@
       gap: 2rem;
       position: relative;
     }
+
     nav a {
       color: #fff;
       text-decoration: none;
       font-weight: bold;
-      position: relative;
       transition: transform 0.2s;
     }
+
     nav a:hover {
       transform: scale(1.1);
     }
 
-    /* ===== Dropdown Menu ===== */
-    .dropdown {
-      position: relative;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: white;
-      padding: 0.5rem 0;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      z-index: 999;
-    }
-    .dropdown-content a {
-      display: block;
-      padding: 0.5rem 1.5rem;
-      color: #cb0101;
-      white-space: nowrap;
-    }
-    .dropdown-content a:hover {
-      background: #ffe5e5;
-    }
-    .dropdown:hover .dropdown-content,
-    .dropdown.open .dropdown-content {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
+    .welcome-banner {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #fff;
+      margin-bottom: 2rem;
     }
 
-    /* ===== Product Section ===== */
     .product-section {
       padding: 3rem 2rem;
       background-color: #fff;
     }
+
     .product-grid {
       display: grid;
       gap: 2rem;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       justify-items: center;
     }
+
     .product-card {
-      background: #fff;
+      background: #333;
       border-radius: 15px;
       padding: 1rem;
       text-align: center;
+      color: #fff;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 380px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      max-width: 300px;
     }
-    .product-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .product-card a {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
+
     .product-card img {
-      flex: 1;
-      object-fit: contain;
       width: 100%;
       border-radius: 10px;
       margin-bottom: 0.75rem;
     }
+
     .product-card h3 {
-      margin: 0;
-      font-size: 1.1rem;
-      min-height: 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      margin-top: 0.5rem;
     }
 
-    /* ===== Footer ===== */
     footer {
       text-align: center;
       padding: 1.5rem;
       background: #111;
       color: #fff;
-      font-size: 0.9rem;
     }
+
     footer a {
       color: #ffadad;
       text-decoration: underline;
     }
 
-    /* ===== Responsive ===== */
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
-        gap: 1rem;
-      }
-      .dropdown-content {
-        left: 50%;
-        transform: translateX(-50%);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== Navigation Bar ===== -->
   <nav>
-    <div class="dropdown">
-      <a href="#" class="dropbtn">Products ▼</a>
-      <div class="dropdown-content">
-        <a href="tumblers.html">Tumblers</a>
-        <a href="mugs.html">Mugs</a>
-        <a href="leds.html">LED Glass Photos</a>
-        <a href="bottles.html">Water Bottles</a>
-        <a href="prints.html">Aluminum Prints</a>
-        <a href="Photo Frames.html">Photo Frames</a>
-      </div>
-    </div>
+    <a href="tumblers.html">Tumblers</a>
+    <a href="mugs.html">Mugs</a>
+    <a href="leds.html">LED Glass Photos</a>
+    <a href="bottles.html">Water Bottles</a>
+    <a href="prints.html">Aluminum Prints</a>
+    <a href="Photo Frames.html">Photo Frames</a>
     <a href="https://thegarciasdesigns.etsy.com" target="_blank">Etsy Shop</a>
   </nav>
 
-  <!-- ===== Product Grid ===== -->
+  <div class="welcome-banner">
+    <h1>Welcome to Garcia Designs</h1>
+    <p>Your one-stop shop for personalized gifts and custom items!</p>
+  </div>
+
   <section class="product-section">
     <div class="product-grid">
       <div class="product-card">
-        <a href="tumblers.html">
-          <img src="images/tumblers.jpg" alt="Custom Tumblers">
-          <h3>Custom Tumblers</h3>
-        </a>
+        <img src="images/tumblers.jpg" alt="Custom Tumblers">
+        <h3>Custom Tumblers</h3>
       </div>
       <div class="product-card">
-        <a href="mugs.html">
-          <img src="images/mugs.jpg" alt="Custom Mugs">
-          <h3>Custom Mugs</h3>
-        </a>
+        <img src="images/mugs.jpg" alt="Custom Mugs">
+        <h3>Custom Mugs</h3>
       </div>
       <div class="product-card">
-        <a href="leds.html">
-          <img src="images/leds.jpg" alt="LED Glass Photos">
-          <h3>LED Glass Photos</h3>
-        </a>
+        <img src="images/leds.jpg" alt="LED Glass Photos">
+        <h3>LED Glass Photos</h3>
       </div>
       <div class="product-card">
-        <a href="bottles.html">
-          <img src="images/bottles.jpg" alt="Custom Water Bottles">
-          <h3>Custom Water Bottles</h3>
-        </a>
+        <img src="images/bottles.jpg" alt="Custom Water Bottles">
+        <h3>Custom Water Bottles</h3>
       </div>
       <div class="product-card">
-        <a href="prints.html">
-          <img src="images/Aluminum Photo Prints.jpg" alt="Aluminum Prints">
-          <h3>Aluminum Prints</h3>
-        </a>
+        <img src="images/Aluminum Photo Prints.jpg" alt="Aluminum Prints">
+        <h3>Aluminum Prints</h3>
       </div>
       <div class="product-card">
-        <a href="Photo Frames.html">
-          <img src="images/Photo Frames.jpg" alt="Photo Frames">
-          <h3>Photo Frames</h3>
-        </a>
+        <img src="images/Photo Frames.jpg" alt="Photo Frames">
+        <h3>Photo Frames</h3>
       </div>
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
   <footer>
     <p>© 2025 The Garcia Designs | Follow us on
-      <a href="https://www.facebook.com/profile.php?id=61579036433148" target="_blank">Facebook</a> & 
+      <a href="https://www.facebook.com/profile.php?id=61579036433148" target="_blank">Facebook</a> &
       <a href="https://instagram.com/" target="_blank">Instagram</a>
     </p>
   </footer>
