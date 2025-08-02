@@ -6,78 +6,31 @@
   <title>Thank You | The Garcia Designs</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #ffeaea;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #333;
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      background: linear-gradient(to bottom right, #fff0f0, #ffeaea);
+      margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; 
+      min-height: 100vh; color: #333; 
     }
     .container {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 600px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      background: #fff; padding: 2rem; border-radius: 12px;
+      max-width: 600px; width: 90%; box-shadow: 0 6px 20px rgba(0,0,0,0.1); text-align: center;
+      animation: fadeIn 0.8s ease-in-out;
     }
-    h1 {
-      color: #cb0101;
-      margin-bottom: 0.5rem;
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
     }
-    p.subtitle {
-      color: #555;
-      margin-bottom: 2rem;
-    }
-    .order-summary {
-      background: #ffeaea;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-      text-align: left;
-    }
-    .order-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.4rem 0;
-      border-bottom: 1px solid #ddd;
-    }
-    .order-item img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 5px;
-      margin-right: 10px;
-    }
-    .order-item-info {
-      display: flex;
-      align-items: center;
-      flex: 1;
-    }
-    .total {
-      font-weight: bold;
-      text-align: right;
-      margin-top: 1rem;
-    }
-    .btn {
-      background: #cb0101;
-      color: #fff;
-      font-weight: bold;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-block;
-      transition: background 0.3s ease;
-    }
-    .btn:hover {
-      background: #a30000;
-    }
+    h1 { color: #cb0101; margin-bottom: 0.5rem; }
+    p.subtitle { color: #555; margin-bottom: 2rem; }
+    .order-summary { background: #ffeaea; padding: 1rem; border-radius: 10px; margin-bottom: 2rem; text-align: left; }
+    .order-item { display: flex; justify-content: space-between; align-items: center; padding: 0.4rem 0; border-bottom: 1px solid #ddd; }
+    .order-item img { width: 40px; height: 40px; object-fit: cover; border-radius: 5px; margin-right: 10px; }
+    .order-item-info { display: flex; align-items: center; flex: 1; }
+    .total { font-weight: bold; text-align: right; margin-top: 1rem; }
+    .btn { background: #cb0101; color: #fff; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; display: inline-block; transition: background 0.3s ease; }
+    .btn:hover { background: #a30000; }
+    .redirect-msg { font-size: 0.9rem; color: #777; margin-top: 1rem; }
   </style>
 </head>
 <body>
@@ -88,38 +41,39 @@
     <div id="orderSummary" class="order-summary"></div>
 
     <a href="index.html" class="btn">Continue Shopping</a>
+    <p class="redirect-msg" id="redirectMsg">You will be redirected to the homepage shortly...</p>
   </div>
 
   <script>
     const TAX_RATE = 0.07;
     const SHIPPING_RATE = 12.00;
 
-    // Retrieve saved cart and buyer info
+    // Retrieve backup cart and name
     let cart = JSON.parse(localStorage.getItem("cartBackup")) || [];
     const buyerName = localStorage.getItem("buyerName") || "";
 
-    // Personalize header
-    if (buyerName) {
-      document.getElementById("thankYouHeader").innerText = `🎉 Thank You, ${buyerName.toUpperCase()}!`;
+    if(buyerName){
+      document.getElementById("thankYouHeader").innerText = `🎉 Thank You, ${buyerName}!`;
     }
 
-    // Render order summary
     const summaryDiv = document.getElementById("orderSummary");
-    if (cart.length === 0) {
+
+    if(cart.length === 0){
       summaryDiv.innerHTML = "<p>Your cart is empty (or has already been cleared).</p>";
     } else {
       let subtotal = 0;
       summaryDiv.innerHTML = "<h3>Order Summary</h3>";
 
       cart.forEach(item => {
-        subtotal += item.price * (item.qty || 1);
+        const qty = item.qty || 1;
+        subtotal += item.price * qty;
         summaryDiv.innerHTML += `
           <div class="order-item">
             <div class="order-item-info">
               <img src="${item.img || 'images/default.jpg'}" alt="${item.name}">
-              <span>${item.qty || 1} × ${item.name}</span>
+              <span>${qty} × ${item.name}</span>
             </div>
-            <span>$${(item.price * (item.qty || 1)).toFixed(2)}</span>
+            <span>$${(item.price * qty).toFixed(2)}</span>
           </div>
         `;
       });
@@ -135,22 +89,21 @@
       `;
     }
 
-    // Clear sensitive data
-    localStorage.removeItem("cart");
+    // Clear cart data completely
     localStorage.removeItem("cartBackup");
     localStorage.removeItem("buyerName");
 
-    // 🔹 Block the back button & prevent caching
+    // --- Disable Back Button ---
     history.pushState(null, null, location.href);
-    window.onpopstate = function () {
-      history.go(1);
+    window.onpopstate = function () { 
+      window.location.href = "index.html"; // Redirect to homepage if back is pressed
     };
-    window.onload = function() {
-      window.history.forward();
-    };
-    window.onpageshow = function(event) {
-      if (event.persisted) window.location.reload();
-    };
+
+    // --- Auto Redirect after 5-12 seconds ---
+    const redirectDelay = Math.floor(Math.random() * (12000 - 5000 + 1)) + 5000; // 5-12s
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, redirectDelay);
   </script>
 </body>
 </html>
