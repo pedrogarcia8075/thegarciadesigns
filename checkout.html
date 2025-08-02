@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Poppins', sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
-    .container { max-width: 650px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .container { max-width: 650px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; }
     h1 { text-align: center; color:#cb0101; margin-bottom: 1.5rem; }
     label { font-weight: bold; display:block; margin:0.5rem 0; }
     input, textarea, button, select {
@@ -21,24 +21,19 @@
     .cart-item img { width: 40px; height: 40px; object-fit: cover; border-radius: 5px; margin-right: 10px; }
     .row { display: flex; gap: 1rem; }
     .row input { flex: 1; }
-
-    /* Back button at top */
-    .top-bar { display: flex; justify-content: flex-start; margin-bottom: 1rem; }
+    /* Top Back Button */
     .back-btn {
-      background: #555; color:#fff; border:none; padding: 0.5rem 1rem;
-      border-radius: 6px; cursor:pointer; font-weight:bold;
+      position: absolute; top: 1rem; left: 1rem;
+      background: #cb0101; color: #fff; padding: 0.5rem 1rem;
+      border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem;
+      transition: background 0.3s;
     }
-    .back-btn:hover { background: #333; }
+    .back-btn:hover { background: #a30000; }
   </style>
 </head>
 <body>
   <div class="container">
-
-    <!-- Back button -->
-    <div class="top-bar">
-      <button class="back-btn" onclick="window.location.href='cart.html'">Back</button>
-    </div>
-
+    <a href="index.html" class="back-btn">Back Button</a>
     <h1>Checkout</h1>
     <div class="cart-summary" id="cartSummary"></div>
 
@@ -155,18 +150,12 @@
     }
   });
 
-  // --- Security: Prevent navigating back to this page after order ---
-  if(sessionStorage.getItem("checkoutComplete") === "true") {
-    localStorage.removeItem("cart");
-    window.location.replace("index.html");
-  }
-
   // Submit order to Formspree via AJAX
   document.getElementById("checkoutForm").addEventListener("submit", function(e) {
     e.preventDefault(); 
 
     const formData = new FormData(this);
-    fetch("https://formspree.io/f/meozlggo", {  
+    fetch("https://formspree.io/f/meozlggo", {  // Your Formspree endpoint
       method: "POST",
       body: formData,
       headers: { "Accept": "application/json" }
@@ -176,15 +165,6 @@
         localStorage.setItem("buyerName", document.getElementById("firstName").value);
         localStorage.setItem("cartBackup", JSON.stringify(cart));
         localStorage.removeItem("cart");
-
-        // Mark session complete
-        sessionStorage.setItem("checkoutComplete", "true");
-
-        // Disable back button immediately
-        history.pushState(null, null, location.href);
-        window.onpopstate = function () { history.go(1); };
-
-        // Redirect to thank-you page
         window.location.href = "thank-you.html";
       } else {
         alert("There was an error submitting your order. Please try again.");
