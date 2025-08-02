@@ -78,10 +78,10 @@
     <h1>Checkout</h1>
     <div class="cart-summary" id="cartSummary"></div>
 
-    <form id="checkoutForm" 
-          action="https://formsubmit.co/janice.garcia22@yahoo.com" 
-          method="POST" novalidate>
-      
+    <form name="checkout" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="checkoutForm" novalidate>
+      <input type="hidden" name="form-name" value="checkout">
+      <input type="hidden" name="order_details" id="orderDetails">
+
       <div class="row">
         <div>
           <label for="firstName">First Name</label>
@@ -124,14 +124,6 @@
           <div class="error-message">Enter a valid 5-digit ZIP.</div>
         </div>
       </div>
-
-      <!-- Hidden order details -->
-      <textarea name="order_details" id="orderDetails" style="display:none;"></textarea>
-
-      <!-- FormSubmit config -->
-      <input type="hidden" name="_subject" value="New Checkout Order">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://formsubmit.co/thank-you">
 
       <button type="submit" id="submitBtn">Place Order</button>
     </form>
@@ -184,15 +176,8 @@
   }
   renderCart();
 
-  const emailField = document.getElementById("email");
-  const phoneField = document.getElementById("phone");
-
-  function validateEmail(email) {
-    return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-  }
-  function validatePhone(phone) {
-    return /^\d{3}-\d{3}-\d{4}$/.test(phone);
-  }
+  function validateEmail(email) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email); }
+  function validatePhone(phone) { return /^\d{3}-\d{3}-\d{4}$/.test(phone); }
 
   function showError(input) {
     input.classList.add("error");
