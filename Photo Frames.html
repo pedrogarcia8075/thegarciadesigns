@@ -2,328 +2,268 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Photo Frames | The Garcia Designs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Photo Frames | The Garcia Designs</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #fff0f0, #ffeaea);
-      color: #333;
-      background-attachment: fixed;
-      background-size: cover;
-    }
+    body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: linear-gradient(to bottom right, #fff0f0, #ffeaea); color: #333; }
+    h1 { text-align: center; margin: 1.5rem 0 0.5rem; font-size: 2.5rem; color: #cb0101; }
+    p.subtitle { text-align: center; font-size: 1.1rem; color: #555; margin-bottom: 2rem; }
 
-    /* ===== Navigation Bar ===== */
-    nav {
-      background-color: #cb0101;
-      padding: 1rem 0;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      position: relative;
-      transition: transform 0.2s;
-    }
-    nav a:hover {
-      transform: scale(1.1);
-    }
+    /* Topbar & Cart */
+    .topbar { display: flex; justify-content: flex-end; align-items: center; background: #cb0101; padding: 10px 20px; position: sticky; top: 0; z-index: 1000; }
+    .cart-icon { color: white; font-weight: bold; font-size: 1.2rem; position: relative; cursor: pointer; }
+    .cart-count { background-color: white; color: #cb0101; font-size: 0.7rem; border-radius: 50%; padding: 2px 6px; position: absolute; top: -8px; right: -12px; font-weight: bold; }
 
-    /* ===== Dropdown Menu ===== */
-    .dropdown { position: relative; }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: white;
-      padding: 0.5rem 0;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      z-index: 999;
-    }
-    .dropdown-content a {
-      display: block;
-      padding: 0.5rem 1.5rem;
-      color: #cb0101;
-      white-space: nowrap;
-    }
-    .dropdown-content a:hover { background: #ffe5e5; }
-    .dropdown:hover .dropdown-content { 
-      display: block; 
-      opacity: 1; 
-      transform: translateY(0); 
-    }
-
-    /* ===== Page Heading ===== */
-    .welcome-banner {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: linear-gradient(135deg, #ffffffcc, #fff5f5cc);
-      backdrop-filter: blur(8px);
-      border-radius: 0 0 15px 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
-    }
-    .welcome-banner h1 { margin-bottom: 0.5rem; font-size: 2rem; }
-    .welcome-banner p { margin-bottom: 0; font-size: 1rem; }
-
-    /* ===== Product Section ===== */
-    .product-section { padding: 3rem 2rem 5rem; background-color: #fff; }
-    .product-grid {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      justify-items: center;
-    }
-    .product-card {
-      background: #fff;
-      border-radius: 15px;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    .product-card.visible { opacity: 1; transform: translateY(0); }
-    .product-card:hover { transform: translateY(-5px); }
-    .product-card a {
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-    .product-card img {
-      flex: 1;
-      width: 100%;
-      object-fit: contain;
-      border-radius: 10px;
-      margin-bottom: 0.75rem;
-      background: #fff;
-    }
-    .product-card h3 {
-      margin: 0;
-      font-size: 1.2rem;
-      text-align: center;
-      min-height: 3rem;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    /* ===== Floating Cart Button ===== */
-    .cart-btn {
+    /* Fancy Back Button */
+    .back-btn {
       position: fixed;
       top: 20px;
-      right: 20px;
+      left: 20px;
       background: #cb0101;
       color: #fff;
-      font-size: 1.8rem;
-      padding: 0.6rem 0.9rem;
-      border-radius: 50%;
+      padding: 0.5rem 1.2rem;
+      font-size: 1rem;
+      border-radius: 30px;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: all 0.3s ease;
-      z-index: 1100;
+      z-index: 2100;
+      opacity: 0;
+      transform: translateY(-10px);
+      animation: fadeSlideIn 0.8s ease forwards, pulseGlow 2.5s ease-in-out infinite 1.2s;
     }
-    .cart-btn:hover {
-      background: #ff2e2e;
-      transform: scale(1.1);
-    }
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: white;
-      color: #cb0101;
-      font-size: 0.7rem;
-      font-weight: bold;
-      padding: 2px 6px;
-      border-radius: 50%;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
+    .back-btn:hover { background: #ff2e2e; transform: scale(1.05); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
+    @keyframes fadeSlideIn { to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulseGlow { 0%,100% { box-shadow: 0 4px 12px rgba(0,0,0,0.2); } 50% { box-shadow: 0 0 20px rgba(203,1,1,0.6); } }
 
-    /* ===== Cart Sidebar ===== */
-    .cart-sidebar {
-      position: fixed;
-      top: 0;
-      right: -350px;
-      width: 350px;
-      height: 100%;
-      background: #fff;
-      box-shadow: -4px 0 10px rgba(0,0,0,0.2);
-      transition: right 0.3s ease;
-      z-index: 1200;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+    /* Layout */
+    .container { display: flex; justify-content: center; gap: 2rem; padding: 2rem; flex-wrap: wrap; }
+    .left-section { display: flex; flex-direction: column; align-items: center; max-width: 400px; }
+    .main-image { width: 100%; max-width: 350px; border-radius: 10px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); }
+    .thumbnails { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; justify-content: center; }
+    .thumbnails img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
+    .thumbnails img.active { border: 2px solid #cb0101; }
+
+    .right-section { max-width: 500px; display: flex; flex-direction: column; gap: 1.5rem; }
+    .product-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .product-card { background: white; border-radius: 8px; padding: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; }
+    .product-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+    .product-card img { width: 100%; max-height: 100px; object-fit: contain; border-radius: 6px; }
+    .price { font-weight: bold; margin: 0.3rem 0; color: #cb0101; }
+    .add-btn { background: #cb0101; color: white; padding: 0.4rem 0.7rem; font-size: 0.9rem; border-radius: 6px; cursor: pointer; border: none; width: 100%; }
+    .add-btn:hover { background: #a30000; }
+
+    /* Customization Form */
+    form { background: #fff; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); padding: 1.5rem; }
+    label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #444; }
+    input[type="file"], input[type="text"], select, textarea { width: 100%; margin-bottom: 1rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
+    button[type="submit"] { background-color: #cb0101; color: white; font-weight: bold; cursor: pointer; border: none; padding: 0.75rem; width: 100%; border-radius: 8px; font-size: 1rem; }
+    button[type="submit"]:hover { background-color: #a30000; }
+    #imagePreview { margin-bottom: 1rem; max-height: 150px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: none; }
+
+    /* Floating Cart Sidebar */
+    .cart-sidebar { position: fixed; top: 0; right: -350px; width: 350px; height: 100%; background: #fff; box-shadow: -4px 0 10px rgba(0,0,0,0.2); transition: right 0.3s ease; z-index: 2000; display: flex; flex-direction: column; justify-content: space-between; }
     .cart-sidebar.active { right: 0; }
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: #cb0101;
-      color: #fff;
-    }
+    .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #cb0101; color: #fff; }
     .close-cart { font-size: 1.5rem; cursor: pointer; }
     .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+    .cart-items p { margin: 0.5rem 0; font-size: 0.95rem; }
     .cart-footer { padding: 1rem; border-top: 1px solid #ddd; }
-    .checkout-btn {
-      display: block;
-      background: #cb0101;
-      color: #fff;
-      text-align: center;
-      padding: 0.75rem;
-      border-radius: 8px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    .checkout-btn:hover { background: #ff2e2e; }
+    .checkout-btn { display: block; background: #cb0101; color: #fff; text-align: center; padding: 0.75rem; border-radius: 8px; font-weight: bold; text-decoration: none; }
+    .checkout-btn:hover { background: #a30000; }
 
-    /* ===== Footer ===== */
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #111;
-      color: #fff;
-      font-size: 0.9rem;
-    }
-    footer a { color: #ffadad; text-decoration: underline; }
+    footer { text-align: center; padding: 1.5rem; background: #111; color: #fff; font-size: 0.9rem; margin-top: 2rem; }
 
-    @media (max-width: 600px) {
-      nav { flex-direction: column; gap: 1rem; }
-      .dropdown-content { left: 50%; transform: translateX(-50%); }
+    /* Mobile */
+    @media (max-width: 768px) {
+      .container { flex-direction: column; align-items: center; }
+      .product-options { display: flex; overflow-x: auto; gap: 0.75rem; padding-bottom: 1rem; scroll-snap-type: x mandatory; }
+      .product-card { flex: 0 0 150px; scroll-snap-align: start; }
+      .right-section { width: 100%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Cart Button -->
-  <div class="cart-btn" id="openCart">
-    🛒
-    <span class="cart-count" id="cartCount">0</span>
+<!-- Fancy Back Button -->
+<div class="back-btn" onclick="window.history.back()">⬅ Back</div>
+
+<!-- Floating Cart Sidebar -->
+<div id="cartSidebar" class="cart-sidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <span id="closeCart" class="close-cart">&times;</span>
+  </div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <p id="cartTotal">Total: $0.00</p>
+    <a href="checkout.html" class="checkout-btn">Checkout</a>
+  </div>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <span class="cart-icon" id="openCart">
+    🛒 Cart <span class="cart-count" id="cartCount">0</span>
+  </span>
+</div>
+
+<h1>Custom Photo Frames</h1>
+<p class="subtitle">🖼 LED Memory Frames | 🌟 Fully Customizable | 🎁 Perfect Gifts</p>
+
+<div class="container">
+  <div class="left-section">
+    <img src="images/frame1.jpg" id="mainDisplay" class="main-image" alt="Main Frame Preview">
+    <div class="thumbnails" id="thumbnailContainer"></div>
   </div>
 
-  <!-- Cart Sidebar -->
-  <div class="cart-sidebar" id="cartSidebar">
-    <div class="cart-header">
-      <h3>Your Cart</h3>
-      <span class="close-cart" id="closeCart">&times;</span>
-    </div>
-    <div class="cart-items" id="cartItems">
-      <p>Your cart is empty.</p>
-    </div>
-    <div class="cart-footer">
-      <p id="cartTotal">Total: $0.00</p>
-      <a href="checkout.html" class="checkout-btn">Checkout</a>
-    </div>
+  <div class="right-section">
+    <div class="product-options" id="productOptions"></div>
+
+    <form id="orderForm">
+      <label for="quantity">Quantity</label>
+      <select name="quantity" id="quantity" required>
+        <option value="">Select...</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+
+      <p id="priceDisplay">Price: $30.00 each</p>
+
+      <label for="personalText">Add Custom Text (Optional)</label>
+      <input type="text" name="personalText" id="personalText" placeholder="e.g., Forever in Our Hearts">
+
+      <label for="upload">Upload Your Image</label>
+      <input type="file" name="upload" id="upload" accept="image/*">
+      <img id="imagePreview" src="" alt="Preview" />
+
+      <label for="notes">Notes</label>
+      <textarea name="notes" id="notes" rows="4" placeholder="Add any special requests or comments..."></textarea>
+
+      <button type="submit">Add Custom Frame to Cart</button>
+    </form>
   </div>
+</div>
 
-  <!-- Welcome Banner -->
-  <div class="welcome-banner">
-    <h1>Photo Frames</h1>
-    <p>Display your memories in beautiful, customizable frames. Perfect for family portraits, pets, and special moments!</p>
-  </div>
+<footer>
+  <p>&copy; 2025 The Garcia Designs. All rights reserved.</p>
+</footer>
 
-  <!-- Navigation Bar -->
-  <nav>
-    <div class="dropdown">
-      <a href="#" class="dropbtn">Products ▼</a>
-      <div class="dropdown-content">
-        <a href="tumblers.html">Tumblers</a>
-        <a href="mugs.html">Mugs</a>
-        <a href="leds.html">LED Glass Photos</a>
-        <a href="bottles.html">Water Bottles</a>
-        <a href="prints.html">Aluminum Prints</a>
-        <a href="photo-frames.html">Photo Frames</a>
-        <a href="children-water-bottles.html">Custom Children Water Bottles</a>
-      </div>
-    </div>
-    <a href="https://thegarciasdesigns.etsy.com" target="_blank">Etsy Shop</a>
-  </nav>
+<script>
+  /* Product setup */
+  const productNames = [
+    "Elegant White Frame", "Rustic Wood Frame", "Golden Memories",
+    "Modern Black Frame", "Family Keepsake", "Love Forever Frame"
+  ];
+  
+  const imageFiles = [
+    "images/frame1.jpg","images/frame2.jpg","images/frame3.jpg",
+    "images/frame4.jpg","images/frame5.jpg","images/frame6.jpg"
+  ];
 
-  <!-- Product Grid -->
-  <section class="product-section">
-    <div class="product-grid">
-      <div class="product-card">
-        <a href="#">
-          <img src="images/photo-frames.jpg" alt="Photo Frame">
-          <h3>Custom Photo Frame</h3>
-        </a>
-      </div>
-    </div>
-  </section>
+  const mainDisplay = document.getElementById('mainDisplay');
+  const thumbnailContainer = document.getElementById('thumbnailContainer');
+  const productOptions = document.getElementById('productOptions');
 
-  <footer>
-    <p>© 2025 The Garcia Designs | Follow us on
-      <a href="https://www.facebook.com/profile.php?id=61579036433148" target="_blank">Facebook</a> & 
-      <a href="https://instagram.com/" target="_blank">Instagram</a>
-    </p>
-  </footer>
+  imageFiles.forEach((file,i)=>{
+    const thumb=document.createElement('img');
+    thumb.src=file;
+    thumb.alt=productNames[i];
+    if(i===0) thumb.classList.add('active');
+    thumb.addEventListener('click',()=>{
+      document.querySelectorAll('.thumbnails img').forEach(img=>img.classList.remove('active'));
+      thumb.classList.add('active');
+      mainDisplay.src=thumb.src;
+    });
+    thumbnailContainer.appendChild(thumb);
 
-  <script>
-    const cards = document.querySelectorAll('.product-card');
-    function checkVisibility() {
-      const triggerBottom = window.innerHeight * 0.9;
-      cards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        if (cardTop < triggerBottom) card.classList.add('visible');
+    const card=document.createElement('div');
+    card.className='product-card';
+    card.setAttribute('data-name',productNames[i]);
+    card.setAttribute('data-price','30');
+    card.innerHTML=`
+      <img src="${file}" alt="${productNames[i]}">
+      <p class="price">$30.00</p>
+      <button class="add-btn">Add to Cart</button>
+    `;
+    productOptions.appendChild(card);
+  });
+
+  /* Cart logic */
+  let cart=JSON.parse(localStorage.getItem("cart"))||[];
+  const cartSidebar=document.getElementById("cartSidebar");
+  const closeCart=document.getElementById("closeCart");
+  const cartItemsDiv=document.getElementById("cartItems");
+  const cartTotal=document.getElementById("cartTotal");
+  const cartCount=document.getElementById("cartCount");
+  const openCartBtn=document.getElementById("openCart");
+
+  function updateCartDisplay(){
+    cartItemsDiv.innerHTML="";
+    let total=0;
+    if(cart.length===0){
+      cartItemsDiv.innerHTML="<p>Your cart is empty.</p>";
+    } else {
+      cart.forEach(item=>{
+        total+=item.price;
+        cartItemsDiv.innerHTML+=`<p><img src="${item.img}" width="30" style="vertical-align:middle;margin-right:5px;"> ${item.name} - $${item.price.toFixed(2)}</p>`;
       });
     }
-    window.addEventListener('scroll', checkVisibility);
-    window.addEventListener('load', checkVisibility);
+    cartCount.textContent=cart.length;
+    cartTotal.textContent="Total: $"+total.toFixed(2);
+    localStorage.setItem("cart",JSON.stringify(cart));
+  }
 
-    // Cart Logic
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const cartBtn = document.getElementById('openCart');
-    const cartSidebar = document.getElementById('cartSidebar');
-    const closeCart = document.getElementById('closeCart');
-    const cartItems = document.getElementById('cartItems');
-    const cartCount = document.getElementById('cartCount');
-    const cartTotal = document.getElementById('cartTotal');
-
-    function updateCartDisplay() {
-      cartItems.innerHTML = '';
-      let total = 0;
-
-      if(cart.length === 0) {
-        cartItems.innerHTML = '<p>Your cart is empty.</p>';
-      } else {
-        cart.forEach(item => {
-          total += item.price * (item.qty || 1);
-          cartItems.innerHTML += `<p>${item.name} x${item.qty || 1} - $${(item.price*(item.qty || 1)).toFixed(2)}</p>`;
-        });
-      }
-
-      cartCount.textContent = cart.length;
-      cartTotal.textContent = 'Total: $' + total.toFixed(2);
-      localStorage.setItem('cart', JSON.stringify(cart));
+  document.addEventListener("click",function(e){
+    if(e.target.classList.contains("add-btn")){
+      const card=e.target.closest(".product-card");
+      const img=card.querySelector('img').src;
+      const name=card.getAttribute("data-name");
+      const price=parseFloat(card.getAttribute("data-price"));
+      cart.push({img,name,price});
+      updateCartDisplay();
+      cartSidebar.classList.add("active");
     }
+  });
 
-    cartBtn.addEventListener('click', () => cartSidebar.classList.add('active'));
-    closeCart.addEventListener('click', () => cartSidebar.classList.remove('active'));
+  document.getElementById("orderForm").addEventListener("submit",function(e){
+    e.preventDefault();
+    const qty=parseInt(document.getElementById("quantity").value||1);
+    const customText=document.getElementById("personalText").value||"Custom Frame";
+    const img=document.getElementById("imagePreview").src||imageFiles[0];
+    for(let i=0;i<qty;i++){
+      cart.push({img,name:customText,price:30});
+    }
+    updateCartDisplay();
+    cartSidebar.classList.add("active");
+    this.reset();
+    document.getElementById('imagePreview').style.display='none';
+    document.getElementById("priceDisplay").textContent="Price: $30.00 each";
+  });
 
-    document.addEventListener('DOMContentLoaded', updateCartDisplay);
-  </script>
+  document.getElementById("quantity").addEventListener("change",function(){
+    const qty=parseInt(this.value||0);
+    const price=30*qty;
+    document.getElementById("priceDisplay").textContent=qty?`Total: $${price}.00`:"Price: $30.00 each";
+  });
 
+  document.getElementById('upload').addEventListener('change',function(event){
+    const file=event.target.files[0];
+    const preview=document.getElementById('imagePreview');
+    if(file&&file.type.startsWith('image/')){
+      preview.src=URL.createObjectURL(file);
+      preview.style.display='block';
+    } else { preview.style.display='none'; }
+  });
+
+  openCartBtn.addEventListener("click",()=>cartSidebar.classList.add("active"));
+  closeCart.addEventListener("click",()=>cartSidebar.classList.remove("active"));
+  document.addEventListener("DOMContentLoaded",updateCartDisplay);
+</script>
 </body>
 </html>
-
