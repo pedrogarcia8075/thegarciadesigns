@@ -129,6 +129,15 @@
         <option value="6">6</option>
       </select>
 
+      <!-- ✅ Added Size Selection -->
+      <label for="size">Bottle Size</label>
+      <select name="size" id="size" required>
+        <option value="">Select Size...</option>
+        <option value="20oz">20 oz</option>
+        <option value="22oz">22 oz</option>
+        <option value="24oz">24 oz</option>
+      </select>
+
       <p id="priceDisplay">Price: $30.00 each</p>
 
       <label for="personalText">Add Custom Text (Optional)</label>
@@ -189,7 +198,7 @@
     if (index === 0) thumb.classList.add('selected');
     thumbnailContainer.appendChild(thumb);
 
-    // Product card
+    // Product card with ✅ Size selection
     const card = document.createElement('div');
     card.className = 'product-card';
     card.setAttribute('data-name', product.name);
@@ -197,6 +206,12 @@
     card.innerHTML = `
       <img src="${product.img}" alt="${product.name}">
       <p class="price">$${product.price}.00</p>
+      <label style="font-size:0.85rem;">Size:</label>
+      <select class="size-select" style="margin-bottom:0.5rem;width:100%;padding:0.3rem;">
+        <option value="20oz">20 oz</option>
+        <option value="22oz">22 oz</option>
+        <option value="24oz">24 oz</option>
+      </select>
       <button class="add-btn">Add to Cart</button>
     `;
     productOptions.appendChild(card);
@@ -232,7 +247,9 @@
       const img = card.querySelector('img').src;
       const name = card.getAttribute("data-name");
       const price = parseFloat(card.getAttribute("data-price"));
-      cart.push({ img, name, price });
+      const size = card.querySelector('.size-select').value; // ✅ capture size
+
+      cart.push({ img, name: `${name} (${size})`, price });
       updateCartDisplay();
       cartSidebar.classList.add("active");
     }
@@ -242,10 +259,11 @@
     e.preventDefault();
     const qty = parseInt(document.getElementById("quantity").value || 1);
     const customText = document.getElementById("personalText").value || "Custom Bottle";
+    const size = document.getElementById("size").value; // ✅ new
     const img = document.getElementById("imagePreview").src || products[0].img; // Default first product
     const price = 30; // Default price for custom
     for (let i = 0; i < qty; i++) {
-      cart.push({ img, name: customText, price: price });
+      cart.push({ img, name: `${customText} (${size})`, price: price });
     }
     updateCartDisplay();
     cartSidebar.classList.add("active");
