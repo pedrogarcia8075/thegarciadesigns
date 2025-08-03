@@ -214,33 +214,47 @@
 </footer>
 
 <script>
-  /* ===== IMAGE & THUMBNAILS ===== */
+  /* ===== IMAGE & PRODUCT SETUP ===== */
+  const productNames = [
+    "Golden Sunset", "Ocean Breeze", "Family Portrait",
+    "City Lights", "Pet Memories", "Mountain Escape",
+    "Wedding Bliss", "Graduation Day", "Baby's First Smile",
+    "Nature Serenity", "Holiday Cheer", "Custom Artwork"
+  ];
+  
+  const imageFiles = [
+    "images/prints1.jpg", "images/prints2.jpg", "images/prints3.jpg",
+    "images/prints4.jpg", "images/prints5.jpg", "images/prints6.jpg",
+    "images/prints7.jpg", "images/prints8.jpg", "images/prints9.jpg",
+    "images/prints10.jpg", "images/prints11.jpg", "images/prints12.jpg"
+  ];
+
   const mainDisplay = document.getElementById('mainDisplay');
   const thumbnailRow = document.getElementById('thumbnailRow');
   const productOptions = document.getElementById('productOptions');
 
-  for (let i = 1; i <= 12; i++) {
+  imageFiles.forEach((file, i) => {
     const thumb = document.createElement('img');
-    thumb.src = `images/prints${i}.jpg`;
+    thumb.src = file;
     thumb.addEventListener('click', function () {
       mainDisplay.src = this.src;
       document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
       this.classList.add('active');
     });
-    if(i===1) thumb.classList.add('active');
+    if(i===0) thumb.classList.add('active');
     thumbnailRow.appendChild(thumb);
 
     const card = document.createElement('div');
     card.className = 'product-card';
-    card.setAttribute('data-name', `Print ${i}`);
+    card.setAttribute('data-name', productNames[i]);
     card.setAttribute('data-price', '30');
     card.innerHTML = `
-      <img src="images/prints${i}.jpg" alt="Print ${i}">
+      <img src="${file}" alt="${productNames[i]}">
       <p class="price">$30.00</p>
       <button class="add-btn">Add to Cart</button>
     `;
     productOptions.appendChild(card);
-  }
+  });
 
   /* ===== CART LOGIC ===== */
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -290,7 +304,7 @@
     e.preventDefault();
     const qty = parseInt(document.getElementById("quantity").value || 1);
     const customText = document.getElementById("personalText").value || "Custom Print";
-    const img = document.getElementById("imagePreview").src || "images/prints1.jpg";
+    const img = document.getElementById("imagePreview").src || imageFiles[0];
     for(let i=0;i<qty;i++){
       cart.push({ img, name: customText, price: 30, qty: 1 });
     }
