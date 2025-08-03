@@ -13,6 +13,10 @@
       color: #333;
       background-attachment: fixed;
       background-size: cover;
+
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* makes footer stick to bottom if content is short */
     }
 
     /* ===== Navigation Bar ===== */
@@ -22,7 +26,6 @@
       display: flex;
       justify-content: center;
       gap: 2rem;
-      position: relative;
     }
     nav a {
       color: #fff;
@@ -90,7 +93,11 @@
     .etsy-link:hover { background-color: #ff2e2e; transform: scale(1.05); }
 
     /* ===== Product Section ===== */
-    .product-section { padding: 3rem 2rem; background-color: #fff; }
+    .product-section {
+      padding: 3rem 2rem 5rem; /* bottom padding to avoid footer overlap */
+      background-color: #fff;
+      flex: 1; /* pushes footer down */
+    }
     .product-grid {
       display: grid;
       gap: 2rem;
@@ -107,13 +114,12 @@
       max-width: 280px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      height: 380px;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
     .product-card.visible { opacity: 1; transform: translateY(0); }
+
     .product-card a {
       text-decoration: none;
       color: inherit;
@@ -122,9 +128,9 @@
       flex: 1;
     }
     .product-card img {
-      flex: 1;
-      object-fit: contain;
       width: 100%;
+      max-height: 250px; /* ensures full image is visible */
+      object-fit: contain;
       border-radius: 10px;
       margin-bottom: 0.75rem;
     }
@@ -132,10 +138,6 @@
       margin: 0;
       font-size: 1.2rem;
       text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      height: 3rem; /* Aligns all names */
     }
 
     /* ===== Fancy Floating Cart Button ===== */
@@ -217,6 +219,7 @@
       background: #111;
       color: #fff;
       font-size: 0.9rem;
+      margin-top: auto;
     }
     footer a { color: #ffadad; text-decoration: underline; }
 
@@ -229,7 +232,7 @@
 </head>
 <body>
 
-  <!-- Fancy Floating Cart Button -->
+  <!-- Floating Cart Button -->
   <div class="cart-btn" id="openCart">
     🛒
     <span class="cart-count" id="cartCount">0</span>
@@ -250,14 +253,14 @@
     </div>
   </div>
 
-  <!-- ===== Welcome Banner ===== -->
+  <!-- Welcome Banner -->
   <div class="welcome-banner">
     <h1>Welcome to The Garcia's Designs!</h1>
     <p>Family-owned and veteran-operated, we create custom, high-quality products designed to celebrate your style, your story, and your special moments. Our website is currently under construction, but please explore our Etsy shop below for the latest creations!</p>
     <a href="https://thegarciasdesigns.etsy.com" class="etsy-link" target="_blank">Visit Our Etsy Shop</a>
   </div>
 
-  <!-- ===== Navigation Bar ===== -->
+  <!-- Navigation Bar -->
   <nav>
     <div class="dropdown">
       <a href="#" class="dropbtn">Products ▼</a>
@@ -273,7 +276,7 @@
     <a href="https://thegarciasdesigns.etsy.com" target="_blank">Etsy Shop</a>
   </nav>
 
-  <!-- ===== Product Grid ===== -->
+  <!-- Product Grid -->
   <section class="product-section">
     <div class="product-grid">
       <div class="product-card">
@@ -282,35 +285,30 @@
           <h3>Custom Tumblers</h3>
         </a>
       </div>
-
       <div class="product-card">
         <a href="mugs.html">
           <img src="images/mugs.jpg" alt="Custom Mugs">
           <h3>Custom Mugs</h3>
         </a>
       </div>
-
       <div class="product-card">
         <a href="leds.html">
           <img src="images/leds.jpg" alt="LED Glass Photos">
           <h3>LED Glass Photos</h3>
         </a>
       </div>
-
       <div class="product-card">
         <a href="bottles.html">
           <img src="images/bottles.jpg" alt="Custom Water Bottles">
           <h3>Custom Water Bottles</h3>
         </a>
       </div>
-
       <div class="product-card">
         <a href="prints.html">
           <img src="images/Aluminum Photo Prints.jpg" alt="Aluminum Prints">
           <h3>Aluminum Prints</h3>
         </a>
       </div>
-
       <div class="product-card">
         <a href="Photo Frames.html">
           <img src="images/Photo Frames.jpg" alt="Photo Frames">
@@ -320,7 +318,7 @@
     </div>
   </section>
 
-  <!-- ===== Footer ===== -->
+  <!-- Footer -->
   <footer>
     <p>© 2025 The Garcia Designs | Follow us on
       <a href="https://www.facebook.com/profile.php?id=61579036433148" target="_blank">Facebook</a> & 
@@ -328,7 +326,7 @@
     </p>
   </footer>
 
-  <!-- ===== JS for Cart & Fade-In Animation ===== -->
+  <!-- JS for Fade-In Animation and Cart -->
   <script>
     const cards = document.querySelectorAll('.product-card');
     function checkVisibility() {
@@ -370,11 +368,8 @@
 
     cartBtn.addEventListener('click', () => cartSidebar.classList.add('active'));
     closeCart.addEventListener('click', () => cartSidebar.classList.remove('active'));
-
     document.addEventListener('DOMContentLoaded', updateCartDisplay);
   </script>
 
 </body>
 </html>
-
-
