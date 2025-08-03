@@ -129,13 +129,12 @@
         <option value="6">6</option>
       </select>
 
-      <!-- ✅ Added Size Selection -->
       <label for="size">Bottle Size</label>
       <select name="size" id="size" required>
         <option value="">Select Size...</option>
         <option value="20oz">20 oz</option>
-        <option value="22oz">22 oz</option>
-        <option value="24oz">24 oz</option>
+        <option value="22oz">22 oz (+$3)</option>
+        <option value="24oz">24 oz (+$5)</option>
       </select>
 
       <p id="priceDisplay">Price: $30.00 each</p>
@@ -259,6 +258,21 @@
     }
   });
 
+  // ✅ Live update ready-made card price on size change
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.product-card').forEach(card => {
+      const priceElement = card.querySelector('.price');
+      const basePrice = parseFloat(card.getAttribute('data-price'));
+      const sizeSelect = card.querySelector('.size-select');
+
+      sizeSelect.addEventListener('change', function() {
+        const size = this.value;
+        const finalPrice = basePrice + sizePricing[size];
+        priceElement.textContent = `$${finalPrice.toFixed(2)}`;
+      });
+    });
+  });
+
   // ✅ Custom order form with dynamic size pricing
   document.getElementById("orderForm").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -317,4 +331,5 @@
 </script>
 </body>
 </html>
+
 
