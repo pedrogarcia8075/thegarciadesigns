@@ -99,7 +99,7 @@
     .checkout-btn { display: block; background: #cb0101; color: #fff; text-align: center; padding: 0.75rem; border-radius: 8px; font-weight: bold; text-decoration: none; }
     .checkout-btn:hover { background: #a30000; }
 
-    /* ===== Fancy Back Button with Pulse ===== */
+    /* ===== Back Button ===== */
     .back-btn {
       position: fixed;
       top: 20px;
@@ -113,21 +113,11 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: all 0.3s ease;
       z-index: 2100;
-      opacity: 0;
-      transform: translateY(-10px);
-      animation: fadeSlideIn 0.8s ease forwards, pulseGlow 2.5s ease-in-out infinite 1.2s;
     }
     .back-btn:hover {
       background: #ff2e2e;
       transform: scale(1.05);
       box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-    }
-    @keyframes fadeSlideIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-      50% { box-shadow: 0 0 20px rgba(203,1,1,0.6); }
     }
 
     footer { text-align: center; padding: 1.5rem; background: #111; color: #fff; font-size: 0.9rem; margin-top: 2rem; }
@@ -143,7 +133,6 @@
 </head>
 <body>
 
-<!-- Fancy Back Button -->
 <div class="back-btn" onclick="window.history.back()">⬅ Back</div>
 
 <!-- Floating Cart Sidebar -->
@@ -172,6 +161,26 @@
   <div class="left-section">
     <img src="images/prints1.jpg" id="mainDisplay" class="main-image" alt="Main Print Preview">
     <div class="thumbnails" id="thumbnailRow"></div>
+
+    <!-- Description Box -->
+    <div style="margin-top: 1.5rem; text-align: center; background: #fff8f8; padding: 1rem; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      <h3 style="color:#cb0101; margin-bottom:0.5rem;">✨ Premium 8x5 Aluminum Prints</h3>
+      <p style="font-size: 0.95rem; line-height: 1.5; color:#444; margin-bottom:0.5rem;">
+        Turn your favorite memories into stunning <strong>8x5 aluminum photo prints</strong> with a glossy, vivid finish.  
+        Our prints are <strong>waterproof, UV-resistant, and scratch-resistant</strong>—perfect for long-lasting décor and gifts.
+      </p>
+      <p style="font-size: 0.95rem; line-height: 1.5; color:#444; margin-bottom:0.5rem;">
+        Choose from <strong>ready-made designs</strong> or create a <strong>custom print</strong> by uploading your photo  
+        and adding personalized text. Celebrate <strong>family moments, pets, vacations, and special occasions</strong>.
+      </p>
+      <div style="margin-top:0.5rem; display:flex; align-items:center; justify-content:center; gap:0.4rem; font-size:0.9rem; color:#cb0101; cursor:pointer;" onclick="document.getElementById('upload').click();">
+        <img src="images/upload-icon.png" alt="Upload Icon" style="width:22px;height:22px;vertical-align:middle;">
+        <span><strong>Upload Your Photo for a Custom Print</strong></span>
+      </div>
+      <p style="font-size: 0.85rem; color:#666; margin-top:0.5rem;">
+        🎁 Ideal for gifts, keepsakes, and unique home décor that truly stands out.
+      </p>
+    </div>
   </div>
 
   <!-- RIGHT SECTION -->
@@ -214,7 +223,6 @@
 </footer>
 
 <script>
-  /* ===== IMAGE & PRODUCT SETUP ===== */
   const productNames = [
     "Golden Sunset", "Ocean Breeze", "Family Portrait",
     "City Lights", "Pet Memories", "Mountain Escape",
@@ -256,7 +264,6 @@
     productOptions.appendChild(card);
   });
 
-  /* ===== CART LOGIC ===== */
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   const cartSidebar = document.getElementById("cartSidebar");
@@ -286,7 +293,6 @@
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
-  // Ready-made products
   document.addEventListener("click", function(e) {
     if (e.target.classList.contains("add-btn")) {
       const card = e.target.closest(".product-card");
@@ -299,7 +305,6 @@
     }
   });
 
-  // Custom product form
   document.getElementById("orderForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const qty = parseInt(document.getElementById("quantity").value || 1);
@@ -315,14 +320,12 @@
     document.getElementById("priceDisplay").textContent = "Price: $30.00 each";
   });
 
-  // Live price update
   document.getElementById("quantity").addEventListener("change", function(){
     const qty = parseInt(this.value || 0);
     const price = 30 * qty;
     document.getElementById("priceDisplay").textContent = qty ? `Total: $${price}.00` : "Price: $30.00 each";
   });
 
-  // Image upload preview
   document.getElementById('upload').addEventListener('change', function (event) {
     const file = event.target.files[0];
     const preview = document.getElementById('imagePreview');
