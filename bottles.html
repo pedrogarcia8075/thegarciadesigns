@@ -130,12 +130,7 @@
       </select>
 
       <label for="size">Bottle Size</label>
-      <select name="size" id="size" required>
-        <option value="">Select Size...</option>
-        <option value="20oz">20 oz</option>
-        <option value="22oz">22 oz (+$3)</option>
-        <option value="24oz">24 oz (+$5)</option>
-      </select>
+      <select name="size" id="size" required></select>
 
       <p id="priceDisplay">Price: $30.00 each</p>
 
@@ -164,11 +159,7 @@
   const productOptions = document.getElementById('productOptions');
 
   // ✅ Size price adjustments
-  const sizePricing = {
-    "20oz": 0,
-    "22oz": 3,
-    "24oz": 5
-  };
+  const sizePricing = { "20oz": 0, "22oz": 3, "24oz": 5 };
 
   const products = [
     { name: "Wolfe Water Bottle", img: "images/Wolfe Water Bottle.jpg", price: 25 },
@@ -184,6 +175,15 @@
     { name: "Grey", img: "images/Grey.jpg", price: 34 },
     { name: "Frosted", img: "images/frosted.jpg", price: 26 }
   ];
+
+  // Helper to create size dropdown with prices
+  function createSizeOptions(basePrice){
+    return `
+      <option value="20oz">20 oz ($${(basePrice + sizePricing["20oz"]).toFixed(2)})</option>
+      <option value="22oz">22 oz ($${(basePrice + sizePricing["22oz"]).toFixed(2)})</option>
+      <option value="24oz">24 oz ($${(basePrice + sizePricing["24oz"]).toFixed(2)})</option>
+    `;
+  }
 
   mainDisplay.src = products[0].img;
   mainDisplay.alt = products[0].name;
@@ -209,14 +209,21 @@
       <p class="price">$${product.price}.00</p>
       <label style="font-size:0.85rem;">Size:</label>
       <select class="size-select" style="margin-bottom:0.5rem;width:100%;padding:0.3rem;">
-        <option value="20oz">20 oz</option>
-        <option value="22oz">22 oz (+$3)</option>
-        <option value="24oz">24 oz (+$5)</option>
+        ${createSizeOptions(product.price)}
       </select>
       <button class="add-btn">Add to Cart</button>
     `;
     productOptions.appendChild(card);
   });
+
+  // Populate custom bottle dropdown dynamically
+  const customSizeSelect = document.getElementById("size");
+  customSizeSelect.innerHTML = `
+    <option value="">Select Size...</option>
+    <option value="20oz">20 oz ($${(30 + sizePricing["20oz"]).toFixed(2)})</option>
+    <option value="22oz">22 oz ($${(30 + sizePricing["22oz"]).toFixed(2)})</option>
+    <option value="24oz">24 oz ($${(30 + sizePricing["24oz"]).toFixed(2)})</option>
+  `;
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const cartSidebar = document.getElementById("cartSidebar");
@@ -242,7 +249,6 @@
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
-  // ✅ Ready-made product add to cart with size pricing
   document.addEventListener("click", function(e) {
     if (e.target.classList.contains("add-btn")) {
       const card = e.target.closest(".product-card");
@@ -251,20 +257,18 @@
       const basePrice = parseFloat(card.getAttribute("data-price"));
       const size = card.querySelector('.size-select').value;
       const price = basePrice + sizePricing[size];
-
       cart.push({ img, name: `${name} (${size})`, price });
       updateCartDisplay();
       cartSidebar.classList.add("active");
     }
   });
 
-  // ✅ Live update ready-made card price on size change
+  // Update ready-made price live
   document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll('.product-card').forEach(card => {
       const priceElement = card.querySelector('.price');
       const basePrice = parseFloat(card.getAttribute('data-price'));
       const sizeSelect = card.querySelector('.size-select');
-
       sizeSelect.addEventListener('change', function() {
         const size = this.value;
         const finalPrice = basePrice + sizePricing[size];
@@ -273,7 +277,7 @@
     });
   });
 
-  // ✅ Custom order form with dynamic size pricing
+  // Custom form
   document.getElementById("orderForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const qty = parseInt(document.getElementById("quantity").value || 1);
@@ -282,7 +286,6 @@
     const img = document.getElementById("imagePreview").src || products[0].img;
     const basePrice = 30;
     const price = basePrice + sizePricing[size];
-
     for (let i = 0; i < qty; i++) {
       cart.push({ img, name: `${customText} (${size})`, price });
     }
@@ -293,7 +296,6 @@
     document.getElementById("priceDisplay").textContent = "Price: $30.00 each";
   });
 
-  // ✅ Dynamic price update for custom form
   document.getElementById("size").addEventListener("change", function(){
     const size = this.value;
     const qty = parseInt(document.getElementById("quantity").value || 1);
@@ -331,5 +333,6 @@
 </script>
 </body>
 </html>
+
 
 
