@@ -15,36 +15,19 @@
     .cart-icon { color: white; font-weight: bold; font-size: 1.2rem; position: relative; cursor: pointer; }
     .cart-count { background-color: white; color: #cb0101; font-size: 0.7rem; border-radius: 50%; padding: 2px 6px; position: absolute; top: -8px; right: -12px; font-weight: bold; }
 
-    /* Fancy Back Button with Pulse */
+    /* Fancy Back Button */
     .back-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: #cb0101;
-      color: #fff;
-      padding: 0.5rem 1.2rem;
-      font-size: 1rem;
-      border-radius: 30px;
-      cursor: pointer;
+      position: fixed; top: 20px; left: 20px;
+      background: #cb0101; color: #fff; padding: 0.5rem 1.2rem;
+      font-size: 1rem; border-radius: 30px; cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-      z-index: 2100;
-      opacity: 0;
-      transform: translateY(-10px);
+      transition: all 0.3s ease; z-index: 2100;
+      opacity: 0; transform: translateY(-10px);
       animation: fadeSlideIn 0.8s ease forwards, pulseGlow 2.5s ease-in-out infinite 1.2s;
     }
-    .back-btn:hover {
-      background: #ff2e2e;
-      transform: scale(1.05);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-    }
-    @keyframes fadeSlideIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-      50% { box-shadow: 0 0 20px rgba(203,1,1,0.6); }
-    }
+    .back-btn:hover { background: #ff2e2e; transform: scale(1.05); box-shadow: 0 6px 16px rgba(0,0,0,0.3); }
+    @keyframes fadeSlideIn { to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulseGlow { 0%, 100% { box-shadow: 0 4px 12px rgba(0,0,0,0.2); } 50% { box-shadow: 0 0 20px rgba(203,1,1,0.6); } }
 
     /* Layout */
     .container { display: flex; justify-content: center; gap: 2rem; padding: 2rem; flex-wrap: wrap; }
@@ -63,6 +46,7 @@
     .add-btn { background: #cb0101; color: white; padding: 0.4rem 0.7rem; font-size: 0.9rem; border-radius: 6px; cursor: pointer; border: none; width: 100%; }
     .add-btn:hover { background: #a30000; }
 
+    /* Form */
     form { background: #fff; border-radius: 12px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); padding: 1.5rem; }
     label { display: block; margin-bottom: 0.3rem; font-weight: bold; color: #444; }
     input[type="file"], input[type="text"], select, textarea { width: 100%; margin-bottom: 1rem; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem; }
@@ -70,7 +54,7 @@
     button[type="submit"]:hover { background-color: #a30000; }
     #imagePreview { margin-bottom: 1rem; max-height: 150px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: none; }
 
-    /* Floating Cart Sidebar */
+    /* Cart Sidebar */
     .cart-sidebar { position: fixed; top: 0; right: -350px; width: 350px; height: 100%; background: #fff; box-shadow: -4px 0 10px rgba(0,0,0,0.2); transition: right 0.3s ease; z-index: 2000; display: flex; flex-direction: column; justify-content: space-between; }
     .cart-sidebar.active { right: 0; }
     .cart-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #cb0101; color: #fff; }
@@ -93,10 +77,10 @@
 </head>
 <body>
 
-<!-- Fancy Back Button -->
+<!-- Back Button -->
 <div class="back-btn" onclick="window.history.back()">⬅ Back</div>
 
-<!-- Floating Cart Sidebar -->
+<!-- Cart Sidebar -->
 <div id="cartSidebar" class="cart-sidebar">
   <div class="cart-header">
     <h3>Your Cart</h3>
@@ -162,24 +146,30 @@
 </footer>
 
 <script>
-  /* ===== PRODUCT LIST WITH PLACEHOLDER NAMES ===== */
-  const products = [
-    { name: "💡 LED Glass 1 - Rename Me 💡", img: "images/led1.jpg", price: 30 },
-    { name: "💡 LED Glass 2 - Rename Me 💡", img: "images/led2.jpg", price: 30 },
-    { name: "💡 LED Glass 3 - Rename Me 💡", img: "images/led3.jpg", price: 30 },
-    { name: "💡 LED Glass 4 - Rename Me 💡", img: "images/led4.jpg", price: 30 },
-    { name: "💡 LED Glass 5 - Rename Me 💡", img: "images/led5.jpg", price: 30 },
-    { name: "💡 LED Glass 6 - Rename Me 💡", img: "images/led6.jpg", price: 30 }
-  ];
-
   const mainDisplay = document.getElementById('mainDisplay');
   const thumbnailRow = document.getElementById('thumbnailRow');
   const productOptions = document.getElementById('productOptions');
 
+  // 12 products with custom names and images
+  const products = [
+    { name: "Romantic Sunset", img: "images/led1.jpg", price: 30 },
+    { name: "Family Love", img: "images/led2.jpg", price: 30 },
+    { name: "Wedding Bliss", img: "images/led3.jpg", price: 30 },
+    { name: "Best Friends Forever", img: "images/led4.jpg", price: 30 },
+    { name: "Mountain Glow", img: "images/led5.jpg", price: 30 },
+    { name: "City Night Lights", img: "images/led6.jpg", price: 30 },
+    { name: "Ocean Waves", img: "images/led7.jpg", price: 30 },
+    { name: "Holiday Memories", img: "images/led8.jpg", price: 30 },
+    { name: "Baby Smile", img: "images/led9.jpg", price: 30 },
+    { name: "Graduation Day", img: "images/led10.jpg", price: 30 },
+    { name: "Flower Beauty", img: "images/led11.jpg", price: 30 },
+    { name: "Pet Portrait", img: "images/led12.jpg", price: 30 }
+  ];
+
+  // Generate thumbnails and cards
   products.forEach((product, index) => {
     const thumb = document.createElement('img');
     thumb.src = product.img;
-    thumb.alt = product.name;
     thumb.addEventListener('click', function () {
       mainDisplay.src = this.src;
       document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
@@ -194,15 +184,15 @@
     card.setAttribute('data-price', product.price);
     card.innerHTML = `
       <img src="${product.img}" alt="${product.name}">
+      <p>${product.name}</p>
       <p class="price">$${product.price}.00</p>
       <button class="add-btn">Add to Cart</button>
     `;
     productOptions.appendChild(card);
   });
 
-  /* ===== CART LOGIC ===== */
+  // Cart Logic
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
   const cartSidebar = document.getElementById("cartSidebar");
   const closeCart = document.getElementById("closeCart");
   const cartItemsDiv = document.getElementById("cartItems");
@@ -213,7 +203,6 @@
   function updateCartDisplay() {
     cartItemsDiv.innerHTML = "";
     let total = 0;
-
     if (cart.length === 0) {
       cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
     } else {
@@ -222,7 +211,6 @@
         cartItemsDiv.innerHTML += `<p><img src="${item.img}" width="30" style="vertical-align:middle;margin-right:5px;"> ${item.name} - $${item.price.toFixed(2)}</p>`;
       });
     }
-
     cartCount.textContent = cart.length;
     cartTotal.textContent = "Total: $" + total.toFixed(2);
     localStorage.setItem("cart", JSON.stringify(cart));
@@ -245,9 +233,7 @@
     const qty = parseInt(document.getElementById("quantity").value || 1);
     const customText = document.getElementById("personalText").value || "Custom LED Glass";
     const img = document.getElementById("imagePreview").src || "images/led1.jpg";
-    for(let i=0;i<qty;i++){
-      cart.push({ img, name: customText, price: 30, qty: 1 });
-    }
+    for(let i=0;i<qty;i++){ cart.push({ img, name: customText, price: 30, qty: 1 }); }
     updateCartDisplay();
     cartSidebar.classList.add("active");
     this.reset();
@@ -279,4 +265,3 @@
 
 </body>
 </html>
-
