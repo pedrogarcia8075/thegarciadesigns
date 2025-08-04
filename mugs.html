@@ -188,11 +188,17 @@
     const thumb = document.createElement('img');
     thumb.src = product.img;
     thumb.alt = product.name;
+
+    // CLICK - change main image
     thumb.addEventListener('click', function () {
-      mainDisplay.src = this.src;
-      document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
-      this.classList.add('active');
+      setMainImage(this.src);
     });
+
+    // HOVER - change main image
+    thumb.addEventListener('mouseenter', function () {
+      setMainImage(this.src, false);
+    });
+
     if(index===0) thumb.classList.add('active');
     thumbnailRow.appendChild(thumb);
 
@@ -208,27 +214,37 @@
     productOptions.appendChild(card);
   });
 
-  // --- Sync Main Image on Product Card Click ---
-  document.addEventListener("click", function (e) {
-    if (e.target.closest(".product-card img")) {
-      const clickedImg = e.target.closest(".product-card img").src;
-      mainDisplay.src = clickedImg;
-
-      // Update active thumbnail
+  // Function to update main image and active thumbnail
+  function setMainImage(src, highlightThumb = true) {
+    mainDisplay.src = src;
+    if (highlightThumb) {
       document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
-      const match = [...document.querySelectorAll('.thumbnails img')].find(img => img.src === clickedImg);
+      const match = [...document.querySelectorAll('.thumbnails img')].find(img => img.src === src);
       if (match) match.classList.add('active');
     }
+  }
+
+  // Hover over product card image updates preview
+  document.addEventListener("mouseover", function (e) {
+    const img = e.target.closest(".product-card img");
+    if (img) setMainImage(img.src, false);
   });
 
-  // --- Auto set main image to the first product on page load ---
+  // Click on product card image sets it as active
+  document.addEventListener("click", function (e) {
+    const img = e.target.closest(".product-card img");
+    if (img) setMainImage(img.src);
+  });
+
+  // Auto set main image to first product
   document.addEventListener("DOMContentLoaded", function () {
     if (products.length > 0) {
       mainDisplay.src = products[0].img;
     }
+    updateCartDisplay();
   });
 
-  // --- Cart Functionality ---
+  // --- CART & FORM CODE ---
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   const cartSidebar = document.getElementById("cartSidebar");
@@ -304,7 +320,6 @@
 
   openCartBtn.addEventListener("click", () => cartSidebar.classList.add("active"));
   closeCart.addEventListener("click", () => cartSidebar.classList.remove("active"));
-  document.addEventListener("DOMContentLoaded", updateCartDisplay);
 </script>
 
 </body>
