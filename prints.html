@@ -110,7 +110,7 @@
 
 <div class="container">
   <div class="left-section">
-    <img src="images/prints1.jpg" id="mainDisplay" class="main-image" alt="Main Print Preview">
+    <img src="" id="mainDisplay" class="main-image" alt="Main Print Preview">
     <div class="thumbnails" id="thumbnailRow"></div>
 
     <div class="description-box">
@@ -161,19 +161,43 @@
   const thumbnailRow = document.getElementById('thumbnailRow');
   const productOptions = document.getElementById('productOptions');
 
+  let firstValidImage = null;
+
   imageFiles.forEach((file, i) => {
     const thumb = document.createElement('img');
     thumb.src = file;
+    thumb.alt = productNames[i];
+
+    // Hide broken images
+    thumb.onerror = function() {
+      thumb.style.display = "none";
+    };
+
+    // When image loads, set first valid image if not already set
+    thumb.onload = function() {
+      if (!firstValidImage) {
+        firstValidImage = file;
+        mainDisplay.src = file;
+        thumb.classList.add('active');
+      }
+    };
+
     thumb.addEventListener('click', () => setMainImage(file));
     thumb.addEventListener('mouseenter', () => setMainImage(file,false));
-    if(i===0) thumb.classList.add('active');
+
     thumbnailRow.appendChild(thumb);
 
+    // Product card
     const card = document.createElement('div');
     card.className = 'product-card';
     card.setAttribute('data-name', productNames[i]);
     card.setAttribute('data-price', '30');
     card.innerHTML = `<img src="${file}" alt="${productNames[i]}"><p class="price">$30.00</p><button class="add-btn">Add to Cart</button>`;
+
+    // Hide card if image fails to load
+    const imgTag = card.querySelector('img');
+    imgTag.onerror = function() { card.style.display = 'none'; };
+
     productOptions.appendChild(card);
   });
 
@@ -189,7 +213,12 @@
 
   // --- Cart Logic ---
   let cart=JSON.parse(localStorage.getItem("cart"))||[];
-  const cartSidebar=document.getElementById("cartSidebar"), closeCart=document.getElementById("closeCart"), cartItemsDiv=document.getElementById("cartItems"), cartTotal=document.getElementById("cartTotal"), cartCount=document.getElementById("cartCount"), openCartBtn=document.getElementById("openCart");
+  const cartSidebar=document.getElementById("cartSidebar"),
+        closeCart=document.getElementById("closeCart"),
+        cartItemsDiv=document.getElementById("cartItems"),
+        cartTotal=document.getElementById("cartTotal"),
+        cartCount=document.getElementById("cartCount"),
+        openCartBtn=document.getElementById("openCart");
 
   function updateCartDisplay(){
     cartItemsDiv.innerHTML=""; let total=0;
@@ -211,7 +240,7 @@
   document.getElementById("orderForm").addEventListener("submit",function(e){
     e.preventDefault();const qty=parseInt(document.getElementById("quantity").value||1);
     const customText=document.getElementById("personalText").value||"Custom Print (8x5)";
-    const img=document.getElementById("imagePreview").src||imageFiles[0];
+    const img=document.getElementById("imagePreview").src || firstValidImage;
     for(let i=0;i<qty;i++){cart.push({img,name:customText,price:30,qty:1});}
     updateCartDisplay();cartSidebar.classList.add("active");this.reset();document.getElementById('imagePreview').style.display='none';document.getElementById("priceDisplay").textContent="Price: $30.00 each";
   });
@@ -234,3 +263,4 @@
 
 </body>
 </html>
+
