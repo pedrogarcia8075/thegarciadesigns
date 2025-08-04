@@ -183,6 +183,7 @@
   const thumbnailRow = document.getElementById('thumbnailRow');
   const productOptions = document.getElementById('productOptions');
 
+  // Populate thumbnails and product cards
   products.forEach((product, index) => {
     const thumb = document.createElement('img');
     thumb.src = product.img;
@@ -207,6 +208,27 @@
     productOptions.appendChild(card);
   });
 
+  // --- Sync Main Image on Product Card Click ---
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".product-card img")) {
+      const clickedImg = e.target.closest(".product-card img").src;
+      mainDisplay.src = clickedImg;
+
+      // Update active thumbnail
+      document.querySelectorAll('.thumbnails img').forEach(img => img.classList.remove('active'));
+      const match = [...document.querySelectorAll('.thumbnails img')].find(img => img.src === clickedImg);
+      if (match) match.classList.add('active');
+    }
+  });
+
+  // --- Auto set main image to the first product on page load ---
+  document.addEventListener("DOMContentLoaded", function () {
+    if (products.length > 0) {
+      mainDisplay.src = products[0].img;
+    }
+  });
+
+  // --- Cart Functionality ---
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   const cartSidebar = document.getElementById("cartSidebar");
