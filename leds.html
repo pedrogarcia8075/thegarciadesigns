@@ -37,6 +37,19 @@
     .thumbnails img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
     .thumbnails img.active { border: 2px solid #cb0101; }
 
+    /* Description Box */
+    .description-box {
+      margin-top: 1rem;
+      background: #fff8f8;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .description-box h3 { color:#cb0101; margin-bottom:0.5rem; }
+    .description-box p { font-size: 0.95rem; line-height: 1.5; color:#444; margin-bottom:0.5rem; }
+    .description-box small { font-size: 0.85rem; color:#666; }
+
     .right-section { max-width: 500px; display: flex; flex-direction: column; gap: 1.5rem; }
     .product-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
     .product-card { background: white; border-radius: 8px; padding: 0.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center; transition: 0.3s; }
@@ -77,10 +90,8 @@
 </head>
 <body>
 
-<!-- Back Button -->
 <div class="back-btn" onclick="window.history.back()">⬅ Back</div>
 
-<!-- Cart Sidebar -->
 <div id="cartSidebar" class="cart-sidebar">
   <div class="cart-header">
     <h3>Your Cart</h3>
@@ -93,18 +104,26 @@
   </div>
 </div>
 
-<!-- Topbar -->
 <div class="topbar">
   <span class="cart-icon" id="openCart">🛒 Cart <span class="cart-count" id="cartCount">0</span></span>
 </div>
 
 <h1>LED Glass Photos</h1>
-<p class="subtitle">💡 Light-Up Memories | 🖼 Fully Customizable | 🎁 Perfect Keepsakes</p>
+<p class="subtitle">💡 Capture Memories in Light | 🖼 Fully Customizable | 🎁 Gift-Ready Elegance</p>
 
 <div class="container">
   <div class="left-section">
     <img src="images/led1.jpg" id="mainDisplay" class="main-image" alt="LED Glass Preview">
     <div class="thumbnails" id="thumbnailRow"></div>
+
+    <div class="description-box">
+      <h3>✨ Turn Moments Into Glowing Memories!</h3>
+      <p>Our <strong>LED Glass Photos</strong> transform your favorite memories into a <strong>stunning illuminated keepsake</strong>. 
+      Each glass photo lights up to create a <strong>warm, glowing display</strong> that brings your pictures to life—day or night.</p>
+      <p>Perfect for <strong>weddings, anniversaries, graduations, or memorials</strong>, these LED glass pieces make 
+      <strong>unforgettable gifts</strong> and beautiful home décor.</p>
+      <small>💡 USB-powered • Elegant night glow • Premium crystal-clear glass</small>
+    </div>
   </div>
 
   <div class="right-section">
@@ -150,7 +169,6 @@
   const thumbnailRow = document.getElementById('thumbnailRow');
   const productOptions = document.getElementById('productOptions');
 
-  // 12 products with custom names and images
   const products = [
     { name: "Romantic Sunset", img: "images/led1.jpg", price: 30 },
     { name: "Family Love", img: "images/led2.jpg", price: 30 },
@@ -166,7 +184,6 @@
     { name: "Pet Portrait", img: "images/led12.jpg", price: 30 }
   ];
 
-  // Generate thumbnails and cards
   products.forEach((product, index) => {
     const thumb = document.createElement('img');
     thumb.src = product.img;
@@ -191,7 +208,6 @@
     productOptions.appendChild(card);
   });
 
-  // Cart Logic
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const cartSidebar = document.getElementById("cartSidebar");
   const closeCart = document.getElementById("closeCart");
