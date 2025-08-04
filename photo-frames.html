@@ -18,9 +18,8 @@
     /* Fancy Back Button */
     .back-btn {
       position: fixed; top: 20px; left: 20px;
-      background: #cb0101; color: #fff;
-      padding: 0.5rem 1.2rem; font-size: 1rem;
-      border-radius: 30px; cursor: pointer;
+      background: #cb0101; color: #fff; padding: 0.5rem 1.2rem;
+      font-size: 1rem; border-radius: 30px; cursor: pointer;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: all 0.3s ease; z-index: 2100;
       opacity: 0; transform: translateY(-10px);
@@ -37,6 +36,19 @@
     .thumbnails { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; justify-content: center; }
     .thumbnails img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
     .thumbnails img.active { border: 2px solid #cb0101; }
+
+    /* Description Box */
+    .description-box {
+      margin-top: 1rem;
+      background: #fff8f8;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .description-box h3 { color:#cb0101; margin-bottom:0.5rem; }
+    .description-box p { font-size: 0.95rem; line-height: 1.5; color:#444; margin-bottom:0.5rem; }
+    .description-box small { font-size: 0.85rem; color:#666; }
 
     .right-section { max-width: 500px; display: flex; flex-direction: column; gap: 1.5rem; }
     .product-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -79,10 +91,8 @@
 </head>
 <body>
 
-<!-- Fancy Back Button -->
 <div class="back-btn" onclick="window.history.back()">⬅ Back</div>
 
-<!-- Floating Cart Sidebar -->
 <div id="cartSidebar" class="cart-sidebar">
   <div class="cart-header">
     <h3>Your Cart</h3>
@@ -95,19 +105,27 @@
   </div>
 </div>
 
-<!-- Topbar -->
 <div class="topbar">
   <span class="cart-icon" id="openCart">🛒 Cart <span class="cart-count" id="cartCount">0</span></span>
 </div>
 
 <h1>Custom Photo Frames</h1>
-<p class="subtitle">🖼 Showcase Your Memories | ✨ Customizable | 🎁 Perfect for Gifts</p>
+<p class="subtitle">🖼 Preserve Your Memories in Style | ✨ Personalized Elegance | 🎁 Perfect Gifts</p>
 
 <div class="container">
   <!-- LEFT SECTION -->
   <div class="left-section">
     <img src="images/photo-frame1.jpg" id="mainDisplay" class="main-image" alt="Main Photo Frame Preview">
     <div class="thumbnails" id="thumbnailRow"></div>
+
+    <div class="description-box">
+      <h3>✨ Turn Life’s Moments into Lasting Art</h3>
+      <p>Our <strong>Custom Photo Frames</strong> transform your cherished memories into <strong>gallery-worthy displays</strong>. 
+      Hand-selected for <strong>quality and elegance</strong>, these frames make your photos pop—whether it’s 
+      <strong>weddings, graduations, family portraits, or beloved pets</strong>.</p>
+      <p>Perfect as <strong>heartfelt gifts</strong> or timeless décor, each frame is crafted to be a <strong>memory you can touch</strong>.</p>
+      <small>🖼 High-quality materials • Custom text option • Ready-to-gift packaging</small>
+    </div>
   </div>
 
   <!-- RIGHT SECTION -->
