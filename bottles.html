@@ -159,7 +159,7 @@
   function createSizeOptions(basePrice){
     return `<option value="20oz">20 oz ($${(basePrice+sizePricing["20oz"]).toFixed(2)})</option>
             <option value="22oz">22 oz ($${(basePrice+sizePricing["22oz"]).toFixed(2)})</option>
-            <option value="24oz">24 oz ($${(basePrice+sizePricing["24oz"]).toFixed(2)})</option>`;
+            
   }
 
   // Populate products & thumbnails
@@ -185,8 +185,7 @@
 
   document.getElementById("size").innerHTML=`<option value="">Select Size...</option>
                                              <option value="20oz">20 oz ($30.00)</option>
-                                             <option value="22oz">22 oz ($33.00)</option>
-                                             <option value="24oz">24 oz ($35.00)</option>`;
+                                             <option value="22oz">22 oz ($33.00)</option>;
 
   function setMainImage(src,highlight){
     mainDisplay.style.opacity=0.3;
