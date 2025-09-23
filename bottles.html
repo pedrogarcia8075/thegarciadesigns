@@ -114,7 +114,7 @@
       <label for="size">Bottle Size</label>
       <select name="size" id="size" required></select>
 
-      <p id="priceDisplay">Price: $30.00 each</p>
+      <p id="priceDisplay">Price: $26.00-$30.00 each</p>
 
       <label for="personalText">Add Custom Text (Optional)</label>
       <input type="text" name="personalText" id="personalText" placeholder="e.g., Drink Up, Sarah!">
@@ -140,32 +140,32 @@ const sizePricing = { "20oz": 0, "22oz": 3 };
 
 // NOTE: Ensure your actual filenames match these exactly (no accents/spaces).
 const products = [
-  { name: "Wolfe_Water_Bottle", img: "images/Wolfe_Water_Bottle.jpg", price: 25 },
-  { name: "Dragon_Water_Bottle", img: "images/Dragon_Water_Bottle.jpg", price: 25 },
-  { name: "Goku_God_Water_Bottle", img: "images/Goku_God_Water_Bottle.jpg", price: 25 },
-  { name: "Goku_Super_Instinct_Water_Bottle", img: "images/Goku_Super_Instinct_Water_Bottle.jpg", price: 25 },
-  { name: "Sheron_Water_Bottle", img: "images/Sheron_Water_Bottle.jpg", price: 25 },
-  { name: "49ers_Water_Bottle", img: "images/49ers_Water_Bottle.jpg", price: 25 },
-  { name: "Vegeta_Super_Saiyan_Black_Water_Bottle", img: "images/Vegeta_Super_Saiyan_Black_Water_Bottle.jpg", price: 25 },
-  { name: "Goku_Super_Saiyan_God_Water_Bottle", img: "images/Goku_Super_Saiyan_God_Water_Bottle.jpg", price: 25 },
-  { name: "Anime_Water_Bottle", img: "images/Anime_Water_Bottle.jpg", price: 25 },
-  { name: "Beauty_and_the_Beast_Water_Bottle", img: "images/Beauty_and_the_Beast_Water_Bottle.jpg", price: 25 },
-  { name: "Custom_Casino_Water_Bottle", img: "images/Custom_Casino_Water_Bottle.jpg", price: 25 },
-  { name: "Custom_Dr_Pepper_Water_Bottle", img: "images/Custom_Dr_Pepper_Water_Bottle.jpg", price: 25 },
-  { name: "Custom_Modelo_Water_Bottle", img: "images/Custom_Modelo_Water_Bottle.jpg", price: 25 },
-  { name: "DBZ_Crew_Water_Bottle", img: "images/DBZ_Crew_Water_Bottle.jpg", price: 25 },
-  { name: "Dragon_Ball_Z_Water_Bottle", img: "images/Dragon_Ball_Z_Water_Bottle.jpg", price: 25 },
-  { name: "Gilmore_Girls_Water_Bottle", img: "images/Gilmore_Girls_Water_Bottle.jpg", price: 25 },
-  { name: "Goku_Blue_Water_Bottle", img: "images/Goku_Blue_Water_Bottle.jpg", price: 25 },
-  { name: "Goku_and_Pikachu_Black_Water_Bottle", img: "images/Goku_and_Pikachu_Black_Water_Bottle.jpg", price: 25 },
-  { name: "Goku_and_Pikachu_White_Water_Bottle", img: "images/Goku_and_Pikachu_White_Water_Bottle.jpg", price: 25 },
-  { name: "Goku_Super_Saiyan_Water_Bottle", img: "images/Goku_Super_Saiyan_Water_Bottle.jpg", price: 25 },
-  { name: "Goku_Water_Bottle", img: "images/Goku_Water_Bottle.jpg", price: 25 },
-  { name: "K_Pop_Demon_Hunter_Water_Bottle", img: "images/K_Pop_Demon_Hunter_Water_Bottle.jpg", price: 25 },
-  { name: "K_Pop_Huntrix_Water_Bottle", img: "images/K_Pop_Huntrix_Water_Bottle.jpg", price: 25 },
-  { name: "Sonic_Water_Bottle", img: "images/Sonic_Water_Bottle.jpg", price: 25 },
-  { name: "Supernatural_Water_Bottle", img: "images/Supernatural_Water_Bottle.jpg", price: 25 },
-  { name: "Witch_and_Moon_Design_Water_Bottle", img: "images/Witch_and_Moon_Design_Water_Bottle.jpg", price: 25 }
+  { name: "Wolfe_Water_Bottle", img: "images/Wolfe_Water_Bottle.jpg", price: 26 },
+  { name: "Dragon_Water_Bottle", img: "images/Dragon_Water_Bottle.jpg", price: 26 },
+  { name: "Goku_God_Water_Bottle", img: "images/Goku_God_Water_Bottle.jpg", price: 26 },
+  { name: "Goku_Super_Instinct_Water_Bottle", img: "images/Goku_Super_Instinct_Water_Bottle.jpg", price: 26 },
+  { name: "Sheron_Water_Bottle", img: "images/Sheron_Water_Bottle.jpg", price: 26 },
+  { name: "49ers_Water_Bottle", img: "images/49ers_Water_Bottle.jpg", price: 26 },
+  { name: "Vegeta_Super_Saiyan_Black_Water_Bottle", img: "images/Vegeta_Super_Saiyan_Black_Water_Bottle.jpg", price: 26 },
+  { name: "Goku_Super_Saiyan_God_Water_Bottle", img: "images/Goku_Super_Saiyan_God_Water_Bottle.jpg", price: 26 },
+  { name: "Anime_Water_Bottle", img: "images/Anime_Water_Bottle.jpg", price: 26 },
+  { name: "Beauty_and_the_Beast_Water_Bottle", img: "images/Beauty_and_the_Beast_Water_Bottle.jpg", price: 26 },
+  { name: "Custom_Casino_Water_Bottle", img: "images/Custom_Casino_Water_Bottle.jpg", price: 26 },
+  { name: "Custom_Dr_Pepper_Water_Bottle", img: "images/Custom_Dr_Pepper_Water_Bottle.jpg", price: 26 },
+  { name: "Custom_Modelo_Water_Bottle", img: "images/Custom_Modelo_Water_Bottle.jpg", price: 26 },
+  { name: "DBZ_Crew_Water_Bottle", img: "images/DBZ_Crew_Water_Bottle.jpg", price: 26 },
+  { name: "Dragon_Ball_Z_Water_Bottle", img: "images/Dragon_Ball_Z_Water_Bottle.jpg", price: 26 },
+  { name: "Gilmore_Girls_Water_Bottle", img: "images/Gilmore_Girls_Water_Bottle.jpg", price: 26 },
+  { name: "Goku_Blue_Water_Bottle", img: "images/Goku_Blue_Water_Bottle.jpg", price: 26 },
+  { name: "Goku_and_Pikachu_Black_Water_Bottle", img: "images/Goku_and_Pikachu_Black_Water_Bottle.jpg", price: 26 },
+  { name: "Goku_and_Pikachu_White_Water_Bottle", img: "images/Goku_and_Pikachu_White_Water_Bottle.jpg", price: 26 },
+  { name: "Goku_Super_Saiyan_Water_Bottle", img: "images/Goku_Super_Saiyan_Water_Bottle.jpg", price: 26 },
+  { name: "Goku_Water_Bottle", img: "images/Goku_Water_Bottle.jpg", price: 26 },
+  { name: "K_Pop_Demon_Hunter_Water_Bottle", img: "images/K_Pop_Demon_Hunter_Water_Bottle.jpg", price: 26 },
+  { name: "K_Pop_Huntrix_Water_Bottle", img: "images/K_Pop_Huntrix_Water_Bottle.jpg", price: 26 },
+  { name: "Sonic_Water_Bottle", img: "images/Sonic_Water_Bottle.jpg", price: 26 },
+  { name: "Supernatural_Water_Bottle", img: "images/Supernatural_Water_Bottle.jpg", price: 26 },
+  { name: "Witch_and_Moon_Design_Water_Bottle", img: "images/Witch_and_Moon_Design_Water_Bottle.jpg", price: 26 }
 ];
 
 const mainDisplay = document.getElementById('mainDisplay');
